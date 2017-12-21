@@ -1,0 +1,4 @@
+cfc549474b7b57ce7eae13af951f4f07714a3e6dbe9e5dc3390dcfbdad647097  data/one.csv
+7bcb8604572de95cf3e8a6a4d3acef43ee1c5cb7baffe2cec8119ce62c268bb4  data/one.csv.jsonld
+4edfe6604626dcd82e3b71da2a1e17333665c8871c57e324e997a3d68202c920  data/two.csv
+7bcb8604572de95cf3e8a6a4d3acef43ee1c5cb7baffe2cec8119ce62c268bb4  data/two.csv.jsonld

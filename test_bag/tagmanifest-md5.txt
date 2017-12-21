@@ -1,0 +1,5 @@
+1d3f749574d9463e47c5c99e2c7770c4 bag-info.txt
+9e5ad981e0d29adc278f6a294b8c2aca bagit.txt
+a4e1416d5251fb6fb49648d73cbd7966 manifest-md5.txt
+c490a3774b9c4ad1f9915dd1b8c3b6b7 manifest-sha256.txt
+d2bacfe0545433a1bc059859055a2935 translator-registry.jsonld
