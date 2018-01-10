@@ -1,0 +1,4 @@
+bdbag ../../ctd_data/bag
+bdbag ../../ctd_data/bag/ --update --validate fast --validate-profile --archive tgz
+python ../grok.py ../../ctd_data/bag.tgz
+python gen/CTD_pathways.py

@@ -4,6 +4,7 @@ import json
 import os
 import sqlite3
 import sys
+import gzip
 from bdbag import bdbag_api
 from jinja2 import Template
 from jsonpath_rw import jsonpath, parse
@@ -15,7 +16,33 @@ class DataSet:
         self.db_path = db_path
         self.columns = columns
         self.operations = []
-        
+
+class CSVFilter:
+    """ Implement data set specific filters. """
+    def filter_data (self, f):
+        basename = os.path.basename (f)
+        if basename.startswith ("CTD_"):
+            with open (f, "r") as stream:
+                f_new = "{0}.new".format (f)
+                with open (f_new, "w") as new_stream:
+                    headers_next = False
+                    index = 0
+                    for line in stream:
+                        index = index + 1
+                        out_line = line
+                        if line.startswith ("#"):
+                            if headers_next:
+                                out_line = line.replace ("# ", "")
+                                headers_next = False
+                            elif line.strip() == "# Fields:":
+                                out_line = None
+                                headers_next = True
+                            else:
+                                out_line = None
+                        if out_line:
+                            new_stream.write (out_line)
+            os.rename (f_new, f)
+            
 class BagServer:
 
     def __init__(self, generated_path="gen"):
@@ -37,11 +64,12 @@ class BagServer:
             return
         
         dataset = None
+        
         with open(csv_file, 'r') as stream:
-            stream.read (1)
+            #stream.read (1)
             reader = csv.reader (stream)
+            #reader = csv.reader (filter(lambda row: row[0] != '#', stream))
             headers = next (reader)
-            
             dataset = DataSet (db_basename, headers)
 
             sql = sqlite3.connect (sql_db_file)
@@ -49,7 +77,6 @@ class BagServer:
             table_name = os.path.basename (csv_file.
                                            replace (".csv", "").
                                            replace ("-", "_"))
-
             col_types = ', '.join ([ "{0} text".format (col) for col in headers ])
             create_table = "CREATE TABLE IF NOT EXISTS {0} ({1})".format (
                 table_name, col_types)
@@ -72,6 +99,10 @@ class BagServer:
 
     def serve (self, manifest, app_template="app.py.j2"):
         dataset_dbs = []
+        if not app_template.startswith (os.path.sep):
+            source_dir = os.path.dirname(__file__)
+            app_template = os.path.join (source_dir, app_template)
+
         for dataset in manifest['datasets']:
             dataset_base = os.path.basename (dataset)
             dataset_dbs.append (self.csv_to_sql (dataset))
@@ -111,8 +142,19 @@ class SemanticCrunch:
             manifest['path'] = bag_path
             manifest['datasets'] = {}
             datasets = manifest['datasets']
-            data_files = glob.glob (os.path.join (bag_path, "data", "*.csv"))
+            data_path = os.path.join (bag_path, "data")
+            tar_data_files = glob.glob (os.path.join (data_path, "*.csv.gz"))
+            for f in tar_data_files:
+                with gzip.open(f, 'rb') as zipped:
+                    extracted = f.replace (".gz", "")
+                    with open (extracted, "wb") as stream:
+                        file_content = zipped.read ()
+                        stream.write (file_content)
+
+            data_files = glob.glob (os.path.join (data_path, "*.csv"))
+            csv_filter = CSVFilter ()
             for f in data_files:
+                csv_filter.filter_data (f)
                 print ("  -- file: {}".format (f))
                 jsonld_context_file = "{0}.jsonld".format (f)
                 if os.path.exists (jsonld_context_file):

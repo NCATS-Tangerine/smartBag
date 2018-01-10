@@ -1,4 +1,6 @@
 import json
+import pyld
+import os
 import sqlite3
 from flask import Flask, jsonify, g, Response
 from flasgger import Swagger
@@ -11,7 +13,9 @@ def _jsonify (obj):
 def get_{{ db.name }}_db():
     db = getattr(g, '_{{ db.name }}', None)
     if db is None:
-        db = g._{{ db.name }} = sqlite3.connect ("{{ db.db_path }}")
+        db_path = "{{ db.db_path }}"
+        db_path = os.path.join (os.path.dirname(__file__), db_path)
+        db = g._{{ db.name }} = sqlite3.connect (db_path)
     return db
 @app.teardown_appcontext
 def close_{{ db.name }}_connection(exception):
@@ -22,16 +26,20 @@ def close_{{ db.name }}_connection(exception):
 {% for column in db.columns %}
 @app.route('/{{ db.name }}_{{ column }}/<{{ column }}>/')
 def {{ db.name }}_{{ column }}({{ column }}):
-    """Example endpoint returning ___________________
+    """Example endpoint returning ________TODO___________
     ---
     parameters:
       - name: {{ column }}
         in: path
         type: string
         required: true
+        x-valueType:
+          - 'TODO'
+        x-requestTemplate:
+          - /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
     responses:
       200:
-        description: _________ provide description ______________
+        description: ...
     """
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
