@@ -1,4 +1,4 @@
-# TBag
+# BDBag-LD
 
 We're adding semantic annotations via JSON-LD to the Bag-It / Bag-it-RO / BDBags specification set.
 
