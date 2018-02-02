@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -e
+set -x
+
+VAR=../../ctd_data
+
+get_archives () {
+    mkdir -p $VAR
+    cur_dir=$PWD
+    cd $VAR
+    download_prefix="http://ctdbase.org/reports"
+    files="
+CTD_chem_gene_ixns.csv.gz
+CTD_chem_gene_ixn_types.csv
+CTD_chemicals_diseases.csv.gz
+CTD_chem_go_enriched.csv.gz
+CTD_chem_pathways_enriched.csv.gz
+CTD_genes_diseases.csv.gz
+CTD_genes_pathways.csv.gz
+CTD_diseases_pathways.csv.gz
+CTD_exposure_studies.csv.gz
+CTD_exposure_events.csv.gz
+CTD_Disease-GO_biological_process_associations.csv.gz
+CTD_Disease-GO_cellular_component_associations.csv.gz
+CTD_Disease-GO_molecular_function_associations.csv.gz
+CTD_chemicals.csv.gz
+CTD_diseases.csv.gz
+CTD_genes.csv.gz
+CTD_pathways.csv.gz
+"
+    for f in $files; do
+        echo $f
+        wget --quiet --timestamping $download_prefix/$f
+    done
+    cd $cur_dir
+}
+
+# Copy the JSON-LD annotation for this CSV file to the bag.
+#cp annotation/*.csv.jsonld $VAR/bag/data
+stage_bag () {
+    archives="CTD_chemicals CTD_chem_gene_ixn_types CTD_pathways"
+    cur_dir=$PWD
+    cd $VAR
+    rm -rf bag
+    mkdir bag
+    for arch in $archives; do
+        echo $arch
+        if [ ! -f $arch.csv ]; then
+            if [ -f $arch.csv.gz ]; then
+                gunzip $arch.csv.gz
+            else
+                echo "no such file $arch.csv.gz"
+                exit 1
+            fi
+        fi
+        cp $arch.csv bag
+        annotations=$cur_dir/annotation/$arch.csv.jsonld
+        if [ -f $annotations ]; then
+            cp $annotations bag
+        fi
+    done
+    cd $cur_dir
+}
+
+bag_and_archive () {
+    # Initialize the BDBag, generating associated metadata.
+    bdbag $VAR/bag
+    
+    # Create the BDBag archive
+    bdbag $VAR/bag/ --update --validate fast --validate-profile --archive tgz
+}
+
+generate_smartapi () {
+    # Remove artifacts of previous code generation.
+    rm -rf gen
+    
+    # Generate the relational database and OpenAPI server implementations from the BDBag.
+    python ../grok.py $VAR/bag.tgz
+}
+
+get_archives
+stage_bag
+bag_and_archive
+generate_smartapi
+
+# Execute the OpenAPI implemenation.
+python gen/CTD_pathways.py
+
+exit 0

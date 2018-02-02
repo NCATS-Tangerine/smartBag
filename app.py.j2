@@ -23,6 +23,29 @@ def close_{{ db.name }}_connection(exception):
     if db is not None:
         db.close()
 {{ db.name }}_connection = sqlite3.connect ("{{ db.db_path }}")
+
+@app.route('/{{ db.name }}_metadata/')
+def {{ db.name }}_metadata ():
+   """ Get service metadata 
+   ---
+   responses:
+     200:
+       description: ...
+       
+   """
+   return _jsonify({{ db.jsonld_context_text }})
+
+@app.route('/{{ db.name }}_examples/')
+def {{ db.name }}_examples ():
+   """ Get a few example rows
+   ---
+   responses:
+     200:
+       description: ...
+       
+   """
+   return _jsonify({{ db.example_rows }})
+
 {% for column in db.columns %}
 @app.route('/{{ db.name }}_{{ column }}/<{{ column }}>/')
 def {{ db.name }}_{{ column }}({{ column }}):
@@ -34,12 +57,17 @@ def {{ db.name }}_{{ column }}({{ column }}):
         type: string
         required: true
         x-valueType:
-          - 'TODO'
+          - {{ db.jsonld_context[column]['@type'] }}
         x-requestTemplate:
           - /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
     responses:
       200:
         description: ...
+        x-responseValueType:
+        {% for response_col in db.columns.values() %}
+          - path: {{ response_col.name }}
+            valueType: {{ response_col.type }}{% endfor %}
+        x-JSONLDContext: /{{ db.name }}_metadata
     """
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
