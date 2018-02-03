@@ -56,3 +56,14 @@ This script will do a number of things:
 
 The generated user interface looks like this:
 ![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true)
+
+To query one of the services, use a valid column value like this:
+![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-2.png?raw=true)
+
+Example values can be queried directly from the API:
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-3.png?raw=true)
+
+It also serves metadata:
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-4.png?raw=true)
+
+
