@@ -35,8 +35,8 @@ CTD_pathways.csv.gz
 "
     for f in $files; do
         echo $f
-        #wget --quiet --timestamping $download_prefix/$f
-        wget --timestamping $download_prefix/$f
+        wget --quiet --timestamping $download_prefix/$f
+        #wget --timestamping $download_prefix/$f
     done
     cd $cur_dir
 }
