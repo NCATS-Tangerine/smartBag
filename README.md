@@ -2,7 +2,7 @@
 
 ## Bagit Conetxt
 
-The emerging ecosystem of complementary conventions for archiving data sets suggests a big opportunity for making data machine readable on a large scale.
+An emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
 
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
 * [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
@@ -47,6 +47,25 @@ This script will do a number of things:
 * Download all CTD files
 * Build a BDBag with semanti annotations for a couple of files by way of example.
 * Generate code for a smartAPI based on the bag
+  * Create a sqlite3 database per tabular file, inserting all rows
+  * Generate an OpenAPI interface able to query all rows by each column
+  * Add smartAPI specific tags based on accompanying JSON-LD annotations
 * Start the API on port 5000
 
+## The OpenAPI Interface
 
+The generated user interface looks like this:
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true)
+
+To query one of the services, use a valid column value like this:
+![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-2.png?raw=true)
+
+The API makes it easy to introspect example values to help explore the interface.
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-3.png?raw=true)
+
+It also serves its own self describign JSON-LD metadata:
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-4.png?raw=true)
+
+# Applications
+
+For this alpha release, we see applicability to anyone, data steward or consumer, with tabular data that might have broad applicability across a number of user communities and technology delivery channels.
