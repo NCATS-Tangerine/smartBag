@@ -47,6 +47,12 @@ This script will do a number of things:
 * Download all CTD files
 * Build a BDBag with semanti annotations for a couple of files by way of example.
 * Generate code for a smartAPI based on the bag
+  * Create a sqlite3 database per tabular file, inserting all rows
+  * Generate an OpenAPI interface able to query all rows by each column
+  * Add smartAPI specific tags based on accompanying JSON-LD annotations
 * Start the API on port 5000
 
+## The OpenAPI Interface
 
+The generated user interface looks like this:
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true)
