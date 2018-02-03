@@ -26,7 +26,7 @@ The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating fede
 
 **Translator** is making automated reasoning over biomedical data tractable but is gated by
 
-* **Development**: IT projects to expose data as web APIs are tedious and expensive.
+* **Development**: Exposing data as web APIs is tedious and expensive.
 * **Technology**: The underlying technologies to do this are in perpetual flux.
 
 The **Data Commons** is providing scalable computing and a home for large biomedical data but would benefit from
