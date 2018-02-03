@@ -11,10 +11,11 @@ rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
 
-if [ ! -d smartVenv ]; then
-   python3.6 -m venv smartVenv
+venv=/projects/stars/ctdVenv
+if [ ! -d $venv ]; then
+   python3.6 -m venv $venv
 fi
-source smartVenv/bin/activate
+source $venv/bin/activate
 
 cd smartBag
 pip install -r requirements.txt
