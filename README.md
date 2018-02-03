@@ -2,7 +2,7 @@
 
 ## Bagit Conetxt
 
-The emerging ecosystem of complementary conventions for archiving data sets suggests a big opportunity for making data machine readable on a large scale.
+An emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
 
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
 * [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
