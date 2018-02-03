@@ -1,16 +1,23 @@
 # smartBag
 
-## Bagit Conetxt
+## Context
 
-An emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
+The emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
+
+### Data Archiving Conventions
 
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
-* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
+* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
 * [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
+
+### Semantic Annotation for Web APIs
+
+* **smartAPI**: [smartAPI](http://smart-api.info/)
+* **JSON-LD**: [JSON-LD](https://json-ld.org/)
 
 ## Challenge
 
-The NCATS Data Translator is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning. But
+The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning. But
 
 * **Development**: IT projects to expose data as web APIs are tedious and expensive.
 * **Technology**: The underlying technologies to do this are in perpetual flux.
@@ -22,15 +29,13 @@ It would be better to
   * **Annotate**: Annotate data archives with appropriate semantica and ontological metadata.
   * **Generate**: Compile the data and semantics to publish them into various evolving tech pipelines.
 
-### Annotation
+### Annotate
 
-So we're developing a tool chain to let (optimally) data stewards or (pragmatically) data consumers semantically annotate their data sources. The Data Translator uses JSON-LD and globally unique identifiers to build robust metadata about web APIs. This is all done according to the [smartAPI](http://smart-api.info/) approach.
+The smartBag tool chain lets data stewards (optimally) or consumers (pragmatically) semantically annotate their data sources. Use JSON-LD contexts to specify the identifiers and ontologies describing tabular data. smartBag integrates the Bagit suite of conventions with the [Data Translator](https://ncats.nih.gov/translator).
 
-The smartBag tool chain adopts both components, providing a mechanism to annotate tabular data with JSON-LD.
+### Generate
 
-### Generation
-
-The seconds step is to illustrate the utility of the metadata by generation a smartAPI from a properly annotated bag. This technique will allow data stewards to focus on meta data and give software developers the openness they need to target arbitrary data delivery and execution platforms.
+The smartBag toolchain will generate an executable smartAPI from a properly annotated bag. Data stewards who annotate their data will be rewarded with the flexibility to compile data publishing pipelines to target arbitrary data delivery and execution platforms.
 
 ## Getting Started
 
@@ -41,11 +46,11 @@ cd <repo>/ctd
 ./all
 ```
 
-This script will do a number of things:
+This script will:
 
 * Create a data directory above the repo
 * Download all CTD files
-* Build a BDBag with semanti annotations for a couple of files by way of example.
+* Build a BDBag with semantic annotations for a couple of files by way of example.
 * Generate code for a smartAPI based on the bag
   * Create a sqlite3 database per tabular file, inserting all rows
   * Generate an OpenAPI interface able to query all rows by each column
@@ -68,4 +73,4 @@ It also serves its own self describign JSON-LD metadata:
 
 # Applications
 
-For this alpha release, we see applicability to anyone, data steward or consumer, with tabular data that might have broad applicability across a number of user communities and technology delivery channels.
+This alpha release is applicabile to data stewards or consumers with tabular data.
