@@ -2,11 +2,18 @@
 
 ## Bagit Conetxt
 
-An emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
+The emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
+
+### Data Archiving Conventions
 
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
 * [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
 * [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
+
+### Semantic Annotation for Web APIs
+
+* **smartAPI**: [smartAPI](http://smart-api.info/)
+* **JSON-LD**: [JSON-LD](https://json-ld.org/)
 
 ## Challenge
 
