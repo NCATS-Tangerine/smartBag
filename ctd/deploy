@@ -21,4 +21,4 @@ cd smartBag
 pip install -r requirements.txt
 
 cd ctd
-./all"
+./all
