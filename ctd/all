@@ -90,6 +90,6 @@ bag_and_archive
 generate_smartapi
 
 # Execute the OpenAPI implemenation.
-python gen/CTD_pathways.py
+python gen/CTD_chemicals.py
 
 exit 0
