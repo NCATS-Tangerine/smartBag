@@ -6,6 +6,8 @@ The emerging ecosystem of complementary conventions for archiving data sets is c
 
 ### Data Archiving Conventions
 
+The [NIH Data Commons](https://commonfund.nih.gov/bd2k/commons) seeks to create a unified platform for biomedial computing. It makes use of a number of data protocols including:
+
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
 * [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
 * [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
@@ -22,10 +24,15 @@ The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating fede
 
 ## Challenge
 
-The translator approach is promising but gated by several factors.
+**Translator** is making automated reasoning over biomedical data tractable but is gated by
 
 * **Development**: IT projects to expose data as web APIs are tedious and expensive.
 * **Technology**: The underlying technologies to do this are in perpetual flux.
+
+The **Data Commons** is providing scalable computing and a home for large biomedical data but would benefit from
+
+* **Semantic Annotation**: A base line approach for publishing data sets for dynamic query with semantic metadata.
+* **Support for AI**: Methods for data stewards to make data amenable to automated resoning and other AI approaches. 
 
 ## Make it Go
 
