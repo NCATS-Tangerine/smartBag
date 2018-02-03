@@ -5,6 +5,10 @@ set -x
 
 VAR=../../ctd_data
 
+if [ ! -z $1 ]; then
+    VAR=$1
+fi
+
 get_archives () {
     mkdir -p $VAR
     cur_dir=$PWD
