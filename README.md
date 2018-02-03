@@ -38,7 +38,7 @@ The **Data Commons** is providing scalable computing and a home for large biomed
 
 It would be better to
 
-  * **Annotate**: Annotate data archives with appropriate semantica and ontological metadata.
+  * **Annotate**: Annotate data archives with appropriate semantic and ontological metadata.
   * **Generate**: Compile the data and semantics to publish them into various evolving tech pipelines.
 
 ### Annotate
