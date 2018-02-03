@@ -57,6 +57,8 @@ This script will:
   * Add smartAPI specific tags based on accompanying JSON-LD annotations
 * Start the API on port 5000
 
+See the ctd sub directory contains the JSON-LD annotations that drive the generator.
+
 ## The OpenAPI Interface
 
 The generated user interface looks like this:
@@ -74,3 +76,15 @@ It also serves its own self describign JSON-LD metadata:
 # Applications
 
 This alpha release is applicabile to data stewards or consumers with tabular data.
+
+# Next
+
+Of course, this is preliminary. A few likely next steps:
+
+* To fit into the Bagit profile mechanism for specifying an extension to the protocol.
+* Code generation. Look into the utility and feasibility of:
+  * Generating the smartAPI registry OpenAPI document to make registering services easier.
+  * Generating more complex queries.
+  * Generating schema objects for return values
+  
+
