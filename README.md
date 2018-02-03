@@ -8,19 +8,19 @@ The emerging ecosystem of complementary conventions for archiving data sets is c
 
 The [NIH Data Commons](https://commonfund.nih.gov/bd2k/commons) seeks to create a unified platform for biomedial computing. It makes use of a number of data protocols including:
 
-* [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
-* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
-* [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
+* **[Bagit](https://en.wikipedia.org/wiki/BagIt)** is a file packaging protocol.
+* **[Bagit-RO](https://github.com/ResearchObject/bagit-ro)** integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
+* **[BDBags](http://bd2k.ini.usc.edu/tools/bdbag/)** extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
 
 ### Semantic Annotation for Web APIs
 
 The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning.
 
-* **[RDF](https://www.w3.org/RDF/)**: Is a knowledge representation format.
-* **[JSON](https://www.json.org/)**: Is a data serialization format widely used on the web.
-* **OpenAPI**: Is a [specification](https://en.wikipedia.org/wiki/OpenAPI_Specification) for describing web data interfaces.
-* **smartAPI**: [Extends](http://smart-api.info/) the OpenAPI spec with additional metadata.
-* **JSON-LD**: Is an RDF serialization [format](https://json-ld.org/) for JSON.
+* **[RDF](https://www.w3.org/RDF/)** Is a knowledge representation format.
+* **[JSON](https://www.json.org/)** Is a data serialization format widely used on the web.
+* **[OpenAPI](https://en.wikipedia.org/wiki/OpenAPI_Specification)** Is a specification for describing web data interfaces.
+* **[smartAPI](http://smart-api.info/)** Extends the OpenAPI spec with additional metadata.
+* **[JSON-LD](https://json-ld.org/)** Is an RDF serialization format for JSON.
 
 ## Challenge
 
