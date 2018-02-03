@@ -73,4 +73,4 @@ It also serves its own self describign JSON-LD metadata:
 
 # Applications
 
-For this alpha release, we see applicability to anyone, data steward or consumer, with tabular data that might have broad applicability across a number of user communities and technology delivery channels.
+This alpha release is applicabile to data stewards or consumers with tabular data.
