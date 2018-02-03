@@ -16,8 +16,8 @@ The [NIH Data Commons](https://commonfund.nih.gov/bd2k/commons) seeks to create 
 
 The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning.
 
-* **RDF**: Is a knowledge representation [format](https://www.w3.org/RDF/) 
-* **JSON**: Is a data serialization [format](https://www.json.org/) widely used on the web.
+* **[RDF](https://www.w3.org/RDF/)**: Is a knowledge representation format.
+* **[JSON](https://www.json.org/)**: Is a data serialization format widely used on the web.
 * **OpenAPI**: Is a [specification](https://en.wikipedia.org/wiki/OpenAPI_Specification) for describing web data interfaces.
 * **smartAPI**: [Extends](http://smart-api.info/) the OpenAPI spec with additional metadata.
 * **JSON-LD**: Is an RDF serialization [format](https://json-ld.org/) for JSON.
@@ -32,7 +32,7 @@ The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating fede
 The **Data Commons** is providing scalable computing and a home for large biomedical data but would benefit from
 
 * **Semantic Annotation**: A base line approach for publishing data sets for dynamic query with semantic metadata.
-* **Support for AI**: Methods for data stewards to make data amenable to automated resoning and other AI approaches. 
+* **Support for AI**: Methods for data stewards to make data amenable to automated resoning. 
 
 ## Make it Go
 
