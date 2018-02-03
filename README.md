@@ -60,10 +60,12 @@ The generated user interface looks like this:
 To query one of the services, use a valid column value like this:
 ![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-2.png?raw=true)
 
-Example values can be queried directly from the API:
+The API makes it easy to introspect example values to help explore the interface.
 ![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-3.png?raw=true)
 
-It also serves metadata:
+It also serves its own self describign JSON-LD metadata:
 ![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-4.png?raw=true)
 
+# Applications
 
+For this alpha release, we see applicability to anyone, data steward or consumer, with tabular data that might have broad applicability across a number of user communities and technology delivery channels.
