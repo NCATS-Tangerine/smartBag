@@ -1,6 +1,6 @@
 # smartBag
 
-## Bagit Context
+## Context
 
 The emerging ecosystem of complementary conventions for archiving data sets is colliding, in a good way, with innovations in semantic annotation for federated web APIs. smartBag blends these with a view to making semantically rich, machine readable data the norm.
 
