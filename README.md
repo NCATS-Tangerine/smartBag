@@ -4,11 +4,9 @@
 
 The emerging ecosystem of complementary conventions for archiving data sets suggests a big opportunity for making data machine readable on a large scale.
 
-[Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
-
-[Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
-
-[BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
+* [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
+* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
+* [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
 
 ## Challenge
 
