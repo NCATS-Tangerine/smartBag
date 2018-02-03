@@ -7,7 +7,7 @@ The emerging ecosystem of complementary conventions for archiving data sets is c
 ### Data Archiving Conventions
 
 * [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
-* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and Research Object frameworks.
+* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
 * [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
 
 ### Semantic Annotation for Web APIs
