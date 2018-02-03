@@ -1,0 +1,23 @@
+#!/bin/bash
+
+deactivate
+set -e
+set -x
+
+hostname; whoami
+mkdir -p $HOSTNAME
+cd $HOSTNAME
+rm -rf smartBag
+
+git clone https://github.com/NCATS-Tangerine/smartBag.git
+
+if [ ! -d smartVenv ]; then
+   python3.6 -m venv smartVenv
+fi
+source smartVenv/bin/activate
+
+cd smartBag
+pip install -r requirements.txt
+
+cd ctd
+./all"
