@@ -55,7 +55,7 @@ This script will do a number of things:
 ## The OpenAPI Interface
 
 The generated user interface looks like this:
-![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true)
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true =150x250)
 
 To query one of the services, use a valid column value like this:
 ![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-2.png?raw=true)
