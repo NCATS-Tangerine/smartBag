@@ -12,12 +12,17 @@ The emerging ecosystem of complementary conventions for archiving data sets is c
 
 ### Semantic Annotation for Web APIs
 
-* **smartAPI**: [smartAPI](http://smart-api.info/)
-* **JSON-LD**: [JSON-LD](https://json-ld.org/)
+The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning.
+
+* **RDF**: Is a knowledge representation [format](https://www.w3.org/RDF/) 
+* **JSON**: Is a data serialization [format](https://www.json.org/) widely used on the web.
+* **OpenAPI**: Is a [specification](https://en.wikipedia.org/wiki/OpenAPI_Specification) for describing web data interfaces.
+* **smartAPI**: [Extends](http://smart-api.info/) the OpenAPI spec with additional metadata.
+* **JSON-LD**: Is an RDF serialization [format](https://json-ld.org/) for JSON.
 
 ## Challenge
 
-The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning. But
+The translator approach is promising but gated by several factors.
 
 * **Development**: IT projects to expose data as web APIs are tedious and expensive.
 * **Technology**: The underlying technologies to do this are in perpetual flux.
