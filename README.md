@@ -6,27 +6,39 @@ The emerging ecosystem of complementary conventions for archiving data sets is c
 
 ### Data Archiving Conventions
 
-* [Bagit](https://en.wikipedia.org/wiki/BagIt) is a file packaging protocol.
-* [Bagit-RO](https://github.com/ResearchObject/bagit-ro) integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
-* [BDBags](http://bd2k.ini.usc.edu/tools/bdbag/) extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
+The [NIH Data Commons](https://commonfund.nih.gov/bd2k/commons) seeks to create a unified platform for biomedial computing. It makes use of a number of data protocols including:
+
+* **[Bagit](https://en.wikipedia.org/wiki/BagIt)** is a file packaging protocol.
+* **[Bagit-RO](https://github.com/ResearchObject/bagit-ro)** integrates the Bagit and [Research Object](http://www.researchobject.org/) frameworks.
+* **[BDBags](http://bd2k.ini.usc.edu/tools/bdbag/)** extends Bagit-RO so that referenced data files may be remote, referenced via ids with checksums.
 
 ### Semantic Annotation for Web APIs
 
-* **smartAPI**: [smartAPI](http://smart-api.info/)
-* **JSON-LD**: [JSON-LD](https://json-ld.org/)
+The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning.
+
+* **[RDF](https://www.w3.org/RDF/)** Is a knowledge representation format.
+* **[JSON](https://www.json.org/)** Is a data serialization format widely used on the web.
+* **[OpenAPI](https://en.wikipedia.org/wiki/OpenAPI_Specification)** Is a specification for describing web data interfaces.
+* **[smartAPI](http://smart-api.info/)** Extends the OpenAPI spec with additional metadata.
+* **[JSON-LD](https://json-ld.org/)** Is an RDF serialization format for JSON.
 
 ## Challenge
 
-The [NCATS Data Translator](https://ncats.nih.gov/translator) is annotating federated web APIs with semantic information. This makes biomedical data amenable to automated discovery, access, and reasoning. But
+**Translator** is making automated reasoning over biomedical data tractable but is gated by
 
-* **Development**: IT projects to expose data as web APIs are tedious and expensive.
+* **Development**: Exposing data as web APIs is tedious and expensive.
 * **Technology**: The underlying technologies to do this are in perpetual flux.
+
+The **Data Commons** is providing scalable computing and a home for large biomedical data but would benefit from
+
+* **Semantic Annotation**: A base line approach for publishing data sets for dynamic query with semantic metadata.
+* **Support for AI**: Methods for data stewards to make data amenable to automated resoning. 
 
 ## Make it Go
 
 It would be better to
 
-  * **Annotate**: Annotate data archives with appropriate semantica and ontological metadata.
+  * **Annotate**: Annotate data archives with appropriate semantic and ontological metadata.
   * **Generate**: Compile the data and semantics to publish them into various evolving tech pipelines.
 
 ### Annotate
@@ -57,6 +69,8 @@ This script will:
   * Add smartAPI specific tags based on accompanying JSON-LD annotations
 * Start the API on port 5000
 
+See the ctd sub directory contains the JSON-LD annotations that drive the generator.
+
 ## The OpenAPI Interface
 
 The generated user interface looks like this:
@@ -74,3 +88,15 @@ It also serves its own self describign JSON-LD metadata:
 # Applications
 
 This alpha release is applicabile to data stewards or consumers with tabular data.
+
+# Next
+
+Of course, this is preliminary. A few likely next steps:
+
+* To fit into the Bagit profile mechanism for specifying an extension to the protocol.
+* Code generation. Look into the utility and feasibility of:
+  * Generating the smartAPI registry OpenAPI document to make registering services easier.
+  * Generating more complex queries.
+  * Generating schema objects for return values
+  
+
