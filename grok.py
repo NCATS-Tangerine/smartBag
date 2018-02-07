@@ -140,7 +140,15 @@ class BagServer:
                         column_type = "{0}{1}".format (iri, value)
                     ds.columns[name] = Column (name, column_type)
                     print ("col: {} {} ".format (name, ds.columns[name].type))
-                
+
+        with open(app_template, "r") as stream:                
+            template = Template (stream.read ())
+            dataset_server_file_name = os.path.join (self.generated_path, "server.py")
+            print ("-- {}".format (dataset_server_file_name))
+            with open(dataset_server_file_name, "w") as app_code:
+                app_code.write (template.render (datasets=dataset_dbs))
+                    
+            '''
             with open(app_template, "r") as stream:                
                 template = Template (stream.read ())
                 dataset_server = self.gen_name (
@@ -150,6 +158,7 @@ class BagServer:
                 print ("-- {}".format (dataset_server))
                 with open(dataset_server, "w") as app_code:
                     app_code.write (template.render (datasets=dataset_dbs))
+            '''
 
 class SemanticCrunch:
 
