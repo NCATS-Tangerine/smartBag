@@ -11,7 +11,7 @@ rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
 
-export PATH=smartBag/bin:$PATH
+export PATH=$PWD/smartBag/bin:$PATH
 
 venv () {
     venv=/projects/stars/ctdVenv
