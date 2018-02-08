@@ -23,6 +23,7 @@ venv () {
 #venv
 
 cd smartBag
+pip install --upgrade pip
 pip install -r requirements.txt
 
 cd example/ctd
