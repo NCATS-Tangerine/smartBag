@@ -27,7 +27,12 @@ template = {
     "https"
   ]
 }
+app.config['SWAGGER'] = {
+    'title': 'SmartBag'
+}
+
 swagger = Swagger(app, template=template)
+
 #swagger = Swagger(app)
 
 {% for db in datasets %}
@@ -72,7 +77,7 @@ def {{ db.name }}_examples ():
 {% for column in db.columns %}
 @app.route('/{{ db.name }}_{{ column }}/<{{ column }}>/')
 def {{ db.name }}_{{ column }}({{ column }}):
-    """Example endpoint returning ________TODO___________
+    """ Get row by {{ column }}
     ---
     parameters:
       - name: {{ column }}
@@ -80,14 +85,13 @@ def {{ db.name }}_{{ column }}({{ column }}):
         type: string
         required: true
         x-valueType:
-          - {{ db.jsonld_context[column]['@type'] }}
+          - {{ db.columns[column].type }}
         x-requestTemplate:
-          - /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
+          - valueType: {{ db.columns[column].type }}
+            template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
     responses:
       200:
-        description: ...
-        x-responseValueType:
-        {% for response_col in db.columns.values() %}
+        x-responseValueType:{% for response_col in db.columns.values() %}
           - path: {{ response_col.name }}
             valueType: {{ response_col.type }}{% endfor %}
         x-JSONLDContext: /{{ db.name }}_metadata

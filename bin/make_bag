@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-
-bdbag ./test_bag/ --update --validate fast --validate-profile --archive tgz
-
-exit 0

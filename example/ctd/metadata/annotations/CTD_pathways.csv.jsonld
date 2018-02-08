@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "kegg" : "http://identifiers.org/kegg.pathway/",
+    "schema"    : "http://schema.org/",
+    "object"    : "schema:object",
+    "PathwayName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "PathwayID"     : {
+      "@type" : "kegg:",
+      "@id"   : "kegg:"
+    }
+  }
+}

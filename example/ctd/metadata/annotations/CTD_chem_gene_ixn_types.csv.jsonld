@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "schema" : "http://schema.org/",
+    "object" : "schema:object",
+    "TypeName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "Code"     : {
+      "@type" : "schema:code",
+      "@id"   : "schema:code"
+    },
+    "Description" : {
+      "@type" : "schema:description",
+      "@id"   : "schema:description"
+    },
+    "ParentCode" : {
+      "@type" : "schema:code",
+      "@id"   : "schema:parentItem"
+    },
+    "results" : {
+      "@id"        : "schema:object",
+      "@type"      : "schema:object",
+      "@container" : "@set"
+    }
+  }
+}

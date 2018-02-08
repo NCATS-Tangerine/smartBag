@@ -1,3 +1,4 @@
+import argparse
 import csv
 import glob
 import json
@@ -114,7 +115,7 @@ class BagServer:
             sql.close ()
         return dataset
 
-    def serve (self, manifest, app_template="app.py.j2"):
+    def serve (self, manifest, app_template="app.py.j2", title="Service"):
         """ Generate an OpenAPI server based on the input manifest. 
            :param: manifest Metadata about a BDBag archive.
            :param: app_template Template of the server application.
@@ -147,18 +148,6 @@ class BagServer:
             print ("-- {}".format (dataset_server_file_name))
             with open(dataset_server_file_name, "w") as app_code:
                 app_code.write (template.render (datasets=dataset_dbs))
-                    
-            '''
-            with open(app_template, "r") as stream:                
-                template = Template (stream.read ())
-                dataset_server = self.gen_name (
-                    "{0}.py".format (dataset_base.\
-                                     replace (".csv", "").\
-                                     replace ("-", "_")))
-                print ("-- {}".format (dataset_server))
-                with open(dataset_server, "w") as app_code:
-                    app_code.write (template.render (datasets=dataset_dbs))
-            '''
 
 class SemanticCrunch:
 
@@ -199,23 +188,46 @@ class SemanticCrunch:
             for f in data_files:
                 csv_filter.filter_data (f)
                 print ("  -- file: {}".format (f))
-                jsonld_context_file = "{0}.jsonld".format (f)
-                if os.path.exists (jsonld_context_file):
-                    print ("opening {}".format (jsonld_context_file))
-                    with open (jsonld_context_file, "r") as stream:
-                        datasets[f] = json.loads (stream.read ())
-                        context = datasets[f]['@context']
-                        datasets[f]['columns'] = {
-                            k : None for k in context if isinstance(context[k],dict)
-                        }
+                jsonld_context = self.get_jsonld_context (f)
+                datasets[f] = jsonld_context
+                context = datasets[f]['@context']
+                datasets[f]['columns'] = {
+                    k : None for k in context if isinstance(context[k],dict)
+                }
+                
         return manifest
 
+    def get_jsonld_context (self, data_file):
+        jsonld = None
+        ro_model_path = data_file.split (os.path.sep)
+        ro_model_path.insert (-1, os.path.sep.join ([ 'metadata', 'annotations' ]))
+        ro_model_path = os.path.sep.join (ro_model_path)
+
+        jsonld_context_files = [
+            "{0}.jsonld".format (data_file),
+            "{0}.jsonld".format (ro_model_path)
+        ]
+        for jsonld_context_file in jsonld_context_files:
+            print ("testing {}".format (jsonld_context_file))
+            if os.path.exists (jsonld_context_file):
+                print ("opening {}".format (jsonld_context_file))
+                with open (jsonld_context_file, "r") as stream:
+                    jsonld = json.loads (stream.read ())
+                    break
+        return jsonld
+       
     def cleanup_bag (bag_path):
         bdbag_api.cleanup_bag (os.path.dirname (bag_path))
 
 # bdbag ./test_bag/ --update --validate fast --validate-profile --archive tgz
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='SmartBag.')
+    parser.add_argument('-b', '--bag', help='Bag to parse.', default="test_bag.tgz")
+    parser.add_argument('-o', '--out', help='Output directory.', default="out")
+    parser.add_argument('-t', '--title', help='Title of the smartAPI to generate.', default=None)
+    args = parser.parse_args()
+
     '''
     unpack a bdbag
     identify the data files
@@ -223,14 +235,14 @@ if __name__ == "__main__":
       load and the associated jsonld context
       use it to determine columns in the data set
     '''
-    bag = sys.argv[1] if len (sys.argv) > 1 else "test_bag.tgz"
-    output_dir = sys.argv[2] if len (sys.argv) > 2 else "out"
+#    bag = sys.argv[1] if len (sys.argv) > 1 else "test_bag.tgz"
+#    output_dir = sys.argv[2] if len (sys.argv) > 2 else "out"
 
     sc = SemanticCrunch ()
     manifest = sc.grok_bag (
-        bag_archive=bag,
-        output_path=output_dir)
+        bag_archive=args.bag,
+        output_path=args.out) #output_dir)
     print (json.dumps (manifest, indent=2))
 
     server = BagServer ()
-    server.serve (manifest)
+    server.serve (manifest, title=args.title)
