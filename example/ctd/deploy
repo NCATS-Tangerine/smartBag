@@ -20,7 +20,7 @@ venv () {
     fi
     source $venv/bin/activate
 }
-#venv
+venv
 
 cd smartBag
 pip install --upgrade pip
