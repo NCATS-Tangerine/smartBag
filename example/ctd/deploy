@@ -25,7 +25,7 @@ venv () {
 cd smartBag
 pip install -r requirements.txt
 
-cd examples/ctd
+cd example/ctd
 ./configure $1
 smartbag make bag
 smartbag make smartapi --bag bag.tgz --title CTD
