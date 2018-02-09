@@ -151,9 +151,12 @@ This alpha release is applicabile to data stewards or consumers with tabular dat
 
 # Next
 
-Of course, this is preliminary. There is pelenty of room for
+Of course, this is preliminary. Candidate next steps include:
+* Consolidating all datasets into different tables.
+* Supporting join and aggregate queries.
 * Generating different back ends.
 * Generating more of the Research Object metadata infrastructure like the manifest.
+
 
 
 
