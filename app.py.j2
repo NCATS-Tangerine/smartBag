@@ -1,7 +1,9 @@
 import json
-import pyld
 import os
+import pyld
+import requests
 import sqlite3
+import yaml
 from flask import Flask, jsonify, g, Response
 from flasgger import Swagger
 app = Flask(__name__)
@@ -111,4 +113,25 @@ def {{ db.name }}_{{ column }}({{ column }}):
 
 {% endfor %}
 {% endfor %}
-app.run(host='0.0.0.0', debug=True)
+
+
+@app.route('/specification/')
+def spec ():
+    """ Get the smartapi specification.
+    ---
+    responses:
+     200:
+       description: ...              
+    """
+    text = ""
+    spec_path = os.path.join (os.path.dirname(__file__), "smartapi.yaml")
+    if not os.path.exists (spec_path):
+        obj = requests.get ("http://localhost:5000/apispec_1.json").json ()
+        with open (spec_path, "w") as stream:
+            yaml.dump (obj, stream, default_flow_style=False)
+    with open (spec_path) as stream:
+        text = stream.read ()
+    return text
+
+
+app.run(host='0.0.0.0', debug=True, threaded=True)
