@@ -131,16 +131,19 @@ smartbag run smartapi
 ## The OpenAPI Interface
 
 The generated user interface looks like this:
-![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-1.png?raw=true)
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/image1.png?raw=true)
 
 To query one of the services, use a valid column value like this:
-![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-2.png?raw=true)
-
-The API makes it easy to introspect example values to help explore the interface.
-![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-3.png?raw=true)
+![Query](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/image2.png?raw=true)
 
 It also serves its own self describign JSON-LD metadata:
-![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/smart-api-4.png?raw=true)
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/image3.png?raw=true)
+
+The API makes it easy to introspect example values to help explore the interface.
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/image4.png?raw=true)
+
+It also serves its own smartAPI schema document.
+![OpenAPI UI](https://github.com/NCATS-Tangerine/smartBag/blob/master/img/image5.png?raw=true)
 
 # Applications
 
