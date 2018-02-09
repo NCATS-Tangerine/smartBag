@@ -43,7 +43,7 @@ It would be better to
 
 ### Annotate
 
-The smartBag tool chain lets data stewards (optimally) or consumers (pragmatically) semantically annotate their data sources. Use JSON-LD contexts to specify the identifiers and ontologies describing tabular data. smartBag integrates the Bagit suite of conventions with the [Data Translator](https://ncats.nih.gov/translator).
+The smartBag tool chain lets data stewards (optimally) or consumers (pragmatically) semantically annotate their data sources using Research Object (RO) conventions. Use JSON-LD contexts to specify the identifiers and ontologies describing tabular data. smartBag integrates the Bagit suite of conventions with the [Data Translator](https://ncats.nih.gov/translator).
 
 ### Generate
 
@@ -52,24 +52,79 @@ The smartBag toolchain will generate an executable smartAPI from a properly anno
 ## Getting Started
 
 Try these steps to get started
+
+### Clone
+
+These steps clone the repo and set up your path to use the toolchain:
+
 ```
-git clone <repo> 
-cd <repo>/ctd
-./all
+git clone git@github.com:NCATS-Tangerine/smartBag.git
+cd smartBag
+pip install -r requirements.txt
+export PATH=$PWD/bin:$PATH
 ```
 
-This script will:
+### Configure
 
-* Create a data directory above the repo
-* Download all CTD files
-* Build a BDBag with semantic annotations for a couple of files by way of example.
+Next, we download data files for the data set we're working with. In this case, they're for CTD, the Clinical Toxicogenomic Database. This also configures the bag we'll create by copying JSON-LD and other metadata as well as data files into a bag staging directory.
+
+The frame of the bag is in the example/ctd directory and is structured like this:
+└── metadata
+    ├── annotations
+    │   ├── CTD_chem_gene_ixn_types.csv.jsonld
+    │   ├── CTD_chemicals.csv.jsonld
+    │   └── CTD_pathways.csv.jsonld
+    ├── manifest.json
+    └── provenance
+        └── results.prov.jsonld
+
+```
+cd example/ctd
+./configure
+```
+
+This stages a bag directory structure blending selected data files with metadata like this:
+├── CTD_chem_gene_ixn_types.csv
+├── CTD_chemicals.csv
+├── CTD_pathways.csv
+└── metadata
+    ├── annotations
+    │   ├── CTD_chem_gene_ixn_types.csv.jsonld
+    │   ├── CTD_chemicals.csv.jsonld
+    │   └── CTD_pathways.csv.jsonld
+    ├── manifest.json
+    └── provenance
+        └── results.prov.jsonld
+        
+### Make the Bag
+
+This creates a BDBag archive (bag.tgz) of the data configured in the prior step.
+
+```
+smartbag make bag
+```
+
+### Generate smartAPI
+
+Next we generate the smartAPI based on the provided metadata.
+
 * Generate code for a smartAPI based on the bag
   * Create a sqlite3 database per tabular file, inserting all rows
   * Generate an OpenAPI interface able to query all rows by each column
   * Add smartAPI specific tags based on accompanying JSON-LD annotations
-* Start the API on port 5000
+  
+```
+smartbag make smartapi --bag bag.tgz --title CTD
+```
 
-See the ctd sub directory contains the JSON-LD annotations that drive the generator.
+### Execute the smartAPI
+
+Finally, run the smartAPI. Here's a [link to your server](http://localhost:5000/apidocs/#/) once you've run the command.
+
+```
+smartbag run smartapi 
+```
+
 
 ## The OpenAPI Interface
 
@@ -91,12 +146,11 @@ This alpha release is applicabile to data stewards or consumers with tabular dat
 
 # Next
 
-Of course, this is preliminary. A few likely next steps:
+Of course, this is preliminary. There is pelenty of room for
+* Generating different back ends.
+* Generating more of the Research Object metadata infrastructure like the manifest.
 
-* To fit into the Bagit profile mechanism for specifying an extension to the protocol.
-* Code generation. Look into the utility and feasibility of:
-  * Generating the smartAPI registry OpenAPI document to make registering services easier.
-  * Generating more complex queries.
-  * Generating schema objects for return values
+
+
   
 
