@@ -71,6 +71,8 @@ stage_bag () {
             exit 1
         fi
     done
+    cp -r $cur_dir/metadata/provenance bag/metadata/provenance
+    cp -r $cur_dir/metadata/manifest.json bag/metadata/
     cd $cur_dir
 }
 
