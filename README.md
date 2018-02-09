@@ -66,9 +66,8 @@ export PATH=$PWD/bin:$PATH
 
 ### Configure
 
-Next, we download data files for the data set we're working with. In this case, they're for CTD, the Clinical Toxicogenomic Database. This also configures the bag we'll create by copying JSON-LD and other metadata as well as data files into a bag staging directory.
-
-The frame of the bag is in the example/ctd directory and is structured like this:
+Next, we download data files for the data set we're working with. In this case, they're for CTD, the Clinical Toxicogenomic Database. The metadata frame of the bag is in the example/ctd directory and is structured like this:
+```
 └── metadata
     ├── annotations
     │   ├── CTD_chem_gene_ixn_types.csv.jsonld
@@ -77,13 +76,15 @@ The frame of the bag is in the example/ctd directory and is structured like this
     ├── manifest.json
     └── provenance
         └── results.prov.jsonld
-
+```
+This step also configures the bag we'll create by copying JSON-LD and other metadata as well as data files into a bag staging directory.
 ```
 cd example/ctd
 ./configure
 ```
 
 This stages a bag directory structure blending selected data files with metadata like this:
+```
 ├── CTD_chem_gene_ixn_types.csv
 ├── CTD_chemicals.csv
 ├── CTD_pathways.csv
@@ -95,7 +96,8 @@ This stages a bag directory structure blending selected data files with metadata
     ├── manifest.json
     └── provenance
         └── results.prov.jsonld
-        
+```
+
 ### Make the Bag
 
 This creates a BDBag archive (bag.tgz) of the data configured in the prior step.
