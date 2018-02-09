@@ -51,7 +51,7 @@ The smartBag toolchain will generate an executable smartAPI from a properly anno
 
 ## Getting Started
 
-Try these steps to get started
+In the following steps we use the example/ctd directory to compile a smartAPI for accessing a subset of the Clinical Toxicogenomic Database.
 
 ### Clone
 
@@ -66,7 +66,7 @@ export PATH=$PWD/bin:$PATH
 
 ### Configure
 
-Next, we download data files for the data set we're working with. In this case, they're for CTD, the Clinical Toxicogenomic Database. The metadata frame of the bag is in the example/ctd directory and is structured like this:
+Next, we download data files for the data set we're working with. In this case, they're for CTD. The metadata frame of the bag is in the example/ctd directory and is structured like this:
 ```
 └── metadata
     ├── annotations
