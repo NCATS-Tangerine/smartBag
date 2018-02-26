@@ -36,7 +36,7 @@ CTD_pathways.csv.gz
 "
     for f in $files; do
         echo $f
-        wget --quiet --timestamping $download_prefix/$f
+        #wget --quiet --timestamping $download_prefix/$f
         #wget --timestamping $download_prefix/$f
     done
     cd $cur_dir
@@ -61,7 +61,8 @@ stage_bag () {
                 exit 1
             fi
         fi
-        cp $VAR/$arch.csv bag
+#        ls -lisa $VAR
+#        cp $VAR/$arch.csv bag
         annotations=$cur_dir/metadata/annotations/$arch.csv.jsonld
         if [ -f $annotations ]; then
             echo Including annotations $annotations
@@ -86,8 +87,11 @@ bag_and_archive () {
 
 get_archives
 stage_bag
+bag_and_archive
 
-ls -lisa $VAR/bag.tgz
-tar tf $VAR/bag.tgz
+
+#ls -lisa $VAR/bag.tgz
+#tar tf $VAR/bag.tgz
+tar tf bag.tgz
 
 exit 0
