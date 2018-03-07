@@ -82,8 +82,6 @@ class BagServer:
             reader = csv.reader (stream)
             #reader = csv.reader (filter(lambda row: row[0] != '#', stream))
             headers = next (reader)
-            print('header')
-            print(headers)
             columns = { n : Column(n, None) for n in headers }
             dataset = DataSet (db_basename, columns)
 
@@ -95,7 +93,6 @@ class BagServer:
                                            replace ("-", "_"))
             col_types = ', '.join ([ "{0} text".format (col) for col in headers ])
             col_types = col_types.replace("#", "")
-            col_types = col_types.replace("index", "index2")
             create_table = "CREATE TABLE IF NOT EXISTS {0} ({1})".format (
                 table_name, col_types)
             print (create_table)
