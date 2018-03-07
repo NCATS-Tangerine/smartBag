@@ -1,0 +1,92 @@
+{
+  "@context": {
+    "schema"   : "http://schema.org/",
+    "object"   : "schema:object",
+    "index_id" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "block_area"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "block_id"     : {
+    },
+    "move_type"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "pre_criterion"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "full_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "expr_mean_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "expr_reg_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "expr_kend_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "expr_cor_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "expr_euc_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "PPI_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "feat_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "TF_crit"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "percent_orig_genes"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "percent_orig_exp"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "exp_mean"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "trajectory_position"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "FEATURE_INDICES"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "move_class"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "num_genes"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "num_exps"     : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+deactivate
+set -e
+set -x
+
+venv () {
+    venv=/Users/timross/virt
+    if [ ! -d $venv ]; then
+        python3 -m venv $venv
+    fi
+    source $venv/bin/activate
+}
+venv
+
+export PATH=$PWD/bin:$PATH
+echo $PATH
+
+./configure
+../../bin/smartbag make bag
+../../bin/smartbag make smartapi --bag bag.tgz --title bicluster
+../../bin/smartbag run smartapi

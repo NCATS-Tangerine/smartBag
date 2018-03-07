@@ -1,0 +1,30 @@
+{ "@context": [ "https://w3id.org/bundle/context" ],
+  "@id": "../",
+  "history": "https://github.com/NCATS-Tangerine/smartBag/commits/master",
+  "createdOn": "2018-02-08T12:23:00Z",
+  "createdBy": {
+    "name": "Steven Cox",
+    "orcid": "http://orcid.org/0000-0002-8561-4508"
+  },
+
+  "aggregates": [
+    { "uri": "../data/BiCluster.csv",
+      "mediatype": "text/csv"
+    }
+  ],
+
+  "annotations": [
+    { "about": ["../data/analyse.py", "../data/numbers.csv", "../data/results.txt"],
+      "content": "../README.md",
+      "oa:motivatedBy": "oa:describing"
+    },
+
+    { "about": "../data/BiCluster.csv",
+      "content": "annotations/BiCluster.csv.jsonld",
+      "createdBy": {
+        "name": "Steven Cox",
+        "orcid": "http://orcid.org/0000-0002-8561-4508"
+      }
+    }
+  ]
+}
