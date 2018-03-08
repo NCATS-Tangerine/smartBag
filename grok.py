@@ -17,7 +17,7 @@ class Column:
         self.type = column_type
     def __repr__(self):
         return "{0} {1}".format (self.name, self.type)
-        
+
 class DataSet:
     def __init__(self, db_path, columns):
         self.name = db_path.replace (".sqlitedb", "")
@@ -33,7 +33,7 @@ class CSVFilter:
     """ Implement data set specific filters. """
     def filter_data (self, f):
         basename = os.path.basename (f)
-        if basename.startswith ("CTD_"):
+        if basename.startswith ("CTD_") or basename.startswith ("Bicl"):
             with open (f, "r") as stream:
                 f_new = "{0}.new".format (f)
                 with open (f_new, "w") as new_stream:
@@ -54,29 +54,29 @@ class CSVFilter:
                         if out_line:
                             new_stream.write (out_line)
             os.rename (f_new, f)
-            
+
 class BagServer:
 
     def __init__(self, generated_path="gen"):
         self.generated_path = generated_path
         if not os.path.exists (self.generated_path):
             os.makedirs (self.generated_path)
-            
+
     def gen_name (self, path):
         return os.path.join (self.generated_path, path)
-    
+
     def csv_to_sql (self, csv_file):
         db_basename = os.path.basename (csv_file).\
                       replace (".csv", ".sqlitedb").\
                       replace ("-", "_")
         sql_db_file = self.gen_name (db_basename)
 
-        if os.path.exists (sql_db_file): 
+        if os.path.exists (sql_db_file):
             print (" -- {0} already exists. skipping.".format (sql_db_file))
             return
-        
+
         dataset = None
-        
+
         with open(csv_file, 'r') as stream:
             #stream.read (1)
             reader = csv.reader (stream)
@@ -86,16 +86,18 @@ class BagServer:
             dataset = DataSet (db_basename, columns)
 
             sql = sqlite3.connect (sql_db_file)
+            sql.text_factory = str
             cur = sql.cursor ()
             table_name = os.path.basename (csv_file.
                                            replace (".csv", "").
                                            replace ("-", "_"))
             col_types = ', '.join ([ "{0} text".format (col) for col in headers ])
+            col_types = col_types.replace("#", "")
             create_table = "CREATE TABLE IF NOT EXISTS {0} ({1})".format (
                 table_name, col_types)
             print (create_table)
             cur.execute (create_table)
-            
+
             col_wildcards = ', '.join ([ "?" for col in headers ])
             insert_command = "INSERT INTO {0} VALUES ({1})".format (
                 table_name, col_wildcards)
@@ -116,7 +118,7 @@ class BagServer:
         return dataset
 
     def serve (self, manifest, app_template="app.py.j2", title="Service"):
-        """ Generate an OpenAPI server based on the input manifest. 
+        """ Generate an OpenAPI server based on the input manifest.
            :param: manifest Metadata about a BDBag archive.
            :param: app_template Template of the server application.
         """
@@ -145,7 +147,7 @@ class BagServer:
                     ds.columns[name] = Column (name, column_type)
                     print ("col: {} {} ".format (name, ds.columns[name].type))
 
-        with open(app_template, "r") as stream:                
+        with open(app_template, "r") as stream:
             template = Template (stream.read ())
             dataset_server_file_name = os.path.join (self.generated_path, "server.py")
             print ("-- {}".format (dataset_server_file_name))
@@ -197,7 +199,7 @@ class SemanticCrunch:
                 datasets[f]['columns'] = {
                     k : None for k in context if isinstance(context[k],dict)
                 }
-                
+
         return manifest
 
     def get_jsonld_context (self, data_file):
@@ -218,7 +220,7 @@ class SemanticCrunch:
                     jsonld = json.loads (stream.read ())
                     break
         return jsonld
-       
+
     def cleanup_bag (bag_path):
         bdbag_api.cleanup_bag (os.path.dirname (bag_path))
 
