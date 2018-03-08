@@ -5,7 +5,7 @@ set -x
 
 VAR=../files
 DEST=.
-cur_dir=/Users/timross/eworkspace/forks/smartBag/example/bicluster
+cur_dir=$PWD
 if [ ! -z $1 ]; then
     VAR=$1
 fi
@@ -23,7 +23,7 @@ get_archives () {
 #cp annotation/*.csv.jsonld $VAR/bag/data
 stage_bag () {
     archives="BiCluster"
-    cur_dir=.
+    cur_dir=$PWD
     cd $DEST
     rm -rf bag
 
