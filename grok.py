@@ -127,6 +127,9 @@ class BagServer:
         for dataset in manifest['datasets']:
             dataset_base = os.path.basename (dataset)
             ds = self.csv_to_sql (dataset)
+            if not ds:
+                print (f"Error creating dataset {dataset}")
+                continue
             ds.jsonld_context = manifest['datasets'][dataset]['@context']
             ds.jsonld_context_text = json.dumps (ds.jsonld_context, indent=2)
             dataset_dbs.append (ds)
@@ -219,30 +222,35 @@ class SemanticCrunch:
     def cleanup_bag (bag_path):
         bdbag_api.cleanup_bag (os.path.dirname (bag_path))
 
+    @staticmethod
+    def generate_smartapi (bag, output_dir, title):
+        sc = SemanticCrunch ()
+        manifest = sc.grok_bag (
+            bag_archive=bag,
+            output_path=output_dir)
+        #print (json.dumps (manifest, indent=2))
+        server = BagServer (generated_path=os.path.join(output_dir, "gen"))
+        server.serve (manifest, title=title)
+        return manifest
+        
 # bdbag ./test_bag/ --update --validate fast --validate-profile --archive tgz
 
 if __name__ == "__main__":
+    '''
+    Parse command line arguments
+    Unpack a bdbag
+    Identify the data files
+    For each data file
+      Load and the associated jsonld context
+      Use it to determine columns in the data set
+      Generate relational database tables
+    Generate a openapi/smartapi server to publish the data
+    '''
+
     parser = argparse.ArgumentParser(description='SmartBag.')
     parser.add_argument('-b', '--bag', help='Bag to parse.', default="test_bag.tgz")
     parser.add_argument('-o', '--out', help='Output directory.', default="out")
     parser.add_argument('-t', '--title', help='Title of the smartAPI to generate.', default=None)
     args = parser.parse_args()
 
-    '''
-    unpack a bdbag
-    identify the data files
-    for each data file
-      load and the associated jsonld context
-      use it to determine columns in the data set
-    '''
-#    bag = sys.argv[1] if len (sys.argv) > 1 else "test_bag.tgz"
-#    output_dir = sys.argv[2] if len (sys.argv) > 2 else "out"
-
-    sc = SemanticCrunch ()
-    manifest = sc.grok_bag (
-        bag_archive=args.bag,
-        output_path=args.out) #output_dir)
-    print (json.dumps (manifest, indent=2))
-
-    server = BagServer ()
-    server.serve (manifest, title=args.title)
+    SemanticCrunch.generate_smartapi (args.bag, args.out, args.title)

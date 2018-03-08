@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import pyld
@@ -101,7 +102,7 @@ def {{ db.name }}_{{ column }}({{ column }}):
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
     data = cursor.execute (
-        "SELECT * from {{ db.name }} where {{ column }} = '{0}'".format (
+        "SELECT * FROM {{ db.name }} where lower({{ column }}) LIKE lower('%{0}%')".format (
             {{ column }}))
     for r in data:
         row = {}
@@ -126,7 +127,8 @@ def spec ():
     text = ""
     spec_path = os.path.join (os.path.dirname(__file__), "smartapi.yaml")
     if not os.path.exists (spec_path):
-        obj = requests.get ("http://localhost:5000/apispec_1.json").json ()
+        port = app.config['SWAGGER']['port']
+        obj = requests.get (f"http://localhost:{port}/apispec_1.json").json ()
         with open (spec_path, "w") as stream:
             yaml.dump (obj, stream, default_flow_style=False)
     with open (spec_path) as stream:
@@ -134,4 +136,10 @@ def spec ():
     return text
 
 
-app.run(host='0.0.0.0', debug=True, threaded=True)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='smartBag Server')
+    parser.add_argument('-p', '--port', type=int, help='Port to run service on.', default=None)
+    args = parser.parse_args ()
+    app.config['SWAGGER']['port'] = args.port
+    
+    app.run(host='0.0.0.0', port=args.port, debug=True, threaded=True)

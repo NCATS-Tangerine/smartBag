@@ -35,7 +35,7 @@ run () {
         cd $generated
         
         # Execute the OpenAPI implemenation.
-        python server.py
+        python server.py $*
     }
     $*
 }

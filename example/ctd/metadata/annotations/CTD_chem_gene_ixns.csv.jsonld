@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "schema" : "http://schema.org/",
+    "object" : "schema:object",
+    "mesh"   : "http://identifiers.org/mesh",
+    "casrn"  : "http://identifiers.org/casrn",
+    "ncbigene" : "http://identifiers.org/ncbigene",
+    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
+    "pubmed" : "http:/identifiers.org/pubemd",
+    "ChemicalName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "ChemicalID"     : {
+      "@type" : "mesh:",
+      "@id"   : "mesh:"
+    },
+    "CasRN" : {
+      "@type" : "casrn:",
+      "@type" : "casrn"
+    },
+    "GeneSymbol" : {
+      "@type" : "schema:name",
+      "@id"   : "schmea:name"
+    },
+    "GeneID" : {
+      "@type" : "ncbigene:",
+      "@id"   : "ncbigene:"
+    },
+    "GeneForms" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "Organism" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "OrganismID" : {
+      "@type" : "ncbitaxon:",
+      "@id"   : "ncbitaxon:"
+    },
+    "Interaction": {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "InteractionActions" : {
+      "@type" : "schema:name",
+      "@type" : "schema:name"
+    },
+    "PubMedIDs" : {
+      "@type" : "pubmed:",
+      "@id"   : "pubmed:"
+    }
+  }
+}

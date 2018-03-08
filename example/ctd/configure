@@ -45,7 +45,7 @@ CTD_pathways.csv.gz
 # Copy the JSON-LD annotation for this CSV file to the bag.
 #cp annotation/*.csv.jsonld $VAR/bag/data
 stage_bag () {
-    archives="CTD_chemicals CTD_chem_gene_ixn_types CTD_pathways"
+    archives="CTD_chemicals CTD_chem_gene_ixns CTD_pathways"
     cur_dir=$PWD
     cd $DEST
     rm -rf bag
@@ -53,7 +53,9 @@ stage_bag () {
     mkdir -p bag/metadata/annotations
     for arch in $archives; do
         echo Including $arch in bag.
-        if [ ! -f $VAR/$arch.csv ]; then
+        if [ -f $VAR/$arch.csv ]; then
+            cp $VAR/$arch.csv bag
+        else
             if [ -f $VAR/$arch.csv.gz ]; then
                 gunzip -c $VAR/$arch.csv.gz > bag/$arch.csv
             else
@@ -61,8 +63,6 @@ stage_bag () {
                 exit 1
             fi
         fi
-#        ls -lisa $VAR
-#        cp $VAR/$arch.csv bag
         annotations=$cur_dir/metadata/annotations/$arch.csv.jsonld
         if [ -f $annotations ]; then
             echo Including annotations $annotations
