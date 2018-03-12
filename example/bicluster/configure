@@ -3,7 +3,8 @@
 set -e
 set -x
 
-VAR=../files
+filesdir=../files
+archives_list="BiCluster"
 DEST=.
 cur_dir=$PWD
 if [ ! -z $1 ]; then
@@ -11,8 +12,7 @@ if [ ! -z $1 ]; then
 fi
 
 get_archives () {
-    for f in $VAR; do
-        echo $f
+    for f in $archives_list; do
         #wget --quiet --timestamping $download_prefix/$f
         #wget --timestamping $download_prefix/$f
     done
@@ -30,6 +30,7 @@ stage_bag () {
     mkdir -p bag/metadata/annotations
     for arch in $archives; do
         echo Including $arch in bag.
+        cp $filesdir/$f.csv bag
 
         annotations=$cur_dir/metadata/annotations/$arch.csv.jsonld
         if [ -f $annotations ]; then
