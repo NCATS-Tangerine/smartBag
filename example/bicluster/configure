@@ -11,7 +11,7 @@ if [ ! -z $1 ]; then
 fi
 
 get_archives () {
-    for f in $files; do
+    for f in $VAR; do
         echo $f
         #wget --quiet --timestamping $download_prefix/$f
         #wget --timestamping $download_prefix/$f
