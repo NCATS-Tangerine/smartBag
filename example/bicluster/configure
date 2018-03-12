@@ -13,6 +13,7 @@ fi
 
 get_archives () {
     for f in $archives_list; do
+        echo $f
         #wget --quiet --timestamping $download_prefix/$f
         #wget --timestamping $download_prefix/$f
     done
