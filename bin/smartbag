@@ -21,13 +21,14 @@ make () {
     }
     smartapi () {
         # Remove artifacts of previous code generation.
-        # rm -rf $generated
+        rm -rf $generated
 
-        pwd 
+        mkdir $generated
+
         # Generate the relational database and OpenAPI server implementations from the BDBag.
         python $root/grok.py $*
 
-        #rm -rf out
+        rm -rf out
     }
     $*
 }
