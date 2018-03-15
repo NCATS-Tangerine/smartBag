@@ -12,17 +12,19 @@ echo $root
 make () {
     bag () {
         DEST="."
-        
+
         # Initialize the BDBag, generating associated metadata.
         bdbag $DEST/bag
-        
+
         # Create the BDBag archive
         bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
     }
     smartapi () {
         # Remove artifacts of previous code generation.
         rm -rf $generated
-        
+
+        mkdir $generated
+
         # Generate the relational database and OpenAPI server implementations from the BDBag.
         python $root/grok.py $*
 
@@ -33,7 +35,7 @@ make () {
 run () {
     smartapi () {
         cd $generated
-        
+
         # Execute the OpenAPI implemenation.
         python server.py $*
     }
