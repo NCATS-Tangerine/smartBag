@@ -32,7 +32,7 @@ make () {
 }
 run () {
     smartapi () {
-        cd $generated
+        cd out/gen #$generated
 
         # Execute the OpenAPI implemenation.
         python server.py $*
