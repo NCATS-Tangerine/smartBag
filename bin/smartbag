@@ -3,7 +3,7 @@
 set -e
 set -x
 
-generated=out/gen
+generated=gen
 
 export PYTHONPATH=$PYTHONPATH:$(dirname ${BASH_SOURCE[0]})/..
 root=$(dirname ${BASH_SOURCE[0]})/..
@@ -21,9 +21,9 @@ make () {
     }
     smartapi () {
         # Remove artifacts of previous code generation.
-        rm -rf $generated
+        rm -rf out #$generated
 
-        mkdir -p $generated
+        mkdir -p out #$generated
 
         # Generate the relational database and OpenAPI server implementations from the BDBag.
         python $root/grok.py $*
