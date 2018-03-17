@@ -3,7 +3,7 @@
 set -e
 set -x
 
-generated=gen
+generated=out/gen
 
 export PYTHONPATH=$PYTHONPATH:$(dirname ${BASH_SOURCE[0]})/..
 root=$(dirname ${BASH_SOURCE[0]})/..
@@ -26,7 +26,7 @@ make () {
         # Generate the relational database and OpenAPI server implementations from the BDBag.
         python $root/grok.py $*
 
-        rm -rf out
+        #rm -rf out
     }
     $*
 }
