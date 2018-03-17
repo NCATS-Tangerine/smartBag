@@ -23,7 +23,7 @@ make () {
         # Remove artifacts of previous code generation.
         rm -rf $generated
 
-        mkdir $generated
+        mkdir -p $generated
 
         # Generate the relational database and OpenAPI server implementations from the BDBag.
         python $root/grok.py $*
