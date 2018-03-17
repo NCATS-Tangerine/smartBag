@@ -46,7 +46,7 @@ CTD_pathways.csv.gz
 #cp annotation/*.csv.jsonld $VAR/bag/data
 stage_bag () {
     archives="CTD_chemicals CTD_chem_gene_ixns CTD_pathways"
-    archives="CTD_chem_gene_ixns"
+    #archives="CTD_chem_gene_ixns"
     cur_dir=$PWD
     cd $DEST
     rm -rf bag
