@@ -5,6 +5,8 @@ set -e
 set -x
 
 hostname; whoami
+cd /projects/stars/var/ctd_data/stage
+
 mkdir -p $HOSTNAME
 cd $HOSTNAME
 rm -rf smartBag
@@ -15,21 +17,20 @@ venv () {
     venv=/projects/stars/ctdVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
+        source $venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
     fi
     source $venv/bin/activate
 }
 venv
 
 cd smartBag
-
 export PATH=$PWD/bin:$PATH
 echo $PATH
-
-pip install --upgrade pip
-pip install -r requirements.txt
 
 cd example/ctd
 ./configure $1
 smartbag make bag
 smartbag make smartapi --bag bag.tgz --title CTD
-smartbag run smartapi
+smartbag run smartapi --port 8997
