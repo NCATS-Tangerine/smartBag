@@ -94,6 +94,7 @@ def {{ db.name }}_{{ column }}({{ column }}):
             template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
     responses:
       200:
+        description: success
         x-responseValueType:{% for response_col in db.columns.values() %}
           - path: {{ response_col.name }}
             valueType: {{ response_col.type }}{% endfor %}
@@ -138,7 +139,7 @@ def spec ():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='smartBag Server')
-    parser.add_argument('-p', '--port', type=int, help='Port to run service on.', default=None)
+    parser.add_argument('-p', '--port', type=int, help='Port to run service on.', default=5000)
     args = parser.parse_args ()
     app.config['SWAGGER']['port'] = args.port
     
