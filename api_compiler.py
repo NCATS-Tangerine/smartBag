@@ -7,6 +7,11 @@ import sqlite3
 import logging
 import sys
 import gzip
+from compiler import BagCompiler
+from compiler import Column
+from compiler import DataSet
+from compiler import CSVFilter
+
 from bdbag import bdbag_api
 from jinja2 import Template
 from jsonpath_rw import jsonpath, parse
@@ -15,62 +20,7 @@ from pyld import jsonld
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)
 
-class Column:
-    """ Model a table column. """
-    def __init__(self, name, column_type=None):
-        self.name = name
-        self.type = column_type
-    def __repr__(self):
-        return "{0} {1}".format (self.name, self.type)
-
-class DataSet:
-    """ A set of columns and associated metadata. """
-    def __init__(self, db_path, columns):
-        self.name = db_path.replace (".sqlitedb", "")
-        self.db_path = db_path
-        self.columns = columns
-        self.operations = []
-        self.jsonld_context = {}
-        self.example_rows = []
-    def __repr__(self):
-        return "{0} {1} {2}".format (self.name, self.db_path, self.columns)
-
-class CSVFilter:
-    """ Implement data set specific filters. Generalize. """
-    def filter_data (self, f):
-        basename = os.path.basename (f)
-        if basename.startswith ("CTD_") or basename.startswith ("Bicl"):
-            with open (f, "r") as stream:
-                f_new = "{0}.new".format (f)
-                with open (f_new, "w") as new_stream:
-                    headers_next = False
-                    index = 0
-                    for line in stream:
-                        index = index + 1
-                        out_line = line
-                        if line.startswith ("#"):
-                            if headers_next:
-                                out_line = line.replace ("# ", "")
-                                headers_next = False
-                            elif line.strip() == "# Fields:":
-                                out_line = None
-                                headers_next = True
-                            else:
-                                out_line = None
-                        if out_line:
-                            new_stream.write (out_line)
-            os.rename (f_new, f)
-
-class AbstractBagCompiler:
-    def compile (self, manifest, options):
-        raise ValueError ("Not implemented")
-    def parse (self, bag_archive, output_path="out"):
-        raise ValueError ("Not implemented.")
-    def cleanup_bag (bag_path):
-        bdbag_api.cleanup_bag (os.path.dirname (bag_path))
-
-class APICompiler(AbstractBagCompiler):
-
+class APICompiler(BagCompiler):
     """ Given a bag of tabular data, generate a relational database back end for it. """
     def __init__(self, generated_path="gen"):
         self.generated_path = generated_path
@@ -78,18 +28,23 @@ class APICompiler(AbstractBagCompiler):
             os.makedirs (self.generated_path)
 
     def _gen_name (self, path):
+        """ Generate a path relative to the output directory. """
         return os.path.join (self.generated_path, path)
 
     def parse (self, bag_archive, output_path="out"):
         """ Analyze the bag, consuming BagIt-RO metadata into a structure downstream code emitters can use. """
         manifest = {}
+        """ Extract the bag. """
         bag_path = bdbag_api.extract_bag (bag_archive, output_path=output_path)
         if bdbag_api.is_bag(bag_path):
+
+            logger.debug ("Initializing metadata datasets")
             manifest['path'] = bag_path
             manifest['datasets'] = {}
             datasets = manifest['datasets']
-            logger.debug (f"datasets: {datasets}")
             data_path = os.path.join (bag_path, "data")
+
+            """ Extract tarred files. """
             tar_data_files = glob.glob (os.path.join (data_path, "*.csv.gz"))
             for f in tar_data_files:
                 with gzip.open(f, 'rb') as zipped:
@@ -98,14 +53,14 @@ class APICompiler(AbstractBagCompiler):
                         file_content = zipped.read ()
                         stream.write (file_content)
 
+            """ Collect metadata for each file. """
             data_files = glob.glob (os.path.join (data_path, "*.csv"))
             csv_filter = CSVFilter ()
             for f in data_files:
                 csv_filter.filter_data (f)
-                print ("  -- file: {}".format (f))
+                logger.debug (f"  --collecting metadata for: {f}")
                 jsonld_context = self._get_jsonld_context (f)
                 datasets[f] = jsonld_context
-                logger.debug (f"data_file: {f}")
                 context = datasets[f]['@context']
                 datasets[f]['columns'] = {
                     k : None for k in context if isinstance(context[k],dict)
@@ -183,7 +138,7 @@ class APICompiler(AbstractBagCompiler):
         return dataset
 
     def compile (self, bag, output_path=".", options_path=None):
-        """ Generate an OpenAPI server based on the input manifest.
+        """ Compile the given bag to emit an OpenAPI server backed by a relational data store.
            :param: bag BDBag archive to compile.
            :param: output_path Output directory to emit generated sources to.
            :param: options_path Settings for generated system as JSON object.
@@ -200,13 +155,12 @@ class APICompiler(AbstractBagCompiler):
             bag_archive=args.bag,
             output_path=args.out)
 
+        """ Process each data set in the bag. """
         dataset_dbs = []
         for dataset in manifest['datasets']:
             dataset_base = os.path.basename (dataset)
             ds = self._generate_relational_database (dataset)
-            if not ds:
-                print (f"Error creating dataset {dataset}")
-                continue
+            assert ds, (f"Error generating relational data for {dataset}.")
             ds.jsonld_context = manifest['datasets'][dataset]['@context']
             ds.jsonld_context_text = json.dumps (ds.jsonld_context, indent=2)
             dataset_dbs.append (ds)

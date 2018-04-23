@@ -21,18 +21,20 @@ make () {
     }
     smartapi () {
         # Remove artifacts of previous code generation.
-        rm -rf out #$generated
+        rm -rf out
 
-        mkdir -p out #$generated
+        # Create the output directory.
+        mkdir -p out
 
         # Generate the relational database and OpenAPI server implementations from the BDBag.
-        python $root/grok.py $*
+        #python $root/grok.py $*
+        python $root/api_compiler.py $*
     }
     $*
 }
 run () {
     smartapi () {
-        cd out/gen #$generated
+        cd out/gen
 
         # Execute the OpenAPI implemenation.
         python server.py $*
