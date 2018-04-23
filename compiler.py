@@ -63,9 +63,76 @@ class CSVFilter:
 
 class BagCompiler:
     """ Demarcates generic concepts relating to compiling a bag. """
-    def compile (self, manifest, options):
-        raise ValueError ("Not implemented")
+    def __init__(self, bag_archive, output_path="out", generated_path="gen"):
+        self.generated_path = generated_path
+        if not os.path.exists (self.generated_path):
+            os.makedirs (self.generated_path)
+        """ Parse bag manifest. """
+        self.manifest = self.parse (
+            bag_archive=bag_archive,
+            output_path=output_path)
+        self.options = None
+    def get_options(self, options_path):
+        options = {}
+        if options_path:
+            with open(options_path, "r") as stream:
+                options = json.loads(stream.read ())
+        return options
+    def compile (self, options_path):
+        """ Load options. """
+        self.options = self.get_options (options_path)
     def parse (self, bag_archive, output_path="out"):
-        raise ValueError ("Not implemented.")
+        """ Analyze the bag, consuming BagIt-RO metadata into a structure downstream code emitters can use. """
+        manifest = {}
+        """ Extract the bag. """
+        bag_path = bdbag_api.extract_bag (bag_archive, output_path=output_path)
+        if bdbag_api.is_bag(bag_path):
+
+            logger.debug ("Initializing metadata datasets")
+            manifest['path'] = bag_path
+            manifest['datasets'] = {}
+            datasets = manifest['datasets']
+            data_path = os.path.join (bag_path, "data")
+
+            """ Extract tarred files. """
+            tar_data_files = glob.glob (os.path.join (data_path, "*.csv.gz"))
+            for f in tar_data_files:
+                with gzip.open(f, 'rb') as zipped:
+                    extracted = f.replace (".gz", "")
+                    with open (extracted, "wb") as stream:
+                        file_content = zipped.read ()
+                        stream.write (file_content)
+
+            """ Collect metadata for each file. """
+            data_files = glob.glob (os.path.join (data_path, "*.csv"))
+            csv_filter = CSVFilter ()
+            for f in data_files:
+                csv_filter.filter_data (f)
+                logger.debug (f"  --collecting metadata for: {f}")
+                jsonld_context = self._get_jsonld_context (f)
+                datasets[f] = jsonld_context
+                context = datasets[f]['@context']
+                datasets[f]['columns'] = {
+                    k : None for k in context if isinstance(context[k],dict)
+                }
+        return manifest
+    def _get_jsonld_context (self, data_file):
+        jsonld = None
+        ro_model_path = data_file.split (os.path.sep)
+        ro_model_path.insert (-1, os.path.sep.join ([ '..', 'metadata', 'annotations' ]))
+        ro_model_path = os.path.sep.join (ro_model_path)
+
+        jsonld_context_files = [
+            "{0}.jsonld".format (data_file),
+            "{0}.jsonld".format (ro_model_path)
+        ]
+        for jsonld_context_file in jsonld_context_files:
+            print ("testing {}".format (jsonld_context_file))
+            if os.path.exists (jsonld_context_file):
+                print ("opening {}".format (jsonld_context_file))
+                with open (jsonld_context_file, "r") as stream:
+                    jsonld = json.loads (stream.read ())
+                    break
+        return jsonld
     def cleanup_bag (bag_path):
         bdbag_api.cleanup_bag (os.path.dirname (bag_path))
