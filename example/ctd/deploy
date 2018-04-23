@@ -32,5 +32,5 @@ echo $PATH
 cd example/ctd
 ./configure $1
 smartbag make bag
-smartbag make smartapi --bag bag.tgz --title CTD
+bin/smartbag make smartapi --bag example/ctd/bag.tgz --opts example/ctd/options.json
 smartbag run smartapi --port 8997
