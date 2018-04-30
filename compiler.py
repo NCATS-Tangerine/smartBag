@@ -108,6 +108,7 @@ class BagCompiler:
             csv_filter = CSVFilter ()
             for f in data_files:
                 csv_filter.filter_data (f)
+                csv_filter.unMesh_ChemicalID(f)
                 logger.debug (f"  --collecting metadata for: {f}")
                 jsonld_context = self._get_jsonld_context (f)
                 datasets[f] = jsonld_context
