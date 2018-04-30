@@ -39,6 +39,9 @@ class RelationalCompiler(BagCompiler):
                       replace ("-", "_")
         sql_db_file = self._gen_name (db_basename)
 
+        """ Also use a single DB with all tables for join purposes. """
+        unified_db_file = os.path.join (self.generated_path, "unifiedDB.sqlitedb")
+
         if os.path.exists (sql_db_file):
             print (" -- {0} already exists. skipping.".format (sql_db_file))
             return
@@ -54,6 +57,11 @@ class RelationalCompiler(BagCompiler):
             sql = sqlite3.connect (sql_db_file)
             sql.text_factory = str
             cur = sql.cursor ()
+
+            unifiedSql = sqlite3.connect (unified_db_file)
+            unifiedSql.text_factory = str
+            unifiedCur = unifiedSql.cursor()
+
             table_name = os.path.basename (csv_file.
                                            replace (".csv", "").
                                            replace ("-", "_"))
@@ -63,6 +71,7 @@ class RelationalCompiler(BagCompiler):
                 table_name, col_types)
             print (create_table)
             cur.execute (create_table)
+            unifiedCur.execute(create_table)
 
             col_wildcards = ', '.join ([ "?" for col in headers ])
             insert_command = "INSERT INTO {0} VALUES ({1})".format (
@@ -78,8 +87,11 @@ class RelationalCompiler(BagCompiler):
                     dataset.example_rows.append (values)
                     i = i + 1
                 cur.execute (insert_command, row)
+                unifiedCur.execute (insert_command, row)
             sql.commit()
             sql.close ()
+            unifiedSql.commit()
+            unifiedSql.close ()
         return dataset
 
     def compile (self, options_path=None):
@@ -112,4 +124,3 @@ class RelationalCompiler(BagCompiler):
                         column_type = "{0}{1}".format (iri, value)
                     ds.columns[name] = Column (name, column_type)
                     print ("col: {} {} ".format (name, ds.columns[name].type))
-    

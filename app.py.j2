@@ -51,6 +51,15 @@ def get_{{ db.name }}_db():
         db_path = os.path.join (os.path.dirname(__file__), db_path)
         db = g._{{ db.name }} = sqlite3.connect (db_path)
     return db
+
+def get_{{ db.name }}_unified():
+    db = getattr(g, '_{{ db.name }}', None)
+    if db is None:
+        db_path = "{{ db.db_path }}"
+        db_path = os.path.join (os.path.dirname(__file__), "unifiedDB.sqlitedb")
+        db = g._{{ db.name }} = sqlite3.connect (db_path)
+    return db
+
 @app.teardown_appcontext
 def close_{{ db.name }}_connection(exception):
     db = getattr(g, '_{{ db.name }}', None)
@@ -60,12 +69,12 @@ def close_{{ db.name }}_connection(exception):
 
 @app.route('/{{ db.name }}_metadata/')
 def {{ db.name }}_metadata ():
-   """ Get service metadata 
+   """ Get service metadata
    ---
    responses:
      200:
        description: ...
-       
+
    """
    return _jsonify({{ db.jsonld_context_text }})
 
@@ -76,7 +85,7 @@ def {{ db.name }}_examples ():
    responses:
      200:
        description: ...
-       
+
    """
    return _jsonify({{ db.example_rows }})
 
@@ -119,6 +128,45 @@ def {{ db.name }}_{{ column }}({{ column }}):
 {% endfor %}
 {% endfor %}
 
+""" Special join method that assumes db dataset has been populated with jointable, joincolumn
+{% for column in db.columns %}
+@app.route('/{{ db.name }}_join_{{db.jointable}}_{{ column }}/<{{ column }}>/')
+def {{ db.name }}_join_{{db.jointable}}_{{ column }}({{ column }}):
+    """ Get row by {{ column }}
+    ---
+    parameters:
+      - name: {{ column }}
+        in: path
+        type: string
+        required: true
+        x-valueType:
+          - {{ db.columns[column].type }}
+        x-requestTemplate:
+          - valueType: {{ db.columns[column].type }}
+            template: /{{db.name }}_join_{{db.jointable}}_{{ column }}/{% raw %}{{ input }}{% endraw %}
+    responses:
+      200:
+        description: success
+        x-responseValueType:{% for response_col in db.columns.values() %}
+          - path: {{ response_col.name }}
+            valueType: {{ response_col.type }}{% endfor %}
+        x-JSONLDContext: /{{ db.name }}_metadata
+    """
+    results = []
+    cursor = get_{{ db.name }}_unified ().cursor ()
+    data = cursor.execute (
+        "SELECT * FROM {{ db.name }} INNER JOIN {{db.jointable}} ON {{ db.name }}.{{db.joincolumn}} = {{db.jointable}}.{{db.joincolumn}} where lower({{ db.name }}.{{ column }}) LIKE lower('%{0}%')".format (
+            {{ column }}))
+    for r in data:
+        row = {}
+        {% for col in db.columns %}row["{{ col }}"]=r[{{ loop.index0 }}]
+        {% endfor %}
+        results.append (row)
+    cursor.close ()
+    return _jsonify(results)
+
+{% endfor %}
+{% endfor %}
 
 @app.route('/specification/')
 def spec ():
@@ -126,7 +174,7 @@ def spec ():
     ---
     responses:
      200:
-       description: ...              
+       description: ...
     """
     text = ""
     spec_path = os.path.join (os.path.dirname(__file__), "smartapi.yaml")
@@ -145,5 +193,5 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--port', type=int, help='Port to run service on.', default=5000)
     args = parser.parse_args ()
     app.config['SWAGGER']['port'] = args.port
-    
+
     app.run(host='0.0.0.0', port=args.port, debug=True, threaded=True)

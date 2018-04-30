@@ -61,6 +61,18 @@ class CSVFilter:
                             new_stream.write (out_line)
             os.rename (f_new, f)
 
+    """ chemical-specific filter. """
+    def unMesh_ChemicalID (self, f):
+        basename = os.path.basename (f)
+        if basename.startswith ("CTD_"):
+            with open (f, "r") as stream:
+                f_new = "{0}.new".format (f)
+                with open (f_new, "w") as new_stream:
+                    for line in stream:
+                        out_line = line.replace ("MESH:", "")
+                        new_stream.write (out_line)
+            os.rename (f_new, f)
+
 class AbstractBagCompiler:
     def compile (self, manifest, options):
         raise ValueError ("Not implemented")
@@ -241,7 +253,7 @@ class APICompiler(AbstractBagCompiler):
         with open(app_template, "r") as stream:
             template = Template (stream.read ())
         return template
-    
+
 class SemanticCrunch:
 
     def apply_semantic_mapping (jsonld_context):
@@ -261,7 +273,7 @@ class SemanticCrunch:
                         if match.value.startswith (method_metadata.out_type) ]
 
 if __name__ == "__main__":
-    
+
     '''
     Parse command line arguments
     Unpack a bdbag
