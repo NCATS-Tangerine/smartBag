@@ -88,10 +88,10 @@ stage_metadata () {
         else
             echo missing annotations file $annotations
             exit 1
-        fi        
+        fi
     done
-    cp -r $cur_dir/metadata/provenance bag/metadata/provenance
-    cp -r $cur_dir/metadata/manifest.json bag/metadata/    
+    cp -r $cur_dir/metadata/provenance bag/metadata
+    cp -r $cur_dir/metadata/manifest.json bag/metadata/
 }
 
 build_it () {
@@ -108,7 +108,7 @@ build_it () {
     # Adding before structuring the bag with bdbag results in the metadata directory being included in the
     # data payload directory which is not conformant to the spec. So we add it here.
     stage_metadata "$archives"
-    
+
     # Archive the bag and associated metadata.
     bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
 
