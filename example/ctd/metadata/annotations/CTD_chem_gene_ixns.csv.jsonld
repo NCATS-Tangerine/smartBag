@@ -2,10 +2,10 @@
   "@context": {
     "schema" : "http://schema.org/",
     "object" : "schema:object",
-    "mesh"   : "http://identifiers.org/mesh",
-    "casrn"  : "http://identifiers.org/casrn",
-    "ncbigene" : "http://identifiers.org/ncbigene",
-    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
+    "mesh"   : "http://identifiers.org/mesh/",
+    "casrn"  : "http://identifiers.org/casrn/",
+    "ncbigene" : "http://identifiers.org/ncbigene/",
+    "ncbitaxon" : "http://identifiers.org/ncbitaxon/",
     "pubmed" : "http:/identifiers.org/pubmed",
     "ChemicalName" : {
       "@type" : "schema:name",

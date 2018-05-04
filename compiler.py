@@ -23,6 +23,17 @@ class Column:
     def __repr__(self):
         return "{0} {1}".format (self.name, self.type)
 
+class RelationalJoin:
+    """ Model a relational join for a DataSet. """
+    def __init__(self, table_name, table_column, join_table_name, join_table_column, join_table_columns):
+        self.table_name = table_name
+        self.table_column = table_column
+        self.join_table_name = join_table_name
+        self.join_table_column = join_table_column
+        self.join_table_columns = join_table_columns
+    def __repr__(self):
+        return "{0} {1}".format (self.table_name, self.table_column, self.join_table_name, self.join_table_column, self.join_table_columns)
+
 class DataSet:
     """ A set of columns and associated metadata. """
     def __init__(self, db_path, columns):
@@ -32,8 +43,13 @@ class DataSet:
         self.operations = []
         self.jsonld_context = {}
         self.example_rows = []
+        self.relationalJoins = []
     def __repr__(self):
         return "{0} {1} {2}".format (self.name, self.db_path, self.columns)
+
+    """ chemical-specific filter. """
+    def addRelationalJoin (self, table_name, table_column, join_table_name, join_table_column, join_table_columns):
+        self.relationalJoins.append(RelationalJoin(table_name, table_column, join_table_name, join_table_column, join_table_columns))
 
 class CSVFilter:
     """ Implement data set specific filters. Generalize. """
@@ -59,6 +75,18 @@ class CSVFilter:
                                 out_line = None
                         if out_line:
                             new_stream.write (out_line)
+            os.rename (f_new, f)
+
+    """ chemical-specific filter. """
+    def unMesh_ChemicalID (self, f):
+        basename = os.path.basename (f)
+        if basename.startswith ("CTD_"):
+            with open (f, "r") as stream:
+                f_new = "{0}.new".format (f)
+                with open (f_new, "w") as new_stream:
+                    for line in stream:
+                        out_line = line.replace ("MESH:", "")
+                        new_stream.write (out_line)
             os.rename (f_new, f)
 
 class BagCompiler:

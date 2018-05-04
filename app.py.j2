@@ -47,16 +47,8 @@ def _jsonify (obj):
 def get_{{ db.name }}_db():
     db = getattr(g, '_{{ db.name }}', None)
     if db is None:
-        db_path = "{{ db.db_path }}"
+        db_path = "unifiedDB.sqlitedb"
         db_path = os.path.join (os.path.dirname(__file__), db_path)
-        db = g._{{ db.name }} = sqlite3.connect (db_path)
-    return db
-
-def get_{{ db.name }}_unified():
-    db = getattr(g, '_{{ db.name }}', None)
-    if db is None:
-        db_path = "{{ db.db_path }}"
-        db_path = os.path.join (os.path.dirname(__file__), "unifiedDB.sqlitedb")
         db = g._{{ db.name }} = sqlite3.connect (db_path)
     return db
 
@@ -65,7 +57,6 @@ def close_{{ db.name }}_connection(exception):
     db = getattr(g, '_{{ db.name }}', None)
     if db is not None:
         db.close()
-{{ db.name }}_connection = sqlite3.connect ("{{ db.db_path }}")
 
 @app.route('/{{ db.name }}_metadata/')
 def {{ db.name }}_metadata ():
@@ -113,7 +104,7 @@ def {{ db.name }}_{{ column }}({{ column }}):
         x-JSONLDContext: /{{ db.name }}_metadata
     """
     results = []
-    cursor = get_{{ db.name }}_db ().cursor ()
+    cursor = get_{{ db.name }}_db().cursor ()
     data = cursor.execute (
         "SELECT * FROM {{ db.name }} where lower({{ column }}) LIKE lower('%{0}%')".format (
             {{ column }}))
@@ -125,13 +116,12 @@ def {{ db.name }}_{{ column }}({{ column }}):
     cursor.close ()
     return _jsonify(results)
 
-{% endfor %}
-{% endfor %}
+    {% endfor %}
 
-""" Special join method that assumes db dataset has been populated with jointable, joincolumn
+{% for join in db.relationalJoins %}
 {% for column in db.columns %}
-@app.route('/{{ db.name }}_join_{{db.jointable}}_{{ column }}/<{{ column }}>/')
-def {{ db.name }}_join_{{db.jointable}}_{{ column }}({{ column }}):
+@app.route('/{{ db.name }}_{{ join.table_column }}_JOIN_{{ join.join_table_name }}_{{ join.join_table_column }}_{{ column }}/<{{ column }}>/')
+def {{ db.name }}_{{ join.table_column }}_JOIN_{{ join.join_table_name }}_{{ join.join_table_column }}_{{ column }}({{ column }}):
     """ Get row by {{ column }}
     ---
     parameters:
@@ -143,7 +133,7 @@ def {{ db.name }}_join_{{db.jointable}}_{{ column }}({{ column }}):
           - {{ db.columns[column].type }}
         x-requestTemplate:
           - valueType: {{ db.columns[column].type }}
-            template: /{{db.name }}_join_{{db.jointable}}_{{ column }}/{% raw %}{{ input }}{% endraw %}
+            template: /{{db.name }}_join_{{ join.join_table_name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
     responses:
       200:
         description: success
@@ -153,18 +143,24 @@ def {{ db.name }}_join_{{db.jointable}}_{{ column }}({{ column }}):
         x-JSONLDContext: /{{ db.name }}_metadata
     """
     results = []
-    cursor = get_{{ db.name }}_unified ().cursor ()
+    cursor = get_{{ db.name }}_db().cursor()
     data = cursor.execute (
-        "SELECT * FROM {{ db.name }} INNER JOIN {{db.jointable}} ON {{ db.name }}.{{db.joincolumn}} = {{db.jointable}}.{{db.joincolumn}} where lower({{ db.name }}.{{ column }}) LIKE lower('%{0}%')".format (
+        "SELECT * FROM {{ db.name }} INNER JOIN {{ join.join_table_name }} ON {{ db.name }}.{{ join.table_column }} = {{ join.join_table_name }}.{{ join.join_table_column }} where lower({{ db.name }}.{{ column }}) LIKE lower('%{0}%')".format (
             {{ column }}))
     for r in data:
         row = {}
+        x = 0
         {% for col in db.columns %}row["{{ col }}"]=r[{{ loop.index0 }}]
+        x = x + 1
+        {% endfor %}
+        {% for col2 in join.join_table_columns %}row["{{ col2 }}"]=r[x]
+        x = x + 1
         {% endfor %}
         results.append (row)
     cursor.close ()
     return _jsonify(results)
 
+{% endfor %}
 {% endfor %}
 {% endfor %}
 

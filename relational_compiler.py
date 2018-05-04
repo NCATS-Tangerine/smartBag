@@ -113,14 +113,38 @@ class RelationalCompiler(BagCompiler):
             ds.jsonld_context = self.manifest['datasets'][dataset]['@context']
             ds.jsonld_context_text = json.dumps (ds.jsonld_context, indent=2)
             self.dataset_dbs.append (ds)
+
+        """ Process each data set in the bag. """
+        for ds in self.dataset_dbs:
+
+            """Iterate through here """""
             for name, column in ds.columns.items ():
-                column_type = ds.jsonld_context.get (column.name, {}).get ('@type', None)
-                if column_type:
-                    if not column_type.startswith ('http') and ':' in column_type:
-                        vals = column_type.split (':')
-                        curie = vals[0]
-                        value = vals[1]
-                        iri = ds.jsonld_context[curie]
-                        column_type = "{0}{1}".format (iri, value)
-                    ds.columns[name] = Column (name, column_type)
-                    print ("col: {} {} ".format (name, ds.columns[name].type))
+                 column_type = ds.jsonld_context.get (column.name, {}).get ('@type', None)
+                 if column_type:
+                     if not column_type.startswith ('http') and ':' in column_type:
+                         vals = column_type.split (':')
+                         curie = vals[0]
+                         value = vals[1]
+                         iri = ds.jsonld_context[curie]
+                         column_type = "{0}{1}".format (iri, value)
+                     ds.columns[name] = Column (name, column_type)
+
+            for dataset2 in self.dataset_dbs:
+                if not (ds.name == dataset2.name):
+                    for name, column in ds.columns.items ():
+                        column_type = ds.jsonld_context.get (column.name, {}).get ('@type', None)
+                        if column_type:
+                            if not column_type.startswith ('http') and ':' in column_type:
+                                vals = column_type.split (':')
+                                column_type = "{0}{1}".format (ds.jsonld_context[vals[0]], vals[1])
+                                ds.columns[name] = Column (name, column_type)
+
+                        for name2, column2 in dataset2.columns.items ():
+                            column_type2 = dataset2.jsonld_context.get (column2.name, {}).get ('@type', None)
+                            if column_type2:
+                                if not column_type2.startswith ('http') and ':' in column_type2:
+                                    vals2 = column_type2.split (':')
+                                    column_type2 = "{0}{1}".format (dataset2.jsonld_context[vals2[0]], vals2[1])
+                                    dataset2.columns[name2] = Column (name2, column_type2)
+                            if (column_type == column_type2):
+                                ds.addRelationalJoin(ds.name, name, dataset2.name, name2, dataset2.columns)
