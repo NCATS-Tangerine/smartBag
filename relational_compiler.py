@@ -48,7 +48,7 @@ class RelationalCompiler(BagCompiler):
         with open(csv_file, 'r') as stream:
             reader = csv.reader (stream)
             headers = next (reader)
-            columns = { n : Column(n, None) for n in headers }
+            columns = { n : Column(n, None) for n in headers if not n == "" }
             dataset = DataSet (db_basename, columns)
 
             sql = sqlite3.connect (sql_db_file)
