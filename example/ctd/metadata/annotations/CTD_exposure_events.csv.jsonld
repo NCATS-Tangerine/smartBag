@@ -1,0 +1,191 @@
+{
+  "@context": {
+    "schema" : "http://schema.org/",
+    "object" : "schema:object",
+    "mesh"   : "http://identifiers.org/mesh",
+    "casrn"  : "http://identifiers.org/casrn",
+    "ncbigene" : "http://identifiers.org/ncbigene",
+    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
+    "pubmed" : "http:/identifiers.org/pubmed",
+
+    "exposurestressorname" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "exposurestressorid" : {
+      "@type" : "mesh:",
+      "@id"   : "mesh:"
+    },
+    "stressorsourcecategory" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+
+    "stressorsourcedetails" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "numberofstressorsamples" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "stressornotes" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+
+    "numberofreceptors" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "receptors" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "receptornotes" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "smokingstatus" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "age" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "ageunitsofmeasurement" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "agequalifier" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "sex" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "race" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "methods" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "detectionlimit" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "detectionlimituom" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "detectionfrequency" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+
+    "medium" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "exposuremarker" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "exposuremarkerid" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "markerlevel" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "markerunitsofmeasurement" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+
+    "markermeasurementstatistic" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "assaynotes" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "studycountries" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "stateorprovince" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "citytownregionarea" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "exposureeventnotes" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+
+    "outcomerelationship" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "diseasename" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "diseaseid" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "phenotypename" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "phenotypeid" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "phenotypeactiondegreetype" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "anatomy" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+
+    "exposureoutcomenotes" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "reference" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "associatedstudytitles" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "enrollmentstartyear" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "enrollmentendyear" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },    
+    "studyfactors" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    }
+    
+  }
+}

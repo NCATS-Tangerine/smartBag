@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "schema" : "http://schema.org/",
+    "object" : "schema:object",
+    "mesh"   : "http://identifiers.org/mesh",
+    "casrn"  : "http://identifiers.org/casrn",
+    "ncbigene" : "http://identifiers.org/ncbigene",
+    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
+    "pubmed" : "http:/identifiers.org/pubmed",
+
+    "GeneSymbol" : {
+      "@type" : "schema:name",
+      "@id"   : "schmea:name"
+    },
+    "GeneID" : {
+      "@type" : "ncbigene:",
+      "@id"   : "ncbigene:"
+    },
+
+    "DiseaseName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "DiseaseID" : {
+      "@type" : "mesh:",
+      "@id"   : "mesh:"
+    },
+
+    "DirectEvidence" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "InferenceChemicalName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "InferenceScore" : {
+      "@type" : "schema:Float",
+      "@id"   : "schema:Float"
+    },
+
+    "OmimIDs" : {
+      "@type" : "schema:string",
+      "@id"   : "schema:string"
+    },
+
+    "PubMedIDs" : {
+      "@type" : "pubmed:",
+      "@id"   : "pubmed:"
+    }
+  }
+}
