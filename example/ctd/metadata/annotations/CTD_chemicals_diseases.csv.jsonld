@@ -1,0 +1,38 @@
+{
+    "@context": {
+    "drugbank" : "http://identifiers.org/drugbank/",
+    "mesh"     : "http://identifiers.org/mesh/",
+    "schema"   : "http://schema.org/",
+    "object"   : "schema:object",
+    "ChemicalName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "ChemicalID"     : {
+      "@type" : "mesh:",
+      "@id"   : "mesh:"
+    },
+    "CasRN" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "DiseaseName" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "DiseaseID" : {
+      "@type" : "mesh:",
+      "@id"   : "mesh:"
+    },
+    "DirectEvidence" : {
+    },
+    "InferenceGeneSymbol" : {
+    },
+    "OmimIDs" : {
+    },
+    "PubMedIDs" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    }
+  }
+}

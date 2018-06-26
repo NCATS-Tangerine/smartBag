@@ -44,6 +44,7 @@ CTD_pathways.csv.gz
 
 archives="
 CTD_chemicals
+CTD_chemicals_diseases
 CTD_chem_gene_ixns
 CTD_pathways
 CTD_genes_diseases
