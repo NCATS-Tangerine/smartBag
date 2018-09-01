@@ -39,7 +39,7 @@ class CSVFilter:
     """ Implement data set specific filters. Generalize. """
     def filter_data (self, f):
         basename = os.path.basename (f)
-        if basename.startswith ("CTD_") or basename.startswith ("Bicl"):
+        if basename.startswith ("CTD_") or basename.lower().startswith ("bicl"):
             with open (f, "r") as stream:
                 f_new = "{0}.new".format (f)
                 with open (f_new, "w") as new_stream:
@@ -111,6 +111,7 @@ class BagCompiler:
                 logger.debug (f"  --collecting metadata for: {f}")
                 jsonld_context = self._get_jsonld_context (f)
                 datasets[f] = jsonld_context
+                print (f"json-ld: {json.dumps(jsonld_context, indent=2)}")
                 context = datasets[f]['@context']
                 datasets[f]['columns'] = {
                     k : None for k in context if isinstance(context[k],dict)
@@ -133,6 +134,8 @@ class BagCompiler:
                 with open (jsonld_context_file, "r") as stream:
                     jsonld = json.loads (stream.read ())
                     break
+        if not jsonld:
+            raise ValueError (f"Unable to find JSON-LD file for {data_file}")
         return jsonld
     def cleanup_bag (bag_path):
         bdbag_api.cleanup_bag (os.path.dirname (bag_path))
