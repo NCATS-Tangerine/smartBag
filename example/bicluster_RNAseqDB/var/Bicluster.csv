@@ -1,5 +1,5 @@
 # Fields:
-# bicluster	gene	bicluster_score	bicluster_mean	gene_bicluster_cor	col_enrich_all	col_enrich_MONDO	col_enrich_MONDO_label	col_enrich_UBERON	col_enrich_UBERON_label	col_enrich_DOID	col_enrich_DOID_label	col_enrich_NCIT	col_enrich_NCIT_label	all_col_labels
+# bicluster,gene,bicluster_score,bicluster_mean,gene_bicluster_cor,col_enrich_all,col_enrich_MONDO,col_enrich_MONDO_label,col_enrich_UBERON,col_enrich_UBERON_label,col_enrich_DOID,col_enrich_DOID_label,col_enrich_NCIT,col_enrich_NCIT_label,all_col_labels
 # 
 1,PHGR1,0.997065881581896,1876.8638264521476,0.9842504641249241,UBERON:0001157,,,UBERON:0001157,COLON - TRANSVERSE,,,,,DOID:234__UBERON:0001157
 2,PHGR1,0.9969198947144589,1488.5099755236781,0.9881374310930081,UBERON:0001157,,,UBERON:0001157,COLON - TRANSVERSE,,,,,DOID:234__UBERON:0001157__UBERON:0001159__NCIT:C32668__DOID:1996
