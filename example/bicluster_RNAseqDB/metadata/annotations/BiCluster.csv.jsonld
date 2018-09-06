@@ -10,9 +10,9 @@
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
-    "ncbigene"     : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
+    "gene"     : {
+      "@type" : "ncbigene:",
+      "@id"   : "ncbigene:"
     },
     "bicluster_score"     : {
       "@type" : "schema:name",
