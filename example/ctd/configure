@@ -119,7 +119,7 @@ build_it () {
     
     # Archive the bag and associated metadata.
     bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
-
+    #bdbag $DEST/bag/ --update --validate fast --archive tgz
     # List bag contents for sanity check.
     tar tf bag.tgz
 }
