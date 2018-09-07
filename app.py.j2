@@ -27,15 +27,16 @@ template = {
     "version": "0.0.1"
   },
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ]
 }
-{% endif %}
 
+{% endif %}
 app.config['SWAGGER'] = {
-    'title': 'SmartBag'
+    'title': 'SmartBag API'
 }
+
 
 swagger = Swagger(app, template=template)
 
@@ -95,17 +96,6 @@ def {{ db.name }}_{{ column }}({{ column }}):
         x-requestTemplate:
           - valueType: {{ db.columns[column].type }}
             template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
-      - name: regex
-        in: query
-        type: boolean
-        required: true
-        default: false
-        x-valueType:
-          - http://schema.org/boolean
-        x-requestTemplate:
-          - valueType: http://schema.org/boolean
-            template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}/?regex={{ regex }}
-
     responses:
       200:
         description: success
@@ -116,17 +106,10 @@ def {{ db.name }}_{{ column }}({{ column }}):
     """
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
-    params = request.args    
-    regex = params['regex']
-
-    if regex == 'true':
-        data = cursor.execute (
-            "SELECT * FROM {{ db.name }} where lower({{ column }}) LIKE lower('%{0}%')".format (
-                {{ column }}))
-    else:
-        data = cursor.execute (
-            "SELECT * FROM {{ db.name }} where lower({{ column }}) = lower('{0}')".format (
-                {{ column }}))
+    
+    data = cursor.execute (
+        "SELECT * FROM {{ db.name }} where lower({{ column }}) = lower('{0}')".format (
+            {{ column }}))
 
     for r in data:
         row = {}
