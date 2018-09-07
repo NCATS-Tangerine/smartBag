@@ -1,0 +1,86 @@
+#!/bin/bash
+
+set -e
+set -x
+
+VAR=$PWD/var
+DEST=.
+
+if [ ! -z $1 ]; then
+    VAR=$1
+fi
+
+archives="BiCluster"
+
+# Create a bag by copying required data files into the bag.
+stage_data () {
+    archives="$1"
+    cur_dir=$PWD
+    cd $DEST
+    rm -rf bag
+    #cp -r $cur_dir bag
+    mkdir -p bag/metadata/annotations
+    # Process each data archive.
+    for arch in $archives; do
+        echo Including $arch in bag.
+        if [ -f $VAR/$arch.csv ]; then
+            # Copy an archive into the bag.
+            # Everything copied to the bag root will end up in the data directory.
+            # So metadata has to be handled separately.
+            cp $VAR/$arch.csv bag
+        else
+            # The archive is a compressed archive. Uncompress it to the bag.
+            if [ -f $VAR/$arch.csv.gz ]; then
+                gunzip -c $VAR/$arch.csv.gz > bag/$arch.csv
+            else
+                echo "no such file $arch.csv.gz"
+                exit 1
+            fi
+        fi
+    done
+    cd $cur_dir
+}
+
+stage_metadata () {
+    # Copy RO metadata including JSON-LD annotation for the data archives into the bag.
+    archives="$1"
+    cur_dir=$PWD
+    cd $DEST
+    mkdir -p bag/metadata/annotations
+    mkdir -p bag/metadata/provenance
+    for arch in $archives; do
+        annotations=$cur_dir/metadata/annotations/$arch.csv.jsonld
+        if [ -f $annotations ]; then
+            echo Including annotations $annotations
+            cp $annotations bag/metadata/annotations
+        else
+            echo missing annotations file $annotations
+            exit 1
+        fi        
+    done
+    cp -r $cur_dir/metadata/provenance bag/metadata/provenance
+    cp -r $cur_dir/metadata/manifest.json bag/metadata/    
+}
+
+build_it () {
+    # Stage data into a bag directory.
+    stage_data "$archives"
+
+    # Generate bag structure and metadata.
+    bdbag $DEST/bag
+
+    # Stage metadata to the bag.
+    # Adding before structuring the bag with bdbag results in the metadata directory being included in the
+    # data payload directory which is not conformant to the spec. So we add it here.
+    stage_metadata "$archives"
+    
+    # Archive the bag and associated metadata.
+    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
+
+    # List bag contents for sanity check.
+    tar tf bag.tgz
+}
+
+build_it
+
+exit 0
