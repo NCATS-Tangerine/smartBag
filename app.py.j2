@@ -95,12 +95,10 @@ def {{ db.name }}_{{ column }}({{ column }}):
         x-requestTemplate:
           - valueType: {{ db.columns[column].type }}
             template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
-      
       - name: include_similar
         in: query
         type: boolean
         default: false
-    
         x-valueType:
           - http://schema.org/boolean
         x-requestTemplate:
@@ -115,8 +113,6 @@ def {{ db.name }}_{{ column }}({{ column }}):
         x-JSONLDContext: /{{ db.name }}_metadata
     """
     include_similar = flask.request.args.get("include_similar")
-    if include_similar == None:
-        include_similar = 'false'
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
     if include_similar == 'true':
