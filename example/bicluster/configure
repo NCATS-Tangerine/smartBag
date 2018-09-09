@@ -56,9 +56,16 @@ stage_metadata () {
         else
             echo missing annotations file $annotations
             exit 1
-        fi        
+        fi 
+        if [=f $provenance ]; then
+            echo Including provenance $provenance
+            cp $provenance bag/metadata/provenance
+        else
+            echo missing provenance file $provenance
+            exit 1
+        fi       
     done
-    #cp -r $cur_dir/metadata/provenance bag/metadata/provenance
+    cp -r $cur_dir/metadata/provenance bag/metadata/provenance
     cp -r $cur_dir/metadata/manifest.json bag/metadata/    
 }
 
