@@ -4,6 +4,7 @@ set -e
 set -x
 
 VAR=$PWD/var
+ls $PWD/var
 DEST=.
 
 if [ ! -z $1 ]; then
