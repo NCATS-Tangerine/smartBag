@@ -1,20 +1,11 @@
 import argparse
-import csv
-import glob
 import json
 import os
-import sqlite3
 import logging
 import sys
-import gzip
-from compiler import BagCompiler
 from compiler import Column
 from compiler import DataSet
-from compiler import CSVFilter
-
 from relational_compiler import RelationalCompiler
-
-from bdbag import bdbag_api
 from jinja2 import Template
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
