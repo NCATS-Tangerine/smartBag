@@ -7,7 +7,6 @@ import gzip
 from bdbag import bdbag_api
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
-from csvfilter import CSVFilter
 
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)
