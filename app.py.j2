@@ -8,6 +8,7 @@ import yaml
 from flask import Flask, jsonify, g, Response, request
 from flasgger import Swagger
 app = Flask(__name__)
+import flask
 
 {% if options.swagger %}
 template = {{ options.swagger }}
@@ -27,19 +28,17 @@ template = {
     "version": "0.0.1"
   },
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ]
 }
-{% endif %}
 
+{% endif %}
 app.config['SWAGGER'] = {
-    'title': 'SmartBag'
+    'title': 'SmartBag API'
 }
 
 swagger = Swagger(app, template=template)
-
-#swagger = Swagger(app)
 
 {% for db in datasets %}
 def _jsonify (obj):
@@ -51,6 +50,7 @@ def get_{{ db.name }}_db():
         db_path = os.path.join (os.path.dirname(__file__), db_path)
         db = g._{{ db.name }} = sqlite3.connect (db_path)
     return db
+
 @app.teardown_appcontext
 def close_{{ db.name }}_connection(exception):
     db = getattr(g, '_{{ db.name }}', None)
@@ -65,7 +65,7 @@ def {{ db.name }}_metadata ():
    responses:
      200:
        description: ...
-       
+
    """
    return _jsonify({{ db.jsonld_context_text }})
 
@@ -95,16 +95,14 @@ def {{ db.name }}_{{ column }}({{ column }}):
         x-requestTemplate:
           - valueType: {{ db.columns[column].type }}
             template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}
-      - name: regex
+      - name: include_similar
         in: query
         type: boolean
-        required: true
         default: false
         x-valueType:
           - http://schema.org/boolean
         x-requestTemplate:
           - valueType: http://schema.org/boolean
-            template: /{{db.name }}_{{ column }}/{% raw %}{{ input }}{% endraw %}/?regex={{ regex }}
 
     responses:
       200:
@@ -114,12 +112,10 @@ def {{ db.name }}_{{ column }}({{ column }}):
             valueType: {{ response_col.type }}{% endfor %}
         x-JSONLDContext: /{{ db.name }}_metadata
     """
+    include_similar = flask.request.args.get("include_similar")
     results = []
     cursor = get_{{ db.name }}_db ().cursor ()
-    params = request.args    
-    regex = params['regex']
-
-    if regex == 'true':
+    if include_similar == 'true':
         data = cursor.execute (
             "SELECT * FROM {{ db.name }} where lower({{ column }}) LIKE lower('%{0}%')".format (
                 {{ column }}))
@@ -127,7 +123,6 @@ def {{ db.name }}_{{ column }}({{ column }}):
         data = cursor.execute (
             "SELECT * FROM {{ db.name }} where lower({{ column }}) = lower('{0}')".format (
                 {{ column }}))
-
     for r in data:
         row = {}
         {% for col in db.columns %}row["{{ col }}"]=r[{{ loop.index0 }}]

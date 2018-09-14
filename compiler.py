@@ -1,14 +1,10 @@
-import argparse
 import csv
 import glob
 import json
 import os
-import sqlite3
 import logging
-import sys
 import gzip
 from bdbag import bdbag_api
-from jinja2 import Template
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
 
