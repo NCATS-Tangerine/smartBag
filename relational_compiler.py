@@ -39,7 +39,7 @@ class RelationalCompiler(BagCompiler):
 
         dataset = None
 
-        with open(csv_file, 'r') as stream:
+        with open(csv_file, 'r', encoding='utf-8') as stream:
             reader = csv.reader (stream)
             headers = next (reader)
             columns = { n : Column(n, None) for n in headers if not n == "" }
@@ -63,15 +63,27 @@ class RelationalCompiler(BagCompiler):
                 table_name, col_wildcards)
             print (insert_command)
             i = 0
+            j = 0
             max_examples = 5
             for row in reader:
-                #print (row)
-                values = [ r for r in row ]
-                if i < max_examples:
-                    print (values)
-                    dataset.example_rows.append (values)
-                    i = i + 1
-                cur.execute (insert_command, row)
+               #print (row)
+               values = [ r for r in row ]
+               if i < max_examples:
+                   print (values)
+                   dataset.example_rows.append (values)
+                   i = i + 1
+               try:
+                   if len(columns) == len(values):
+                       cur.execute (insert_command, row)
+                   else:
+                       #print (f"detected row with {len(values)} values but only {len(columns)} headers were supplied. skipping.")
+                       j+=1
+               except:
+                   print (values)
+                   for i, v in enumerate(values):
+                       print (f" {i} - {v}")
+                   traceback.print_exc ()
+            print('Number of rows skipped due to header/row length mismatch:', j)
             sql.commit()
             sql.close ()
         return dataset
