@@ -47,7 +47,7 @@ stage_metadata () {
     cur_dir=$PWD
     cd $DEST
     mkdir -p bag/metadata/annotations
-    mkdir -p bag/metadata/provenance
+    #mkdir -p bag/metadata/provenance
     for arch in $archives; do
         annotations=$cur_dir/metadata/annotations/$arch.csv.jsonld
         if [ -f $annotations ]; then
@@ -58,7 +58,7 @@ stage_metadata () {
             exit 1
         fi        
     done
-    cp -r $cur_dir/metadata/provenance bag/metadata/provenance
+    #cp -r $cur_dir/metadata/provenance bag/metadata/provenance
     cp -r $cur_dir/metadata/manifest.json bag/metadata/    
 }
 
