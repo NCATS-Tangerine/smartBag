@@ -8,7 +8,7 @@
     "ncbitaxon" : "http://identifiers.org/ncbitaxon",
     "pubmed" : "http:/identifiers.org/pubmed",
 
-    "chem_type" : {
+    "chemicalID" : {
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
@@ -28,7 +28,7 @@
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
-    "gene_type" : {
+    "geneID" : {
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
@@ -40,11 +40,15 @@
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
-    "taxon" : {
+    "taxonID" : {
       "@type" : "schema:name",
       "@id"   : "schema:name"
     },
     "process_type" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "process" : {
       "@type" : "schema:name",
       "@id"   : "schema:name"
     }
