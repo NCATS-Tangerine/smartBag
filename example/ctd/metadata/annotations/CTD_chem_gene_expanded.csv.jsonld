@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "schema" : "http://schema.org/",
+    "object" : "schema:object",
+    "mesh"   : "http://identifiers.org/mesh",
+    "casrn"  : "http://identifiers.org/casrn",
+    "ncbigene" : "http://identifiers.org/ncbigene",
+    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
+    "pubmed" : "http:/identifiers.org/pubmed",
+
+    "chem_type" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "chem_label" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "degree" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "interaction" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "direction" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "gene_type" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "gene_label" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "form" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "taxon" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    },
+    "process_type" : {
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
+    }
+  }
+}
