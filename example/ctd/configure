@@ -45,6 +45,7 @@ CTD_pathways.csv.gz
 archives="
 CTD_chemicals
 CTD_chemicals_diseases
+CTD_chem_gene_expanded
 CTD_chem_gene_ixns
 CTD_pathways
 CTD_genes_diseases
@@ -104,7 +105,7 @@ stage_metadata () {
 
 build_it () {
     # Download data files.
-    get_archives
+    #get_archives
 
     # Stage data into a bag directory.
     stage_data "$archives"
@@ -120,6 +121,7 @@ build_it () {
     # Archive the bag and associated metadata.
     bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
     #bdbag $DEST/bag/ --update --validate fast --archive tgz
+    
     # List bag contents for sanity check.
     tar tf bag.tgz
 }
