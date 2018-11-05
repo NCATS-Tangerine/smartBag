@@ -1,56 +1,33 @@
 {
   "@context": {
-    "schema" : "http://schema.org/",
-    "object" : "schema:object",
-    "mesh"   : "http://identifiers.org/mesh",
-    "casrn"  : "http://identifiers.org/casrn",
+    "drugbank" : "http://identifiers.org/drugbank/",
+    "mesh"     : "http://identifiers.org/mesh/",
+    "schema"   : "http://schema.org/",
     "ncbigene" : "http://identifiers.org/ncbigene",
-    "ncbitaxon" : "http://identifiers.org/ncbitaxon",
-    "pubmed" : "http:/identifiers.org/pubmed",
-
-    "chemicalID" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
+    "object"   : "schema:object",
+    "chemicalID"     : {
+        "@type" : "mesh:",
+        "@id"   : "mesh:"
     },
     "chem_label" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
-    },
-    "degree" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
     },
     "interaction" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
+        "@type" : "schema:name",
+        "@id" : "schema:name"
     },
     "direction" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
     },
     "geneID" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
+        "@type" : "ncbigene:",
+        "@id" : "ncbigene:"
     },
     "gene_label" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
     },
     "form" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
     },
     "taxonID" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
     },
-    "process_type" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
-    },
-    "process" : {
-      "@type" : "schema:name",
-      "@id"   : "schema:name"
+    "PMID" : {
     }
   }
 }
