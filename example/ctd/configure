@@ -4,6 +4,7 @@ set -e
 set -x
 
 VAR=../../../ctd_data
+
 DEST=.
 
 if [ ! -z $1 ]; then
@@ -51,7 +52,11 @@ CTD_pathways
 CTD_genes_diseases
 CTD_diseases
 CTD_exposure_events
+CTD_grouped
 "
+# archives="
+# CTD_grouped
+# "
 
 # Create a bag by copying required data files into the bag.
 stage_data () {
