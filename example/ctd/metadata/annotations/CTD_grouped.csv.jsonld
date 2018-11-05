@@ -1,0 +1,33 @@
+{
+  "@context": {
+    "drugbank" : "http://identifiers.org/drugbank/",
+    "mesh"     : "http://identifiers.org/mesh/",
+    "schema"   : "http://schema.org/",
+    "ncbigene" : "http://identifiers.org/ncbigene",
+    "object"   : "schema:object",
+    "chemicalID"     : {
+        "@type" : "mesh:",
+        "@id"   : "mesh:"
+    },
+    "chem_label" : {
+    },
+    "interaction" : {
+        "@type" : "schema:name",
+        "@id" : "schema:name"
+    },
+    "direction" : {
+    },
+    "geneID" : {
+        "@type" : "ncbigene:",
+        "@id" : "ncbigene:"
+    },
+    "gene_label" : {
+    },
+    "form" : {
+    },
+    "taxonID" : {
+    },
+    "PMID" : {
+    }
+  }
+}
