@@ -45,7 +45,6 @@ class RelationalCompiler(BagCompiler):
             headers = [name.replace('?', '') for name in headers] # query artifact removal
             columns = { n : Column(n, None) for n in headers if not n == "" }
             dataset = DataSet (db_basename, columns)
-
             sql = sqlite3.connect (sql_db_file)
             sql.text_factory = str
             cur = sql.cursor ()
@@ -58,7 +57,6 @@ class RelationalCompiler(BagCompiler):
                 table_name, col_types)
             print (create_table)
             cur.execute (create_table)
-
             col_wildcards = ', '.join ([ "?" for col in headers ])
             insert_command = "INSERT INTO {0} VALUES ({1})".format (
                 table_name, col_wildcards)
@@ -79,18 +77,15 @@ class RelationalCompiler(BagCompiler):
                    for i, v in enumerate(values):
                       print (f" {i} - {v}")
                    traceback.print_exc ()
-            #    try:
-            #        if len(columns) == len(values):
-            #            cur.execute (insert_command, row)
-            #        else:
-                       
-            #            j+=1
-            #    except:
-            #        print (values)
-            #        for i, v in enumerate(values):
-            #            print (f" {i} - {v}")
-            #        traceback.print_exc ()
-            # print('Number of rows skipped due to header/row length mismatch:', j)
+            for label in columns:
+                sql_index = 'CREATE INDEX {0} ON {1}({2})'.format(label+'_index', table_name, label)
+                try:
+                    if label == 'geneID':
+                        print(sql_index)
+                        cur.execute(sql_index)
+                except Exception as e:
+                    print(e)
+                    traceback.print_exc ()
             sql.commit()
             sql.close ()
         return dataset
@@ -125,4 +120,3 @@ class RelationalCompiler(BagCompiler):
                         column_type = "{0}{1}".format (iri, value)
                     ds.columns[name] = Column (name, column_type)
                     print ("col: {} {} ".format (name, ds.columns[name].type))
-    
