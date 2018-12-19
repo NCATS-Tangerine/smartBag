@@ -10,7 +10,7 @@ if [ ! -z $1 ]; then
     VAR=$1
 fi
 
-archives="RNAseqDB_bicluster_gene_to_tissue"
+archives="RNAseqDB_bicluster_gene_to_tissue_v2"
 
 # Create a bag by copying required data files into the bag.
 stage_data () {
