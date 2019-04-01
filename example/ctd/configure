@@ -46,7 +46,6 @@ CTD_pathways.csv.gz
 archives="
 CTD_chemicals
 CTD_chemicals_diseases
-CTD_chem_gene_expanded
 CTD_chem_gene_ixns
 CTD_pathways
 CTD_genes_diseases
@@ -108,7 +107,7 @@ stage_metadata () {
 }
 
 build_it () {
-    # Download data files.
+    # Download data files. Uncomment the next line to recapture the data files.
     #get_archives
 
     # Stage data into a bag directory.
