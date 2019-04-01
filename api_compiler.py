@@ -40,6 +40,7 @@ class APICompiler(RelationalCompiler):
         template = self._get_app_template (self.options)
         dataset_server_file_name = os.path.join (self.generated_path, "server.py")
         print ("-- {}".format (dataset_server_file_name))
+
         with open(dataset_server_file_name, "w") as app_code:
             app_code.write (template.render (
                 datasets=self.dataset_dbs,
