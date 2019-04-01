@@ -120,7 +120,6 @@ Next we generate the smartAPI based on the provided metadata.
 ```
 smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
 
-smartbag make smartapi --bag bag.tgz --
 ```
 
 ### Execute the smartAPI
