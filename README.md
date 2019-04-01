@@ -115,7 +115,7 @@ Next we generate the smartAPI based on the provided metadata.
   * Generate an OpenAPI interface able to query all rows by each column
   * Add smartAPI specific tags based on accompanying JSON-LD annotations
   * A configuration file must be specified to declare the properties of Swagger and website (flask) settings.
-  * The command line below should be run in the bin/smartapi directory.
+  * The command line below should be run in the bin/smartbag directory.
   
 ```
 smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
