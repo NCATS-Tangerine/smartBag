@@ -1,0 +1,147 @@
+{
+  "@context": {
+    "gtex" : "https://identifiers.org/gtex",
+    "ensembl"     : "https://identifiers.org/ensembl",
+    "ncbigene"    : "http://identifiers.org/ncbigene",
+    "schema"      : "http://schema.org/",
+    "object"      : "schema:object",
+  
+	"tissue_name" : {
+            "@type" : "gtex:",
+            "@id"   : "gtex:"
+	},	
+	"gene_id" : {
+            "@type" : "ensembl:",
+            "@id"   : "ensembl:"
+	},	
+	"gene_name" : {
+            "@type" : "ncbigene:",
+            "@id"   : "ncbigene:"
+        },
+	"gene_chr" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"gene_start" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"gene_end" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"strand" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"num_var" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"beta_shape1" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"beta_shape2" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"true_df" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pval_true_df" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"variant_id" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"tss_distance" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"chr" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pos" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"ref" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"alt" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"num_alt_per_site" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"rs_id_dbSNP147_GRCh37p13" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"minor_allele_samples" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"minor_allele_count" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},
+	"mafv" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"ref_factor" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pval_nominal" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"slope" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"slope_se" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pval_perm" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pval_beta" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"qval" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"pval_nominal_threshold" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"log2_aFC" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"log2_aFC_lower" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	},	
+	"log2_aFC_upper" : {
+            "@type" : "schema:name",
+            "@id"   : "schema:name"
+	}
+    }	    
+}
+
