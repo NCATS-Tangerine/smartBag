@@ -1,0 +1,54 @@
+#!/bin/bash
+
+deactivate
+set -e
+set -x
+
+# gather VM name
+hostname; whoami
+
+# move to the  GTEX staging area
+cd /projects/stars/var/GTEx/stage
+
+# make a directory for the smartBag repo
+mkdir -p $HOSTNAME
+cd $HOSTNAME
+rm -rf smartBag
+
+# clone the entire repo
+git clone https://github.com/NCATS-Tangerine/smartBag.git
+
+# method to prep the VM
+venv () {
+    venv=/projects/stars/ctdVenv
+    if [ ! -d $venv ]; then
+        python3.6 -m venv $venv
+        source $venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    fi
+    source $venv/bin/activate
+}
+
+# call for VM prep
+venv
+
+# go the the cloned repo
+cd smartBag
+export PATH=$PWD/bin:$PATH
+echo $PATH
+
+# go to the target data to load
+cd example/GTEx
+
+# run the confiuguration script
+./configure $1
+
+# make the smart bag
+smartbag make bag
+
+# decompress the smart bag and load the API
+bin/smartbag make smartapi --bag example/ctd/bag.tgz --opts example/ctd/options.json
+
+# start/run the API website
+smartbag run smartapi --port 8997

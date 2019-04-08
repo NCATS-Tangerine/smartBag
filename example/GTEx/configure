@@ -66,7 +66,90 @@ Uterus
 Vagina
 Whole_Blood"
 
-# Create a bag by copying required data files into the bag.
+# gets the raw data from the GTEx website and unpacks it.
+get_archives ()
+{
+    # remove the raw data directory if it exists
+    rm -rf $VAR
+
+    # make the target data directory
+    mkdir -p $VAR
+
+    # save where we are now
+    cur_dir=$PWD
+
+    # go to the raw data directory
+    cd $VAR
+
+     # set the URL to the data. only going after the single tiussue data for now
+    download_prefix="https://storage.googleapis.com/gtex_analysis_v7/single_tissue_eqtl_data"
+
+    # list of raw archive files
+    # note although we are setting up for processing a list only one file is needed right now.
+    # there are numerous other files that may also be desired on the site in the future.
+    archive_files="
+	GTEx_Analysis_v7_eQTL
+    "
+
+    # for each raw data archive file
+    for f in $archive_files; do
+	# checkpoint for the user
+#        echo $f
+
+	# make the call to get the data
+#        wget --timestamping $download_prefix/$f.tar.gz
+        wget --quiet --timestamping $download_prefix/$f.tar.gz
+    done
+
+    # now unpack them
+    for f in $archive_files; do
+	# does the file exist
+        if [ -f $f.tar.gz ]; then
+	    # extract the files. the data is actually in a subdir in the archive
+	    tar -zxvf $f.tar.gz $f -C ./
+
+	    # move the tissue files back to this working directory
+            mv ./$f/*.gz ./
+
+	    # remove the temp directory
+	    rm -rf $f
+        else
+            echo "no such file $f.tar.gz"
+            exit 1
+        fi
+    done
+
+    # Process each tissue archive file
+    for tissue in $tissues; do
+        echo Including $tissue in $VAR.
+
+        # The tissues are a compressed archive. Uncompress it
+        if [ -f $tissue.v7.egenes.txt.gz ]; then
+            gunzip -c $tissue.v7.egenes.txt.gz > $tissue.v7.egenes.csv
+        else
+            echo "no such file $tissue.v7.egenes.txt.gz"
+            exit 1
+        fi
+
+        # The tissues are a compressed archive. Uncompress it
+        if [ -f $tissue.v7.signif_variant_gene_pairs.txt.gz ]; then
+            gunzip -c $tissue.v7.signif_variant_gene_pairs.txt.gz > $tissue.v7.signif_variant_gene_pairs.csv
+        else
+            echo "no such file $tissue.v7.signif_variant_gene_pairs.txt.gz"
+            exit 1
+        fi
+    done
+
+    # remove all intermediate files
+    rm ./*.gz
+
+    # go back to the root directory
+    cd $cur_dir
+}
+
+# here we create CSV files from the txt data starting with adding a header record then 
+# appending all data from each tissue into a merged CSV file.
+# Finally create a bag by copying required data files into the bag.
 stage_data () {
     # get the tissues list
     tissues="$1"
@@ -83,30 +166,6 @@ stage_data () {
     # make the bag directory
     mkdir bag
 
-    # remove all csv files
-    rm -f $VAR/*.csv
-
-    # Process each tissue
-    for tissue in $tissues; do
-        echo Including $tissue in $VAR.
-
-        # The tissues are a compressed archive. Uncompress it
-        if [ -f $VAR/$tissue.v7.egenes.txt.gz ]; then
-            gunzip -c $VAR/$tissue.v7.egenes.txt.gz > $VAR/$tissue.v7.egenes.csv
-        else
-            echo "no such file $tissue.v7.egenes.txt.gz"
-            exit 1
-        fi
-
-        # The tissues are a compressed archive. Uncompress it
-        if [ -f $VAR/$tissue.v7.signif_variant_gene_pairs.txt.gz ]; then
-            gunzip -c $VAR/$tissue.v7.signif_variant_gene_pairs.txt.gz > $VAR/$tissue.v7.signif_variant_gene_pairs.csv
-        else
-            echo "no such file $tissue.v7.signif_variant_gene_pairs.txt.gz"
-            exit 1
-        fi
-    done
-
     # here we start the process of merging all the csv files into the two types
 
     # add the column headers to the target egenes file
@@ -117,7 +176,6 @@ stage_data () {
 
     # for each tissue file 
     for tissue in $tissues; do
-
 	# create the column data for the tissue name
 	tissueName="${tissue//_/ },"
 
@@ -133,6 +191,7 @@ stage_data () {
             # write out the line prepending with the tissue type and replacing tabs with commas
             echo $tissueName${line//	/,} >> bag/egenes.csv
 
+	# load up the next file to process
         done < $VAR/$tissue.v7.egenes.csv
 
         # init a line counter for the signif records
@@ -147,8 +206,8 @@ stage_data () {
             # write out the line prepending with the tissue type and replacing tabs with commas
             echo $tissueName${line//	/,} >> bag/signif_variant_gene_pairs.csv
 
+	# load up the next file to process
         done < $VAR/$tissue.v7.signif_variant_gene_pairs.csv
-
     done
 
     # move to the target directory
@@ -170,35 +229,38 @@ stage_metadata () {
     mkdir -p bag/metadata/provenance
 
     # get a copy of the json data descriptors into the metdata annotation dir
-    cp $cur_dir/stage/schema/*.jsonld bag/metadata/annotations/
+    cp $cur_dir/proj_files/schema/*.jsonld bag/metadata/annotations/
 
     # save the data provenance directory
-    cp -r $cur_dir/stage/provenance bag/metadata/
+    cp -r $cur_dir/proj_files/provenance bag/metadata/
 
     # save the data manifest
-    cp -r $cur_dir/stage/manifest.json bag/metadata/
+    cp -r $cur_dir/proj_files/manifest.json bag/metadata/
 
     # save the run options
-    cp -r $cur_dir/stage/options.json ./
+    cp -r $cur_dir/proj_files/options.json ./
 }
 
 build_it () {
+    # get the raw data from the archive
+    get_archives
+
     # Stage data into a bag directory.
 #    stage_data "$tissues"
 
     # Generate bag structure and metadata.
-    bdbag $DEST/bag
+#    bdbag $DEST/bag
 
     # Stage metadata to the bag.
     # Adding before structuring the bag with bdbag results in the metadata directory being included in the
     # data payload directory which is not conformant to the spec. So we add it here.
-    stage_metadata "$tissues"
+#    stage_metadata "$tissues"
 
     # Archive the bag and associated metadata.
-    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
+#    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
 
     # List bag contents for sanity check.
-    tar tf bag.tgz
+#    tar tf bag.tgz
 }
 
 build_it
