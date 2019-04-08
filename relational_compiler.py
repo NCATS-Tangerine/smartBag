@@ -46,6 +46,9 @@ class RelationalCompiler(BagCompiler):
             columns = { n : Column(n, None) for n in headers if not n == "" }
             dataset = DataSet (db_basename, columns)
 
+#            print("headers:{0}.".format(headers))
+#            print("header item count: {0}".format(len(headers)))
+
             sql = sqlite3.connect (sql_db_file)
             sql.text_factory = str
             cur = sql.cursor ()
@@ -72,25 +75,30 @@ class RelationalCompiler(BagCompiler):
                    print (values)
                    dataset.example_rows.append (values)
                    i = i + 1
+#               try:
+#                   cur.execute(insert_command, row)
+#               except:
+#                   print (values)
+#                   for i, v in enumerate(values):
+#                      print (f" {i} - {v}")
+#                   traceback.print_exc ()
+
+#               if i > 4: break
+                   
+
                try:
-                   cur.execute(insert_command, row)
+                   if len(columns) == len(values):
+                       cur.execute (insert_command, row)
+                   else:
+                       j+=1
                except:
                    print (values)
                    for i, v in enumerate(values):
-                      print (f" {i} - {v}")
+                       print (f" {i} - {v}")
                    traceback.print_exc ()
-            #    try:
-            #        if len(columns) == len(values):
-            #            cur.execute (insert_command, row)
-            #        else:
-                       
-            #            j+=1
-            #    except:
-            #        print (values)
-            #        for i, v in enumerate(values):
-            #            print (f" {i} - {v}")
-            #        traceback.print_exc ()
-            # print('Number of rows skipped due to header/row length mismatch:', j)
+
+            print('Number of rows skipped due to header/row length mismatch:', j)
+
             sql.commit()
             sql.close ()
         return dataset
