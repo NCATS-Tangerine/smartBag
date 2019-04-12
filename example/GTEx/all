@@ -1,0 +1,4 @@
+./configure 
+smartbag make bag
+smartbag make smartapi --bag bag.tgz --opts options.json
+smartbag run smartapi --port 8997
