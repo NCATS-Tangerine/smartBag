@@ -47,7 +47,7 @@ cd example/GTEx
 cd ../../bin
 
 # make the smart bag
-./smartbag make bag
+#./smartbag make bag
 
 # decompress the smart bag and load the API
 ./smartbag make smartapi --bag ../example/GTEx/bag.tgz --opts ../example/GTEx/options.json
