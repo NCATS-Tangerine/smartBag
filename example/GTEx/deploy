@@ -20,7 +20,7 @@ git clone https://github.com/NCATS-Tangerine/smartBag.git
 
 # method to prep the VM
 venv () {
-    venv=/projects/stars/GTExVenv
+    venv=/projects/stars/var/GTExVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate
