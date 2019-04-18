@@ -53,4 +53,4 @@ cd ../../bin
 ./smartbag make smartapi --bag ../example/GTEx/bag.tgz --opts ../example/GTEx/options.json
 
 # start/run the API website
-./smartbag run smartapi --port 8997
+#./smartbag run smartapi --port 8997
