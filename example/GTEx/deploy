@@ -41,16 +41,17 @@ echo $PATH
 # go to the target data to load
 cd example/GTEx
 
-# run the confiuguration script
+# run the configuration script
 ./configure $1
 
 cd ../../bin
 
 # make the smart bag
-./smartbag make bag
+#./smartbag make bag
+cp /projects/stars/var/GTEx/GTEx_rawdata/bag.tgz ../example/GTEx/
 
 # decompress the smart bag and load the API
-./smartbag make smartapi --bag example/GTEx/bag.tgz --opts example/GTEx/options.json
+./smartbag make smartapi --bag ../example/GTEx/bag.tgz --opts ../example/GTEx/options.json
 
 # start/run the API website
 ./smartbag run smartapi --port 8997
