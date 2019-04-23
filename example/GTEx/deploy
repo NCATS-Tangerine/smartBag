@@ -52,5 +52,13 @@ cd ../../bin
 # decompress the smart bag and load the API
 ./smartbag make smartapi --bag example/GTEx/bag.tgz --opts example/GTEx/options.json
 
+# from here you should be aboe to initiate a docker container
+# The last command in the Dockerfile is to start the web site using the smartbad command below
+# The commands to create the docker conrtainer are:
+#    docker build --tag=smartbag_gtex .
+#    docker run -it -v /projects/stars/var/GTEx/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_gtex
+
+# alternativly you can start the website in the running instance
 # start/run the API website
-./smartbag run smartapi --port 8997
+./smartbag run smartapi --port 5000
+
