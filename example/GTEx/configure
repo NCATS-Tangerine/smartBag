@@ -251,6 +251,7 @@ stage_metadata () {
 
 build_it () {
     # get the raw data from the archive
+
     get_archives
 
     # Stage data into a bag directory.
