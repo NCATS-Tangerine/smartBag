@@ -14,8 +14,7 @@ fi
 
 # the list of tissues to process
 tissues=(
-"Adipose_Subcutaneous, 0002190"
-"Adipose_Visceral_Omentum, 0003688")
+"Adipose_Subcutaneous, 0002190")
 
 alltissues=(
 "Adipose_Subcutaneous, 0002190"
@@ -252,7 +251,7 @@ stage_metadata () {
 
 build_it () {
     # get the raw data from the archive
-#    get_archives
+    get_archives
 
     # Stage data into a bag directory.
     stage_data "$tissues"
