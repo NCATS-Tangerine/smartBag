@@ -103,7 +103,7 @@ This stages a bag directory structure blending selected data files with metadata
 This next command creates a BDBag archive (bag.tgz) of the configured data. Note this is automatically done in the previous "configure" step.
 
 ```
-smartbag make bag
+./smartbag make bag
 ```
 
 ### Generate smartAPI
@@ -115,10 +115,10 @@ Next we generate the smartAPI based on the provided metadata.
   * Generate an OpenAPI interface able to query all rows by each column
   * Add smartAPI specific tags based on accompanying JSON-LD annotations
   * A configuration file must be specified to declare the properties of Swagger and website (flask) settings.
-  * The command line below should be run in the bin/smartapi directory.
+  * The command line below should be run in the bin/smartbag directory.
   
 ```
-smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
+./smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
 ```
 
 ### Execute the smartAPI
@@ -126,7 +126,7 @@ smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/option
 Finally, run the smartAPI. Here's a [link to your server](http://localhost:5000/apidocs/#/) once you've run the command.
 
 ```
-smartbag run smartapi 
+./smartbag run smartapi 
 ```
 
 
