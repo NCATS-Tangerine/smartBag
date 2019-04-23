@@ -13,10 +13,10 @@ if [ ! -z $1 ]; then
 fi
 
 # the list of tissues to process
-tissues=(
+onetissues=(
 "Adipose_Subcutaneous, 0002190")
 
-alltissues=(
+tissues=(
 "Adipose_Subcutaneous, 0002190"
 "Adipose_Visceral_Omentum, 0003688"
 "Adrenal_Gland, 0018303"
