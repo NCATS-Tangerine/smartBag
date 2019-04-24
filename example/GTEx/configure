@@ -257,12 +257,12 @@ build_it () {
 #    stage_data "$tissues"
 
     # Generate bag structure and metadata.
-#    bdbag $DEST/bag
+    bdbag $DEST/bag
 
     # Stage metadata to the bag.
     # Adding before structuring the bag with bdbag results in the metadata directory being included in the
     # data payload directory which is not conformant to the spec. So we add it here.
-#    stage_metadata "$tissues"
+    stage_metadata "$tissues"
 
     # Archive the bag and associated metadata.
     bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
