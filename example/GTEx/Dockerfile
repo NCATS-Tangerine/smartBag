@@ -1,16 +1,24 @@
+# install python
 FROM python:3.6.5
 
-ADD . /code
+# make a dir for the git repo
+RUN mkdir ./repo
 
-WORKDIR /code
+# go there
+WORKDIR repo
 
-RUN git clone https://github.com/NCATS-Tangerine/smartBag.git
+# get the smartBag repo
+RUN git clone http://github.com/NCATS-Tangerine/smartBag.git
 
-RUN pip install -r smartBag/requirements.txt
+# install the needed packages
+RUN pip install -r ./smartBag/requirements.txt
 
+# update
 RUN apt-get update
 
+EXPOSE 5000
+
+# change to the directory with the web site smart via the smartbag script
 WORKDIR /smartBag
 
 ENTRYPOINT ["/bin/bash", "-c", "./smartbag run smartapi --port 5000"]
-

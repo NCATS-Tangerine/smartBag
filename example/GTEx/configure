@@ -13,58 +13,58 @@ if [ ! -z $1 ]; then
 fi
 
 # the list of tissues to process
-onetissues="
-Adipose_Subcutaneous"
+onetissues=(
+"Adipose_Subcutaneous, 0002190")
 
-tissues="
-Adipose_Subcutaneous
-Adipose_Visceral_Omentum
-Adrenal_Gland
-Artery_Aorta
-Artery_Coronary
-Artery_Tibial
-Brain_Amygdala
-Brain_Anterior_cingulate_cortex_BA24
-Brain_Caudate_basal_ganglia
-Brain_Cerebellar_Hemisphere
-Brain_Cerebellum
-Brain_Cortex
-Brain_Frontal_Cortex_BA9
-Brain_Hippocampus
-Brain_Hypothalamus
-Brain_Nucleus_accumbens_basal_ganglia
-Brain_Putamen_basal_ganglia
-Brain_Spinal_cord_cervical_c-1
-Brain_Substantia_nigra
-Breast_Mammary_Tissue
-Cells_EBV-transformed_lymphocytes
-Cells_Transformed_fibroblasts
-Colon_Sigmoid
-Colon_Transverse
-Esophagus_Gastroesophageal_Junction
-Esophagus_Mucosa
-Esophagus_Muscularis
-Heart_Atrial_Appendage
-Heart_Left_Ventricle
-Liver
-Lung
-Minor_Salivary_Gland
-Muscle_Skeletal
-Nerve_Tibial
-Ovary
-Pancreas
-Pituitary
-Prostate
-Skin_Not_Sun_Exposed_Suprapubic
-Skin_Sun_Exposed_Lower_leg
-Small_Intestine_Terminal_Ileum
-Spleen
-Stomach
-Testis
-Thyroid
-Uterus
-Vagina
-Whole_Blood"
+tissues=(
+"Adipose_Subcutaneous, 0002190"
+"Adipose_Visceral_Omentum, 0003688"
+"Adrenal_Gland, 0018303"
+"Artery_Aorta, 0004178"
+"Artery_Coronary ,0002111"
+"Artery_Tibial, 0007610"
+"Brain_Amygdala, 0001876"
+"Brain_Anterior_cingulate_cortex_BA24, 0006101"
+"Brain_Caudate_basal_ganglia, 0002420"
+"Brain_Cerebellar_Hemisphere, 0002245"
+"Brain_Cerebellum, 0002037"
+"Brain_Cortex, 0000956"
+"Brain_Frontal_Cortex_BA9, 0001870"
+"Brain_Hippocampus, 0002310"
+"Brain_Hypothalamus, 0001898"
+"Brain_Nucleus_accumbens_basal_ganglia, 0001882"
+"Brain_Putamen_basal_ganglia, 0001874"
+"Brain_Spinal_cord_cervical_c-1, 0002726"
+"Brain_Substantia_nigra, 0002038"
+"Breast_Mammary_Tissue, 0001911"
+"Cells_EBV-transformed_lymphocytes, 0001744"
+"Cells_Transformed_fibroblasts, 0015764"
+"Colon_Sigmoid, 0001159"
+"Colon_Transverse, 0001157"
+"Esophagus_Gastroesophageal_Junction, 0007650"
+"Esophagus_Mucosa, 0002469"
+"Esophagus_Muscularis, 0004648"
+"Heart_Atrial_Appendage, 0006618"
+"Heart_Left_Ventricle, 0002084"
+"Liver, 0002107"
+"Lung, 0002048"
+"Minor_Salivary_Gland, 0001830"
+"Muscle_Skeletal, 0001134"
+"Nerve_Tibial, 0001323"
+"Ovary, 0000992"
+"Pancreas, 0001264"
+"Pituitary, 0000007"
+"Prostate, 0002367"
+"Skin_Not_Sun_Exposed_Suprapubic, 0036149"
+"Skin_Sun_Exposed_Lower_leg, 0004264"
+"Small_Intestine_Terminal_Ileum, 0002116"
+"Spleen, 0002106"
+"Stomach, 0000945"
+"Testis, 0000473"
+"Thyroid, 0002046"
+"Uterus, 0000995"
+"Vagina, 0000996"
+"Whole_Blood, 0000178")
 
 # gets the raw data from the GTEx website and unpacks it.
 get_archives ()
@@ -87,14 +87,12 @@ get_archives ()
     # list of raw archive files
     # note although we are setting up for processing a list only one file is needed right now.
     # there are numerous other files that may also be desired on the site in the future.
-    archive_files="
-	GTEx_Analysis_v7_eQTL
-    "
+    archive_files="GTEx_Analysis_v7_eQTL"
 
     # for each raw data archive file
     for f in $archive_files; do
 	# checkpoint for the user
-#        echo $f
+        echo $f
 
 	# make the call to get the data
 #        wget --timestamping $download_prefix/$f.tar.gz
@@ -109,7 +107,7 @@ get_archives ()
 	    tar -zxvf $f.tar.gz $f -C ./
 
 	    # move the tissue files back to this working directory
-            mv ./$f/*.gz ./
+           mv ./$f/*.gz ./
 
 	    # remove the temp directory
 	    rm -rf $f
@@ -120,20 +118,24 @@ get_archives ()
     done
 
     # Process each tissue archive file
-    for tissue in $tissues; do
-        echo Including $tissue in $VAR.
+    for tissue in "${tissues[@]}"; do
+        # split the tissue data to get the name
+        IFS=', ' read -ra tissue_data <<< $tissue
+
+        # something fo rthe user
+        echo Including ${tissue_data[0]} in $VAR.
 
         # The tissues are a compressed archive. Uncompress it
-        if [ -f $tissue.v7.egenes.txt.gz ]; then
-            gunzip -c $tissue.v7.egenes.txt.gz > $tissue.v7.egenes.csv
+        if [ -f ${tissue_data[0]}.v7.egenes.txt.gz ]; then
+            gunzip -c ${tissue_data[0]}.v7.egenes.txt.gz > ${tissue_data[0]}.v7.egenes.csv
         else
-            echo "no such file $tissue.v7.egenes.txt.gz"
+            echo "no such file ${tissue_data[0]}.v7.egenes.txt.gz"
             exit 1
         fi
 
         # The tissues are a compressed archive. Uncompress it
-        if [ -f $tissue.v7.signif_variant_gene_pairs.txt.gz ]; then
-            gunzip -c $tissue.v7.signif_variant_gene_pairs.txt.gz > $tissue.v7.signif_variant_gene_pairs.csv
+        if [ -f ${tissue_data[0]}.v7.signif_variant_gene_pairs.txt.gz ]; then
+            gunzip -c ${tissue_data[0]}.v7.signif_variant_gene_pairs.txt.gz > ${tissue_data[0]}.v7.signif_variant_gene_pairs.csv
         else
             echo "no such file $tissue.v7.signif_variant_gene_pairs.txt.gz"
             exit 1
@@ -169,15 +171,21 @@ stage_data () {
     # here we start the process of merging all the csv files into the two types
 
     # add the column headers to the target egenes file
-    echo 'tissue_name,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper' > bag/egenes.csv
+    echo 'tissue_name,tissue_uberon,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper' > bag/egenes.csv
 
     # add the column headers to the target signif file
-    echo 'tissue_name,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/signif_variant_gene_pairs.csv
+    echo 'tissue_name,tissue_uberon,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/signif_variant_gene_pairs.csv
 
-    # for each tissue file 
-    for tissue in $tissues; do
-	# create the column data for the tissue name
-	tissueName="${tissue//_/ },"
+    # for each tissue file
+    for tissue in "${tissues[@]}"; do
+        # split the tissue data into  the name removing the underscores
+        IFS=', ' read -ra tissue_data <<< "$tissue"
+
+	# create the column data for the tissue name and uberon
+	tissueName="${tissue_data[0]//_/ },"
+
+        # create the column data for the uberon value
+	tissueUberon="${tissue_data[1]},"
 
         # init a line counter for the egenes records
         i=1
@@ -189,10 +197,10 @@ stage_data () {
             test $i -eq 1 && ((i=i+1)) && continue
 
             # write out the line prepending with the tissue type and replacing tabs with commas
-            echo $tissueName${line//	/,} >> bag/egenes.csv
+            echo $tissueName$tissueUberon${line//	/,} >> bag/egenes.csv
 
 	# load up the next file to process
-        done < $VAR/$tissue.v7.egenes.csv
+        done < $VAR/${tissue_data[0]}.v7.egenes.csv
 
         # init a line counter for the signif records
         i=1
@@ -204,10 +212,10 @@ stage_data () {
             test $i -eq 1 && ((i=i+1)) && continue
 
             # write out the line prepending with the tissue type and replacing tabs with commas
-            echo $tissueName${line//	/,} >> bag/signif_variant_gene_pairs.csv
+            echo $tissueName$tissueUberon${line//	/,} >> bag/signif_variant_gene_pairs.csv
 
 	# load up the next file to process
-        done < $VAR/$tissue.v7.signif_variant_gene_pairs.csv
+        done < $VAR/${tissue_data[0]}.v7.signif_variant_gene_pairs.csv
     done
 
     # move to the target directory
@@ -249,7 +257,7 @@ build_it () {
 #    stage_data "$tissues"
 
     # Generate bag structure and metadata.
-#    bdbag $DEST/bag
+    bdbag $DEST/bag
 
     # Stage metadata to the bag.
     # Adding before structuring the bag with bdbag results in the metadata directory being included in the
@@ -257,10 +265,10 @@ build_it () {
     stage_metadata "$tissues"
 
     # Archive the bag and associated metadata.
-#    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
+    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
 
     # List bag contents for sanity check.
-#    tar tf bag.tgz
+    tar tf bag.tgz
 }
 
 build_it
