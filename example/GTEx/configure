@@ -21,7 +21,7 @@ tissues=(
 "Adipose_Visceral_Omentum, 0003688"
 "Adrenal_Gland, 0018303"
 "Artery_Aorta, 0004178"
-"Artery_Coronary ,0002111"
+"Artery_Coronary, 0002111"
 "Artery_Tibial, 0007610"
 "Brain_Amygdala, 0001876"
 "Brain_Anterior_cingulate_cortex_BA24, 0006101"
@@ -149,6 +149,28 @@ get_archives ()
     cd $cur_dir
 }
 
+# here we use a python script to parse all the CSV files
+stage_data_python  ()
+{
+    # save the current directory
+    cur_dir=$PWD
+
+    # make sure we are in the root GTEx directory
+    cd $DEST
+
+    # remove the bag directory and start from scratch
+    rm -rf bag
+
+    # make the bag directory
+    mkdir bag
+
+    # call the python script to do the parse
+    python parseGTExCSV.py -i ./GTEx_data -o ./bag
+
+    # go back to the original directory
+    cd $cur_dir
+}
+
 # here we create CSV files from the txt data starting with adding a header record then 
 # appending all data from each tissue into a merged CSV file.
 # Finally create a bag by copying required data files into the bag.
@@ -251,11 +273,12 @@ stage_metadata () {
 
 build_it () {
     # get the raw data from the archive
-#    get_archives
+    get_archives
 
     # Stage data into a bag directory.
-#    stage_data "$tissues"
-
+    # old way, now obsolete    stage_data "$tissues"
+    stage_data_python
+    
     # Generate bag structure and metadata.
     bdbag $DEST/bag
 
