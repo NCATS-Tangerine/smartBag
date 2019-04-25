@@ -1,9 +1,11 @@
 import sys, getopt
 
-onetissues={
+# debug use only
+test_tissues={
 "Adipose_Subcutaneous, 0002190"
 }
 
+# list of all the tissues in the GTEX data
 tissues={
 "Adipose_Subcutaneous,0002190",
 "Adipose_Visceral_Omentum,0003688",
@@ -54,16 +56,10 @@ tissues={
 "Vagina,0000996",
 "Whole_Blood,0000178"}
 
-# the column headers to the target egenes file
-egeneHeader='tissue_name,tissue_uberon,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper\n'
-    
-# the column headers to the target signif file
-signifHeader='tissue_name,tissue_uberon,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta\n'
-
 ####
-# main entry point
+# processes each CSV file
 ####
-def main(argv):
+def processCSVFiles(argv):
     inputDir = ''
     outputDir = ''
     
@@ -84,27 +80,26 @@ def main(argv):
     
     firstFile = True
     
-    # call the func to create the output file
+    # call the funcs to process the CSV file and fill the output file
     for item in tissues:
-        parseCSV(item, inputDir, outputDir, 'egenes', firstFile)
-        parseCSV(item, inputDir, outputDir, 'signif_variant_gene_pairs', firstFile)
+        parseCSVFile(item, inputDir, outputDir, 'egenes', firstFile)
+        parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', firstFile)
         firstFile = False
 
 ####
 # parses the individual tissue file
 ####
-def parseCSV(tissue, inputDir, outputDir, fileType, firstFileFlag):
+def parseCSVFile(tissue, inputDir, outputDir, fileType, firstFileFlag):
 
     try:
-        # split the tissue into its parts
+        # split the tissue declaration into its parts
         tissue_data = tissue.split(',')
         
         # get the complete in and output file names
         infileName = "{0}/{1}.v7.{2}.csv".format(inputDir, tissue_data[0], fileType)
         outfileName = "{0}/{1}.csv".format(outputDir, fileType)
         
-        print("Input file is: {0}".format(infileName))
-        print("Output file is: {0}\n".format(outfileName))
+        print("Processing input file: {0}, Sending to output file: {1}\n".format(infileName, outfileName))
     
         # get the tissue name
         tissueName = tissue_data[0].replace('_', ' ')
@@ -115,26 +110,23 @@ def parseCSV(tissue, inputDir, outputDir, fileType, firstFileFlag):
         # get the output file handle
         outFH = open(outfileName, 'a+')
     
-        # if this if the first time for the output write out the header
-        if firstFileFlag == True:
-            if fileType == 'egenes':   
-                outFH.write(egeneHeader)  
-            else:
-                outFH.write(signifHeader)
-
-        # get the expected number of columns
+        # get the expected number of columns for error checking
         if fileType == 'egenes':   
             colCount = 35        
         else:
             colCount = 14
         
-        # init a line counter
+        # init a line counter for error checking
         lineCount = 1
         
         # get the input file handle, skip the header line and parse the rest
         with open(infileName, 'r') as inFH:
             # skip the first header line
-            next(inFH)
+            firstLine = next(inFH)
+            
+            # if this if the first time for the output write out the header
+            if firstFileFlag == True:
+                outFH.write("tissue_name,tissue_uberon,{0}".format(firstLine).replace('\t', ','))
 
             # for the rest of the lines in the file 
             for line in inFH:       
@@ -146,9 +138,9 @@ def parseCSV(tissue, inputDir, outputDir, fileType, firstFileFlag):
                 
                 # check the column count
                 if len(numOfCols) != colCount:
-                    print("Error column count. got:{0}, expected {1} in {2} at position {3}".format(len(numOfCols), colCount, infileName, lineCount))
+                    print("Error with column count. Got:{0}, expected {1} in {2} at position {3}".format(len(numOfCols), colCount, infileName, lineCount))
             
-                #increment the line counter
+                # increment the line counter
                 lineCount += 1
                         
                 # write the new line to the output file
@@ -160,5 +152,9 @@ def parseCSV(tissue, inputDir, outputDir, fileType, firstFileFlag):
     except Exception as e:
         print("Error: {0}".format(e.message))
     
+####
+# main entry point to the process
+####
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    processCSVFiles(sys.argv[1:])
+
