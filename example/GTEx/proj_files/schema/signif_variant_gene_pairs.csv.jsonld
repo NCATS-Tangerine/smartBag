@@ -1,13 +1,20 @@
 {
   "@context": {
-    "gtex"    : "https://identifiers.org/gtex",
-    "ensembl" : "https://identifiers.org/ensembl",
+    "gtex"      : "https://identifiers.org/gtex/",
+    "ensembl"   : "https://identifiers.org/ensembl/",
+    "ncbigene"  : "http://identifiers.org/ncbigene/",
+    "uberon"    : "http://identifiers.org/uberon/",
+    "schema"    : "http://schema.org/",
     "schema"  : "http://schema.org/",
   
 	"tissue_name" : {
-	"@type" : "gtex:",
+	    "@type" : "gtex:",
         "@id"   : "gtex:"
 	},	
+	"tissue_uberon" : {
+        "@type" : "uberon:",
+        "@id"   : "uberon:"
+	},
 	"variant_id" : {
 	    "@type" : "schema:string",
 	    "@id"   : "schema:string"
@@ -18,44 +25,44 @@
 	},	
 	"tss_distance" : {
 	    "@type" : "schema:name",
-            "@id"   : "schema:name"
+        "@id"   : "schema:name"
 	},	
 	"ma_samples" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "ma_count" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "maf" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "pval_nominal" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "slope" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "slope_se" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "pval_nominal_threshold" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "min_pval_nominal" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        },	
-        "pval_beta" : {
-            "@type" : "schema:name",
-            "@id"   : "schema:name"
-        }
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "ma_count" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "maf" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "pval_nominal" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "slope" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "slope_se" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "pval_nominal_threshold" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "min_pval_nominal" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "pval_beta" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
+  }
 }
 
