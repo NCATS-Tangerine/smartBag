@@ -22,7 +22,7 @@ venv () {
 }
 
 # call for virtual python environment prep
-venv
+#venv
 
 # move to the GTEX staging area for the repo
 #cd /projects/stars/var/GTEx/stage/smartBag/
@@ -41,9 +41,9 @@ echo $PATH
 #cd example/GTEx
 
 # run the configuration script. this also creates the smartbag archive
-./configure
+#./configure
 
-// go to the smartBag API directory to create the site
+# go to the smartBag API directory to create the site
 cd ../../bin
 
 # decompress the smart bag and load the API
