@@ -25,7 +25,7 @@ venv () {
 venv
 
 # move to the GTEX staging area for the repo
-cd /projects/stars/var/GTEx/stage/smartBag/
+#cd /projects/stars/var/GTEx/stage/smartBag/
 
 # get the repo. sort of a chicken/egg thing here as the deploy file used here is in the repo
 # note using a pull here implies you are using the correct repo branch
@@ -38,7 +38,7 @@ export PATH=$PWD/bin:$PATH
 echo $PATH
 
 # go to the target project to process
-cd example/GTEx
+#cd example/GTEx
 
 # run the configuration script. this also creates the smartbag archive
 ./configure
