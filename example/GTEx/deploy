@@ -10,6 +10,7 @@ hostname; whoami
 # method to prep the VM
 venv () {
     venv=/projects/stars/var/GTEx/GTExVenv
+
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate
@@ -20,15 +21,17 @@ venv () {
     source $venv/bin/activate
 }
 
-# call for VM prep
+# call for virtual python environment prep
 venv
 
-# move to the  GTEX staging area
+# move to the GTEX staging area for the repo
 cd /projects/stars/var/GTEx/stage/smartBag/
 
-# clone the entire repo
+# get the repo. sort of a chicken/egg thing here as the deploy file used here is in the repo
 # note using a pull here implies you are using the correct repo branch
-git pull https://github.com/NCATS-Tangerine/smartBag.git
+# alternativly, one could do a clone if master is up to date
+# git clone https://github.com/NCATS-Tangerine/smartBag.git
+#git pull
 
 # export the current directory
 export PATH=$PWD/bin:$PATH
@@ -53,6 +56,6 @@ cd ../example/GTEx
 docker build --tag=smartbag_gtex .
 docker run -it -v /projects/stars/var/GTEx/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_gtex
 
-# alternativly you can start the website in the running instance
+# alternativly you can start the website on the command line
 # start/run the API website
 #./smartbag run smartapi --port 5000
