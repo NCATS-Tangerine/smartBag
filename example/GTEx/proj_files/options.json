@@ -5,8 +5,6 @@
       "title": "GTEx API",
       "description": "A Programmatically Generated OpenAPI 3.0 smartAPI for the Genotype-Tissue Expression Database.",
       "contact": {
-        "responsibleOrganization": "www.renci.org",
-        "responsibleDeveloper": "powen@renci.org",
         "email": "powen@renci.org",
         "url": "www.renci.org"
       },
