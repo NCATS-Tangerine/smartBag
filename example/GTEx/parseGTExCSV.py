@@ -1,4 +1,4 @@
-import sys, getopt
+import sys, getopt, csv
 
 # debug use only
 test_tissues={
@@ -56,6 +56,28 @@ tissues={
 "Vagina,0000996",
 "Whole_Blood,0000178"}
 
+reference_chrom_labels = {
+    'b37': {
+        'p1': {
+            1: 'NC_000001.10', 2: 'NC_000002.11', 3: 'NC_000003.11', 4: 'NC_000004.11', 5: 'NC_000005.9',
+            6: 'NC_000006.11', 7: 'NC_000007.13', 8: 'NC_000008.10', 9: 'NC_000009.11', 10: 'NC_000010.10', 11: 'NC_000011.9',
+            12: 'NC_000012.11', 13: 'NC_000013.10', 14: 'NC_000014.8', 15: 'NC_000015.9', 16: 'NC_000016.9', 17: 'NC_000017.10',
+            18: 'NC_000018.9', 19: 'NC_000019.9', 20: 'NC_000020.10', 21: 'NC_000021.8', 22: 'NC_000022.10', 23: 'NC_000023.10',
+            24: 'NC_000024.9'
+        }
+    },
+    'b38': {
+        'p1': {
+            1: 'NC_000001.11', 2: 'NC_000002.12', 3: 'NC_000003.12', 4: 'NC_000004.12', 5: 'NC_000005.10',
+            6: 'NC_000006.12', 7: 'NC_000007.14', 8: 'NC_000008.11', 9: 'NC_000009.12', 10: 'NC_000010.11', 11: 'NC_000011.10',
+            12: 'NC_000012.12', 13: 'NC_000013.11', 14: 'NC_000014.9', 15: 'NC_000015.10', 16: 'NC_000016.10', 17: 'NC_000017.11',
+            18: 'NC_000018.10', 19: 'NC_000019.10', 20: 'NC_000020.11', 21: 'NC_000021.9', 22: 'NC_000022.11', 23: 'NC_000023.11',
+            24: 'NC_000024.10'
+        }
+    }
+}
+
+
 ####
 # processes each CSV file
 ####
@@ -81,15 +103,15 @@ def processCSVFiles(argv):
     firstFile = True
     
     # call the funcs to process the CSV file and fill the output file
-    for item in tissues:
-        parseCSVFile(item, inputDir, outputDir, 'egenes', firstFile)
-        parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', firstFile)
+    for item in test_tissues:
+        parseCSVFile(item, inputDir, outputDir, 'egenes', 11, firstFile)
+        parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', 0, firstFile)
         firstFile = False
 
 ####
 # parses the individual tissue file
 ####
-def parseCSVFile(tissue, inputDir, outputDir, fileType, firstFileFlag):
+def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstFileFlag):
 
     try:
         # split the tissue declaration into its parts
@@ -112,9 +134,9 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, firstFileFlag):
     
         # get the expected number of columns for error checking
         if fileType == 'egenes':   
-            colCount = 35        
+            colCount = 36
         else:
-            colCount = 14
+            colCount = 15
         
         # init a line counter for error checking
         lineCount = 1
@@ -126,12 +148,21 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, firstFileFlag):
             
             # if this if the first time for the output write out the header
             if firstFileFlag == True:
-                outFH.write("tissue_name,tissue_uberon,{0}".format(firstLine).replace('\t', ','))
+                outFH.write("tissue_name,tissue_uberon,HGVS,{0}".format(firstLine).replace('\t', ','))
 
             # for the rest of the lines in the file 
-            for line in inFH:       
+            for line in inFH:
+                # split the into an array
+                newLine = line.split('\t')
+
+                # get the variant ID value
+                variant_id = newLine[variant_id_index]
+
+                # get the HGVS value
+                HGVS = get_HGVS_value(variant_id)
+
                 # prepend the input line with the tissue name and uberon id
-                newLine = "{0},{1},{2}".format(tissueName, tissueUberon, line).replace('\t', ',')
+                newLine = "{0},{1},{2},{3}".format(tissueName, tissueUberon, HGVS, line).replace('\t', ',')
                 
                 # make check to insure we have the correct number of columns
                 numOfCols = newLine.split(',')
@@ -151,7 +182,98 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, firstFileFlag):
         outFH.close()
     except Exception as e:
         print("Error: {0}".format(e.message))
-    
+
+def get_HGVS_value(gtex_variant_id):
+    try:
+        # split the string into the components
+        variant_id = gtex_variant_id.split('_')
+
+        # get position indexes into the data element
+        reference_patch = 'p1'
+        position = int(variant_id[1])
+        ref_allele = variant_id[2]
+        alt_allele = variant_id[3]
+        reference_genome = variant_id[4]
+        chromosome = variant_id[0]
+
+        # X or Y to integer values for proper indexing
+        if chromosome == 'X':
+            chromosome = 23
+        elif chromosome == 'Y':
+            chromosome = 24
+        else:
+            chromosome = int(variant_id[0])
+
+        # get the HGVS chromosome label
+        ref_chromosome = reference_chrom_labels[reference_genome][reference_patch][chromosome]
+    except KeyError:
+        return ''
+
+    # get the length of the reference allele
+    len_ref = len(ref_allele)
+
+    # is there an alt allele
+    if alt_allele == '.':
+        # deletions
+        if len_ref == 1:
+            variation = f'{position}del'
+        else:
+            variation = f'{position}_{position + len_ref - 1}del'
+
+    elif alt_allele.startswith('<'):
+        # we know about these but don't support them yet
+        return ''
+
+    else:
+        # get the length of the alternate allele
+        len_alt = len(alt_allele)
+
+        # if this is a SNP
+        if (len_ref == 1) and (len_alt == 1):
+            # simple layout of ref/alt SNP
+            variation = f'{position}{ref_allele}>{alt_allele}'
+        # if the alternate allele is larger than the reference is an insert
+        elif (len_alt > len_ref) and alt_allele.startswith(ref_allele):
+            # get the length of the insertion
+            diff = len_alt - len_ref
+
+            # get the position offset
+            offset = len_alt - diff
+
+            # layout the insert
+            variation = f'{position + offset - 1}_{position + offset}ins{alt_allele[offset:]}'
+        # if the reference is larger than the deletion it is a deletion
+        elif (len_ref > len_alt) and ref_allele.startswith(alt_allele):
+            # get the length of the deletion
+            diff = len_ref - len_alt
+
+            # get the position offset
+            offset = len_ref - diff
+
+            # if the diff is only 1 BP
+            if diff == 1:
+                # layout the SNP deletion
+                variation = f'{position + offset}del'
+            # else this is more that a single BP deletion
+            else:
+                # layout the deletion
+                variation = f'{position + offset}_{position + offset + diff - 1}del'
+        # we do not support this allele
+        else:
+           return ''
+
+    # layout the final HGVS expression in curie format
+    hgvs: str = f'{ref_chromosome}:g.{variation}'
+
+    # convert the reference genome to a project standard. danger, hack job ahead.
+    if reference_genome == 'b37':
+        reference_genome = 'HG19'
+    else:
+        reference_genome = 'HG38'
+
+    # return the expression to the caller
+    return hgvs
+
 ####
 # main entry point to the process
 ####
