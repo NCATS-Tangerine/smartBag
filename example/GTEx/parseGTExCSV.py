@@ -183,6 +183,9 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstF
     except Exception as e:
         print("Error: {0}".format(e.message))
 
+####
+# parses the GTEx variant ID and converts it to an HGVS expression
+####
 def get_HGVS_value(gtex_variant_id):
     try:
         # split the string into the components
