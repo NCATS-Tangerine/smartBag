@@ -36,7 +36,7 @@ run () {
     smartapi () {
         cd out/gen
 
-        # Execute the OpenAPI implemenation.
+        # Execute the OpenAPI implementation.
         python server.py $*
     }
     $*
