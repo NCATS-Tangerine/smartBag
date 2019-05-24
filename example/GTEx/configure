@@ -193,10 +193,10 @@ stage_data () {
     # here we start the process of merging all the csv files into the two types
 
     # add the column headers to the target egenes file
-    echo 'tissue_name,tissue_uberon,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper' > bag/egenes.csv
+    echo 'tissue_name,tissue_uberon,hgvs,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper' > bag/egenes.csv
 
     # add the column headers to the target signif file
-    echo 'tissue_name,tissue_uberon,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/signif_variant_gene_pairs.csv
+    echo 'tissue_name,tissue_uberon,hgvs,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/signif_variant_gene_pairs.csv
 
     # for each tissue file
     for tissue in "${tissues[@]}"; do

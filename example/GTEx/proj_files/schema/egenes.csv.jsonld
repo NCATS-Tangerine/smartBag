@@ -15,6 +15,10 @@
         "@type" : "uberon:",
         "@id"   : "uberon:"
 	},
+	"HGVS" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+	},
 	"gene_id" : {
         "@type" : "ensembl:",
         "@id"   : "ensembl:"

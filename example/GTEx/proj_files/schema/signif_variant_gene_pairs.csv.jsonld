@@ -15,6 +15,10 @@
         "@type" : "uberon:",
         "@id"   : "uberon:"
 	},
+	"HGVS" : {
+        "@type" : "schema:string",
+        "@id"   : "schema:string"
+	},
 	"variant_id" : {
 	    "@type" : "schema:string",
 	    "@id"   : "schema:string"
