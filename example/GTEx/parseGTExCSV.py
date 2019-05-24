@@ -103,7 +103,7 @@ def processCSVFiles(argv):
     firstFile = True
     
     # call the funcs to process the CSV file and fill the output file
-    for item in test_tissues:
+    for item in tissues:
         parseCSVFile(item, inputDir, outputDir, 'egenes', 11, firstFile)
         parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', 0, firstFile)
         firstFile = False
@@ -183,6 +183,9 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstF
     except Exception as e:
         print("Error: {0}".format(e.message))
 
+####
+# parses the GTEx variant ID and converts it to an HGVS expression
+####
 def get_HGVS_value(gtex_variant_id):
     try:
         # split the string into the components

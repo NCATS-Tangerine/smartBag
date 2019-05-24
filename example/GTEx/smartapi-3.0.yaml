@@ -10,6 +10,104 @@ info:
   title: GTEx API
   version: 0.0.1
 paths:
+  "/egenes_HGVS/{HGVS}/":
+    get:
+      parameters:
+      - in: path
+        name: HGVS
+        required: true
+        type: string
+        x-requestTemplate:
+        - template: "/egenes_HGVS/{{ input }}"
+          valueType: http://schema.org/name
+        x-valueType:
+        - http://schema.org/name
+      - default: false
+        in: query
+        name: include_similar
+        type: boolean
+        x-requestTemplate:
+        - valueType: http://schema.org/boolean
+        x-valueType:
+        - http://schema.org/boolean
+      responses:
+        '200':
+          description: success
+          x-JSONLDContext: "/egenes_metadata"
+          x-responseValueType:
+          - path: tissue_name
+            valueType: https://identifiers.org/gtex/
+          - path: tissue_uberon
+            valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
+          - path: gene_id
+            valueType: https://identifiers.org/ensembl/
+          - path: gene_name
+            valueType: http://identifiers.org/ncbigene/
+          - path: gene_chr
+            valueType: http://schema.org/name
+          - path: gene_start
+            valueType: http://schema.org/name
+          - path: gene_end
+            valueType: http://schema.org/name
+          - path: strand
+            valueType: http://schema.org/name
+          - path: num_var
+            valueType: http://schema.org/name
+          - path: beta_shape1
+            valueType: http://schema.org/name
+          - path: beta_shape2
+            valueType: http://schema.org/name
+          - path: true_df
+            valueType: http://schema.org/name
+          - path: pval_true_df
+            valueType: http://schema.org/name
+          - path: variant_id
+            valueType: http://schema.org/name
+          - path: tss_distance
+            valueType: http://schema.org/name
+          - path: chr
+            valueType: http://schema.org/name
+          - path: pos
+            valueType: http://schema.org/name
+          - path: ref
+            valueType: http://schema.org/name
+          - path: alt
+            valueType: http://schema.org/name
+          - path: num_alt_per_site
+            valueType: http://schema.org/name
+          - path: rs_id_dbSNP147_GRCh37p13
+            valueType: http://schema.org/name
+          - path: minor_allele_samples
+            valueType: http://schema.org/name
+          - path: minor_allele_count
+            valueType: http://schema.org/name
+          - path: maf
+            valueType: None
+          - path: ref_factor
+            valueType: http://schema.org/name
+          - path: pval_nominal
+            valueType: http://schema.org/name
+          - path: slope
+            valueType: http://schema.org/name
+          - path: slope_se
+            valueType: http://schema.org/name
+          - path: pval_perm
+            valueType: http://schema.org/name
+          - path: pval_beta
+            valueType: http://schema.org/name
+          - path: qval
+            valueType: http://schema.org/name
+          - path: pval_nominal_threshold
+            valueType: http://schema.org/name
+          - path: log2_aFC
+            valueType: http://schema.org/name
+          - path: log2_aFC_lower
+            valueType: http://schema.org/name
+          - path: log2_aFC_upper
+            valueType: http://schema.org/name
+      summary: Get row by HGVS
   "/egenes_alt/{alt}/":
     get:
       parameters:
@@ -39,6 +137,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -135,6 +235,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -231,6 +333,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -327,6 +431,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -429,6 +535,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -525,6 +633,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -621,6 +731,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -717,6 +829,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -813,6 +927,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -909,6 +1025,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1005,6 +1123,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1101,6 +1221,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1197,6 +1319,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1299,6 +1423,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1395,6 +1521,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1491,6 +1619,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1587,6 +1717,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1683,6 +1815,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1779,6 +1913,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1875,6 +2011,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -1971,6 +2109,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2067,6 +2207,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2163,6 +2305,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2259,6 +2403,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2355,6 +2501,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2451,6 +2599,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2547,6 +2697,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2643,6 +2795,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2739,6 +2893,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2835,6 +2991,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -2931,6 +3089,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -3027,6 +3187,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -3123,6 +3285,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -3219,6 +3383,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -3315,6 +3481,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/name
           - path: gene_id
             valueType: https://identifiers.org/ensembl/
           - path: gene_name
@@ -3382,6 +3550,62 @@ paths:
           - path: log2_aFC_upper
             valueType: http://schema.org/name
       summary: Get row by variant_id
+  "/signif_variant_gene_pairs_HGVS/{HGVS}/":
+    get:
+      parameters:
+      - in: path
+        name: HGVS
+        required: true
+        type: string
+        x-requestTemplate:
+        - template: "/signif_variant_gene_pairs_HGVS/{{ input }}"
+          valueType: http://schema.org/string
+        x-valueType:
+        - http://schema.org/string
+      - default: false
+        in: query
+        name: include_similar
+        type: boolean
+        x-requestTemplate:
+        - valueType: http://schema.org/boolean
+        x-valueType:
+        - http://schema.org/boolean
+      responses:
+        '200':
+          description: success
+          x-JSONLDContext: "/signif_variant_gene_pairs_metadata"
+          x-responseValueType:
+          - path: tissue_name
+            valueType: https://identifiers.org/gtex/
+          - path: tissue_uberon
+            valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
+          - path: variant_id
+            valueType: http://schema.org/string
+          - path: gene_id
+            valueType: https://identifiers.org/ensembl/
+          - path: tss_distance
+            valueType: http://schema.org/name
+          - path: ma_samples
+            valueType: http://schema.org/name
+          - path: ma_count
+            valueType: http://schema.org/name
+          - path: maf
+            valueType: http://schema.org/name
+          - path: pval_nominal
+            valueType: http://schema.org/name
+          - path: slope
+            valueType: http://schema.org/name
+          - path: slope_se
+            valueType: http://schema.org/name
+          - path: pval_nominal_threshold
+            valueType: http://schema.org/name
+          - path: min_pval_nominal
+            valueType: http://schema.org/name
+          - path: pval_beta
+            valueType: http://schema.org/name
+      summary: Get row by HGVS
   "/signif_variant_gene_pairs_examples/":
     get:
       responses:
@@ -3417,6 +3641,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3471,6 +3697,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3525,6 +3753,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3579,6 +3809,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3639,6 +3871,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3693,6 +3927,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3747,6 +3983,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3801,6 +4039,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3855,6 +4095,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3909,6 +4151,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -3963,6 +4207,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -4017,6 +4263,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -4071,6 +4319,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -4125,6 +4375,8 @@ paths:
             valueType: https://identifiers.org/gtex/
           - path: tissue_uberon
             valueType: http://identifiers.org/uberon/
+          - path: HGVS
+            valueType: http://schema.org/string
           - path: variant_id
             valueType: http://schema.org/string
           - path: gene_id
@@ -4156,3 +4408,4 @@ paths:
         '200':
           description: "..."
       summary: Get the smartapi specification.
+
