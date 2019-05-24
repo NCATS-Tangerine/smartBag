@@ -103,7 +103,7 @@ def processCSVFiles(argv):
     firstFile = True
     
     # call the funcs to process the CSV file and fill the output file
-    for item in test_tissues:
+    for item in tissues:
         parseCSVFile(item, inputDir, outputDir, 'egenes', 11, firstFile)
         parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', 0, firstFile)
         firstFile = False
