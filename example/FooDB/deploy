@@ -1,0 +1,61 @@
+#!/bin/bash
+
+deactivate
+set -e
+set -x
+
+# gather VM name
+hostname; whoami
+
+# method to prep the VM
+venv () {
+    venv=/projects/stars/var/FooDB/FooDBVenv
+
+    if [ ! -d $venv ]; then
+        python3.6 -m venv $venv
+        source $venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    fi
+
+    source $venv/bin/activate
+}
+
+# call for virtual python environment prep
+venv
+
+# move to the FooDB staging area for the repo
+cd /projects/stars/var/FooDB/stage/smartBag/
+
+# get the repo. sort of a chicken/egg thing here as the deploy file used here is in the repo
+# note using a pull here implies you are using the correct repo branch
+# alternativly, one could do a clone if master is up to date
+# git clone https://github.com/NCATS-Tangerine/smartBag.git
+git pull
+
+# export the current directory
+export PATH=$PWD/bin:$PATH
+echo $PATH
+
+# go to the target project to process
+cd example/FooDB
+
+# run the configuration script. this also creates the smartbag archive
+./configure
+
+# go to the smartBag API directory to create the site
+cd ../../bin
+
+# decompress the smart bag and load the API
+./smartbag make smartapi --bag ../example/FooDB/bag.tgz --opts ../example/FooDB/options.json
+
+# go to the directory with the docker file
+cd ../example/FooDB
+
+# create the docker image and launch the container
+docker build --tag=smartbag_FooDB .
+docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_FooDB
+
+# alternativly you can start the website on the command line
+# start/run the API website
+#./smartbag run smartapi --port 5000

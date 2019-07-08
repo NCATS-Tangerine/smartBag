@@ -1,0 +1,33 @@
+{ "@context": [ "https://w3id.org/bundle/context" ],
+  "@id": "../",
+  "history": "https://github.com/NCATS-Tangerine/smartBag/commits/master",
+  "createdOn": "2018-02-08T12:23:00Z",
+  "createdBy": {
+    "name": "Phil Owen",
+    "orcid": "https://orcid.org/0000-0002-5146-8434"
+  },
+
+  "aggregates": [
+      { "uri": "",
+        "mediatype": "text/csv"
+      },
+      { "uri": "",
+        "mediatype": "text/csv"
+      }
+  ],
+
+  "annotations": [
+    { "about": [""],
+      "content": "",
+      "oa:motivatedBy": "oa:describing"
+    },
+
+    { "about": "",
+      "content": "a",
+      "createdBy": {
+        "name": "Phillips Owen",
+        "orcid": "https://orcid.org/0000-0002-5146-8434"
+      }
+    }
+  ]
+}
