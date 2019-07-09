@@ -81,7 +81,7 @@ get_archives ()
     # go to the raw data directory
     cd $VAR
 
-     # set the URL to the data. only going after the single tiussue data for now
+     # set the URL to the data. only going after the single tissue data for now
     download_prefix="https://storage.googleapis.com/gtex_analysis_v7/single_tissue_eqtl_data"
 
     # list of raw archive files
@@ -103,14 +103,14 @@ get_archives ()
     for f in $archive_files; do
 	# does the file exist
         if [ -f $f.tar.gz ]; then
-	    # extract the files. the data is actually in a subdir in the archive
-	    tar -zxvf $f.tar.gz $f -C ./
+	        # extract the files. the data is actually in a subdir in the archive
+	        tar -zxvf $f.tar.gz $f -C ./
 
-	    # move the tissue files back to this working directory
-           mv ./$f/*.gz ./
+	        # move the tissue files back to this working directory
+            mv ./$f/*.gz ./
 
-	    # remove the temp directory
-	    rm -rf $f
+	        # remove the temp directory
+	        rm -rf $f
         else
             echo "no such file $f.tar.gz"
             exit 1
