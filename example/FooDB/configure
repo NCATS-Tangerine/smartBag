@@ -1,0 +1,164 @@
+#!/bin/bash
+
+set -e
+set -x
+
+# set the directory of the raw data
+VAR=./FooDB_data
+
+DEST=.
+
+if [ ! -z $1 ]; then
+    VAR=$1
+fi
+
+# the list of files to process
+oneTargetFile=(
+"compounds")
+
+targetFiles=(
+"compounds"
+"compounds_enzymes"
+"compounds_flavors"
+"compounds_health_effects"
+"compounds_pathways"
+"compound_alternate_parents"
+"compound_external_descriptors"
+"compound_substituents"
+"compound_synonyms"
+"contents"
+"enzymes"
+"flavors"
+"foodcomex_compounds"
+"foodcomex_compound_providers"
+"foods"
+"food_taxonomies"
+"health_effects"
+"nutrients"
+"nutrients"
+"references"
+)
+
+# gets the raw data from the GTEx website and unpacks it.
+get_archives ()
+{
+    # remove the raw data directory if it exists
+    rm -rf $VAR
+
+    # make the target data directory
+    mkdir -p $VAR
+
+    # save where we are now
+    cur_dir=$PWD
+
+    # go to the raw data directory
+    cd $VAR
+
+     # set the URL to the data. only going after the single tissue data for now
+    download_prefix="http://www.foodb.ca/system"
+
+    # list of raw archive files
+    # note although we are setting up for processing a list only one file is needed right now.
+    # there are numerous other files that may also be desired on the site in the future.
+    archive_files="foodb_2017_06_29_csv"
+
+    # for each raw data archive file
+    for f in $archive_files; do
+	    # checkpoint for the user
+        echo $f
+
+	    # make the call to get the data
+        # wget --timestamping $download_prefix/$f.tar.gz
+        wget --quiet --timestamping $download_prefix/$f.tar.gz
+    done
+
+    # now unpack them
+    for f in $archive_files; do
+	    # does the file exist
+        if [ -f $f.tar.gz ]; then
+            # extract the files. the data is actually in a subdir in the archive
+            tar -zxvf $f.tar.gz $f -C ./
+
+            # remove all intermediate files
+            rm ./$f/._*
+            rm ./$f/.DS*
+
+            # move the files back up a directory
+            mv ./$f/*.csv ./
+
+            # remove the temp directory
+            rm -rf $f
+        else
+            echo "no such file $f.tar.gz"
+            exit 1
+        fi
+    done
+
+    # remove the original archive file
+    rm ./*.gz
+
+    # go back to the root directory
+    cd $cur_dir
+
+    # remove the bag directory and start from scratch
+    rm -rf bag
+
+    # make the bag directory
+    mkdir bag
+
+    # move the into the data directory
+    cp ./$VAR/*.csv ./bag
+}
+
+###################
+# create the metadata annotations
+###################
+stage_metadata () {
+    # save the current directory
+    cur_dir=$PWD
+
+    # make sure we are in the root GTEx directory
+    cd $DEST
+
+    # create the bag directories for annotations and provenance
+    mkdir -p bag/metadata/annotations
+    mkdir -p bag/metadata/provenance
+
+    # get a copy of the json data descriptors into the metdata annotation dir
+    cp $cur_dir/proj_files/schema/*.jsonld bag/metadata/annotations/
+
+    # save the data provenance directory
+    cp -r $cur_dir/proj_files/provenance bag/metadata/
+
+    # save the data manifest
+    cp -r $cur_dir/proj_files/manifest.json bag/metadata/
+
+    # save the run options
+    cp -r $cur_dir/proj_files/options.json ./
+
+    # go back to the original directory
+    cd $cur_dir
+}
+
+build_it () {
+    # get the raw data from the archive
+    get_archives
+
+    # Generate bag structure and metadata.
+    bdbag $DEST/bag
+
+    # Stage metadata to the bag.
+    # Adding before structuring the bag with bdbag results in the metadata directory being included in the
+    # data payload directory which is not conformant to the spec. So we add it here.
+    stage_metadata
+
+    # Archive the bag and associated metadata.
+    bdbag $DEST/bag/ --update --validate fast --validate-profile --archive tgz
+
+    # List bag contents for sanity check.
+    tar tf bag.tgz
+}
+
+build_it
+
+exit 0

@@ -53,9 +53,9 @@ cd ../../bin
 cd ../example/FooDB
 
 # create the docker image and launch the container
-docker build --tag=smartbag_FooDB .
-docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_FooDB
+#docker build --tag=smartbag_FooDB .
+#docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000:5001 -d smartbag_FooDB
 
 # alternativly you can start the website on the command line
 # start/run the API website
-#./smartbag run smartapi --port 5000
+#./smartbag run smartapi --port 5001
