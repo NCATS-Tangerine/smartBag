@@ -58,4 +58,4 @@ cd ../example/FooDB
 
 # alternativly you can start the website on the command line
 # start/run the API website
-#./smartbag run smartapi --port 5001
+./smartbag run smartapi --port 5001
