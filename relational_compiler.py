@@ -41,7 +41,7 @@ class RelationalCompiler(BagCompiler):
 
         dataset = None
 
-        with open(csv_file, 'r', encoding='utf-8') as stream:
+        with open(csv_file, 'r', encoding='utf-16') as stream:
             reader = csv.reader (stream)
             headers = next (reader)
             headers = [name.replace('?', '') for name in headers] # query artifact removal
