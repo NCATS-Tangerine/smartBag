@@ -41,13 +41,10 @@ class RelationalCompiler(BagCompiler):
 
         dataset = None
 
-        with open(csv_file, 'r', encoding='utf-8') as stream:
+        with open(csv_file, 'r') as stream:
             reader = csv.reader (stream)
 
-            try:
-                headers = next (reader)
-            except:
-                print(f'trapped: {headers}')
+            headers = next (reader)
 
             headers = [name.replace('?', '') for name in headers] # query artifact removal
             columns = { n : Column(n, None) for n in headers if not n == "" }
@@ -92,7 +89,7 @@ class RelationalCompiler(BagCompiler):
 #                   traceback.print_exc ()
 
 #               if i > 4: break
-                   
+
 
                try:
                    if len(columns) == len(values):
