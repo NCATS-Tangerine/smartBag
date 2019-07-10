@@ -49,10 +49,9 @@ cd ../../bin
 # decompress the smart bag and load the API
 ./smartbag make smartapi --bag ../example/FooDB/bag.tgz --opts ../example/FooDB/options.json
 
-# go to the directory with the docker file
-cd ../example/FooDB
-
 # create the docker image and launch the container
+# go to the directory with the docker file
+#cd ../example/FooDB
 #docker build --tag=smartbag_FooDB .
 #docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000:5001 -d smartbag_FooDB
 
