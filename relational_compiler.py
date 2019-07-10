@@ -33,6 +33,8 @@ class RelationalCompiler(BagCompiler):
                       replace ("-", "_")
         sql_db_file = self._gen_name (db_basename)
 
+        print(f'working: {csv_file}')
+
         if os.path.exists (sql_db_file):
             print (" -- {0} already exists. skipping.".format (sql_db_file))
             return
@@ -69,6 +71,7 @@ class RelationalCompiler(BagCompiler):
             i = 0
             j = 0
             max_examples = 5
+
             for row in reader:
                values = [ r for r in row ]
                if i < max_examples:
