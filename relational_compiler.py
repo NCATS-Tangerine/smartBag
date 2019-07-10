@@ -9,6 +9,7 @@ from compiler import Column
 from compiler import DataSet
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
+from collections import OrderedDict
 
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)
@@ -46,6 +47,9 @@ class RelationalCompiler(BagCompiler):
 
             headers = next (reader)
 
+            # remove duplicate columns
+            headers = list(OrderedDict.fromkeys(headers))
+
             headers = [name.replace('?', '') for name in headers] # query artifact removal
             columns = { n : Column(n, None) for n in headers if not n == "" }
             dataset = DataSet (db_basename, columns)
@@ -58,7 +62,8 @@ class RelationalCompiler(BagCompiler):
             cur = sql.cursor ()
             table_name = os.path.basename (csv_file.
                                            replace (".csv", "").
-                                           replace ("-", "_"))
+                                           replace ("-", "_").replace('references', 'references1'))
+
             col_types = ', '.join ([ "{0} text".format (col) for col in headers ])
             col_types = col_types.replace("#", "")
             create_table = "CREATE TABLE IF NOT EXISTS {0} ({1})".format (
