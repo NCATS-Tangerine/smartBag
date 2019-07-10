@@ -41,7 +41,7 @@ class RelationalCompiler(BagCompiler):
 
         dataset = None
 
-        with open(csv_file, 'r') as stream:
+        with open(csv_file, 'r', encoding='ISO-8859-1') as stream:
             reader = csv.reader (stream)
 
             headers = next (reader)
