@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "compound_id" : {
+    },
+    "flavor_id" : {
+    },
+    "citations" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    },
+    "source_id" : {
+    },
+    "source_type" : {
+    }
+  }
+}

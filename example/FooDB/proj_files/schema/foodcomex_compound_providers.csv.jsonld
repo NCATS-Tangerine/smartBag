@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "foodcomex_compound_id" : {
+    },
+    "provider_id" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    }
+  }
+}

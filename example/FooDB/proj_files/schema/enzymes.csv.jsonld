@@ -1,0 +1,69 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "name" : {
+    },
+    "gene_name" : {
+    },
+    "description" : {
+    },
+    "go_classification" : {
+    },
+    "general_function" : {
+    },
+    "specific_function" : {
+    },
+    "pathway" : {
+    },
+    "reaction" : {
+    },
+    "cellular_location" : {
+    },
+    "signals" : {
+    },
+    "transmembrane_regions" : {
+    },
+    "molecular_weight" : {
+    },
+    "theoretical_pi" : {
+    },
+    "locus" : {
+    },
+    "chromosome" : {
+    },
+    "uniprot_name" : {
+    },
+    "uniprot_id" : {
+    },
+    "pdb_id" : {
+    },
+    "genbank_protein_id" : {
+    },
+    "genbank_gene_id" : {
+    },
+    "genecard_id" : {
+    },
+    "genatlas_id" : {
+    },
+    "hgnc_id" : {
+    },
+    "hprd_id" : {
+    },
+    "organism" : {
+    },
+    "general_citations" : {
+    },
+    "comments" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    }
+  }
+}

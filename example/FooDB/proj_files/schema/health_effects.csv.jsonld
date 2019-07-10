@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "name" : {
+    },
+    "description" : {
+    },
+    "chebi_name" : {
+    },
+    "chebi_id" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    },
+    "chebi_definition" : {
+    }
+  }
+}
