@@ -10,6 +10,8 @@ WORKDIR repo
 # get the smartBag repo
 RUN git clone http://github.com/NCATS-Tangerine/smartBag.git
 
+RUN git checkout phil_smartBag
+
 # install the needed packages
 RUN pip install -r ./smartBag/requirements.txt
 
