@@ -16,9 +16,9 @@ RUN pip install -r ./smartBag/requirements.txt
 # update
 RUN apt-get update
 
-EXPOSE 5000
+EXPOSE 5001
 
 # change to the directory with the web site smart via the smartbag script
 WORKDIR /smartBag
 
-ENTRYPOINT ["/bin/bash", "-c", "./smartbag run smartapi --port 5000"]
+ENTRYPOINT ["/bin/bash", "-c", "./smartbag run smartapi --port 5001"]
