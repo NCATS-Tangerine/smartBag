@@ -1,0 +1,19 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "food_id" : {
+    },
+    "ncbi_taxonomy_id" : {
+    },
+    "classification_name" : {
+    },
+    "classification_order" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    }
+  }
+}

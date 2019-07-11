@@ -1,0 +1,21 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "name" : {
+    },
+    "flavor_group" : {
+    },
+    "category" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    }
+  }
+}

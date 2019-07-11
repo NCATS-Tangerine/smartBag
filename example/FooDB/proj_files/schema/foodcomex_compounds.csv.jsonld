@@ -1,0 +1,77 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "compound_id" : {
+    },
+    "origin" : {
+    },
+    "storage_form" : {
+    },
+    "maximum_quantity" : {
+    },
+    "storage_condition" : {
+    },
+    "contact_name" : {
+    },
+    "contact_address" : {
+    },
+    "contact_email" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    },
+    "export" : {
+    },
+    "purity" : {
+    },
+    "description" : {
+    },
+    "spectra_details" : {
+    },
+    "delivery_time" : {
+    },
+    "stability" : {
+    },
+    "admin_user_id" : {
+    },
+    "public_id" : {
+    },
+    "cas_number" : {
+    },
+    "taxonomy_class" : {
+    },
+    "taxonomy_family" : {
+    },
+    "experimental_logp" : {
+    },
+    "experimental_solubility" : {
+    },
+    "melting_point" : {
+    },
+    "food_of_origin" : {
+    },
+    "production_method_reference_text" : {
+    },
+    "production_method_reference_file_name" : {
+    },
+    "production_method_reference_content_type" : {
+    },
+    "production_method_reference_file_size" : {
+    },
+    "production_method_reference_updated_at" : {
+    },
+    "elemental_formula" : {
+    },
+    "minimum_quantity" : {
+    },
+    "quantity_units" : {
+    },
+    "available_spectra" : {
+    },
+    "storage_conditions" : {
+    }
+  }
+}

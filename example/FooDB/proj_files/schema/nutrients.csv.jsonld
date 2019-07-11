@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "legacy_id" : {
+    },
+    "type" : {
+    },
+    "public_id" : {
+    },
+    "name" : {
+    },
+    "export" : {
+    },
+    "state" : {
+    },
+    "annotation_quality" : {
+    },
+    "description" : {
+    },
+    "wikipedia_id" : {
+    },
+    "comments" : {
+    },
+    "dfc_id" : {
+    },
+    "duke_id" : {
+    },
+    "eafus_id" : {
+    },
+    "dfc_name" : {
+    },
+    "compound_source" : {
+    },
+    "metabolism" : {
+    },
+    "synthesis_citations" : {
+    },
+    "general_citations" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    }
+  }
+}

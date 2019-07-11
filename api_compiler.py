@@ -2,9 +2,6 @@ import argparse
 import json
 import os
 import logging
-import sys
-from compiler import Column
-from compiler import DataSet
 from relational_compiler import RelationalCompiler
 from jinja2 import Template
 from jsonpath_rw import jsonpath, parse

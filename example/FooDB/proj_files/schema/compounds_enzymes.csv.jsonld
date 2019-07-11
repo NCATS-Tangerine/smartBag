@@ -1,0 +1,21 @@
+{
+  "@context": {
+    "object"   : "schema:object",
+    "id" : {
+    },
+    "compound_id" : {
+    },
+    "enzyme_id" : {
+    },
+    "citations" : {
+    },
+    "created_at" : {
+    },
+    "updated_at" : {
+    },
+    "creator_id" : {
+    },
+    "updater_id" : {
+    }
+  }
+}

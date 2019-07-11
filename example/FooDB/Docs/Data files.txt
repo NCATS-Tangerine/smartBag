@@ -1,0 +1,100 @@
+compounds.csv - 37m
+----------------------------
+id,legacy_id,type,public_id,name,export,state,annotation_quality,description,cas_number,melting_point,protein_formula,protein_weight
+,experimental_solubility,experimental_logp,hydrophobicity,isoelectric_point,metabolism,kegg_compound_id,pubchem_compound_id,pubchem_substance_id
+,chebi_id,het_id,uniprot_id,uniprot_name,genbank_id,wikipedia_id,synthesis_citations,general_citations,comments,protein_structure_file_name
+,protein_structure_content_type,protein_structure_file_size,protein_structure_updated_at,msds_file_name,msds_content_type,msds_file_size
+,msds_updated_at,creator_id,updater_id,created_at,updated_at,phenolexplorer_id,dfc_id,hmdb_id,duke_id,drugbank_id,bigg_id,eafus_id,knapsack_id
+,boiling_point,boiling_point_reference,charge,charge_reference,density,density_reference,optical_rotation,optical_rotation_reference
+,percent_composition,percent_composition_reference,physical_description,physical_description_reference,refractive_index,refractive_index_reference
+,uv_index,uv_index_reference,experimental_pka,experimental_pka_reference,experimental_solubility_reference,experimental_logp_reference
+,hydrophobicity_reference,isoelectric_point_reference,melting_point_reference,moldb_alogps_logp,moldb_logp,moldb_alogps_logs,moldb_smiles,moldb_pka
+,moldb_formula,moldb_average_mass,moldb_inchi,moldb_mono_mass,moldb_inchikey,moldb_alogps_solubility,moldb_id,moldb_iupac,structure_source,duplicate_id
+,old_dfc_id,dfc_name,compound_source,flavornet_id,goodscent_id,superscent_id,phenolexplorer_metabolite_id,kingdom,superklass,klass,subklass
+,direct_parent,molecular_framework,chembl_id,chemspider_id,meta_cyc_id,foodcomex,phytohub_id
+
+compounds_enzymes.csv - 8m
+----------------------------
+id,compound_id,enzyme_id,"citations","created_at","updated_at",creator_id,updater_id
+
+compounds_flavors.csv - 3m
+----------------------------
+id,compound_id,flavor_id,citations,created_at,updated_at,creator_id,updater_id,source_id,source_type
+
+compounds_health_effects.csv - 1.5m
+----------------------------
+id,compound_id,health_effect_id,"orig_health_effect_name","orig_compound_name","orig_citation","citation","citation_type","created_at","updated_at",creator_id,updater_id,source_id,"source_type"
+
+compounds_pathways.csv - 106k
+----------------------------
+id,compound_id,pathway_id,creator_id,updater_id,"created_at","updated_at"
+
+compound_alternate_parents.csv - 4m
+----------------------------
+id,"name",compound_id,creator_id,updater_id,"created_at","updated_at"
+
+compound_external_descriptors.csv - 424k
+----------------------------
+id,"external_id","annotations",compound_id,creator_id,updater_id,"created_at","updated_at"
+
+compound_substituents.csv - 8m
+----------------------------
+id,"name",compound_id,creator_id,updater_id,"created_at","updated_at"
+
+compound_synonyms.csv - 18m
+----------------------------
+id,"synonym","synonym_source","created_at","updated_at",source_id,"source_type"
+
+contents.csv - 336m
+----------------------------
+id,source_id,"source_type",food_id,"orig_food_id","orig_food_common_name","orig_food_scientific_name","orig_food_part","orig_source_id","orig_source_name"
+,orig_content,orig_min,orig_max,"orig_unit","orig_citation","citation","citation_type",creator_id,updater_id,"created_at","updated_at","orig_method"
+,"orig_unit_expression",standard_content
+
+enzymes.csv - 401k
+----------------------------
+id,"name","gene_name","description","go_classification","general_function","specific_function","pathway","reaction","cellular_location","signals"
+,"transmembrane_regions",molecular_weight,theoretical_pi,"locus","chromosome","uniprot_name","uniprot_id","pdb_id","genbank_protein_id","genbank_gene_id"
+,"genecard_id","genatlas_id","hgnc_id","hprd_id","organism","general_citations","comments",creator_id,updater_id,"created_at","updated_at"
+
+flavors.csv - 68k
+----------------------------
+id,"name","flavor_group","category","created_at","updated_at",creator_id,updater_id
+
+foodcomex_compounds.csv - 406k
+----------------------------
+id,compound_id,"origin","storage_form","maximum_quantity","storage_condition","contact_name","contact_address","contact_email","created_at","updated_at"
+,export,"purity","description","spectra_details","delivery_time","stability",admin_user_id,"public_id","cas_number","taxonomy_class","taxonomy_family"
+,"experimental_logp","experimental_solubility","melting_point","food_of_origin","production_method_reference_text","production_method_reference_file_name"
+,"production_method_reference_content_type",production_method_reference_file_size,"production_method_reference_updated_at","elemental_formula","minimum_quantity"
+,"quantity_units","available_spectra","storage_conditions"
+
+foodcomex_compound_providers.csv - 59k
+----------------------------
+id,foodcomex_compound_id,provider_id,"created_at","updated_at"
+
+foods.csv - 821k
+----------------------------
+id,name,name_scientific,description,itis_id,wikipedia_id,wikipedia_id,picture_content_type,picture_file_size,picture_updated_at,legacy_id,food_group
+,food_subgroup,food_type,created_at,updated_at,creator_id,updater_id,export_to_afcdb,category,ncbi_taxonomy_id,export_to_foodb
+
+food_taxonomies.csv - 70k
+----------------------------
+id,food_id,ncbi_taxonomy_id,"classification_name",classification_order,"created_at","updated_at"
+
+health_effects.csv - 289k
+----------------------------
+id,"name","description","chebi_name","chebi_id","created_at","updated_at",creator_id,updater_id,"chebi_definition"
+
+nutrients.csv - 7k
+----------------------------
+id,legacy_id,"type","public_id","name",export,"state","annotation_quality","description","wikipedia_id","comments","dfc_id","duke_id","eafus_id"
+,"dfc_name","compound_source","metabolism","synthesis_citations","general_citations",creator_id,updater_id,"created_at","updated_at"
+
+pathways.csv - 10k
+----------------------------
+id,"smpdb_id","kegg_map_id","name","created_at","updated_at"
+
+references.csv - 8.5m
+----------------------------
+id,"ref_type","text","pubmed_id","link","title",creator_id,updater_id,"created_at","updated_at",source_id,"source_type"

@@ -9,6 +9,7 @@ from compiler import Column
 from compiler import DataSet
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
+from collections import OrderedDict
 
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)
@@ -33,15 +34,22 @@ class RelationalCompiler(BagCompiler):
                       replace ("-", "_")
         sql_db_file = self._gen_name (db_basename)
 
+        print(f'working: {csv_file}')
+
         if os.path.exists (sql_db_file):
             print (" -- {0} already exists. skipping.".format (sql_db_file))
             return
 
         dataset = None
 
-        with open(csv_file, 'r', encoding='utf-8') as stream:
+        with open(csv_file, 'r', encoding='ISO-8859-1') as stream:
             reader = csv.reader (stream)
+
             headers = next (reader)
+
+            # remove duplicate columns
+            headers = list(OrderedDict.fromkeys(headers))
+
             headers = [name.replace('?', '') for name in headers] # query artifact removal
             columns = { n : Column(n, None) for n in headers if not n == "" }
             dataset = DataSet (db_basename, columns)
@@ -54,7 +62,8 @@ class RelationalCompiler(BagCompiler):
             cur = sql.cursor ()
             table_name = os.path.basename (csv_file.
                                            replace (".csv", "").
-                                           replace ("-", "_"))
+                                           replace ("-", "_").replace('references', 'references1'))
+
             col_types = ', '.join ([ "{0} text".format (col) for col in headers ])
             col_types = col_types.replace("#", "")
             create_table = "CREATE TABLE IF NOT EXISTS {0} ({1})".format (
@@ -69,6 +78,7 @@ class RelationalCompiler(BagCompiler):
             i = 0
             j = 0
             max_examples = 5
+
             for row in reader:
                values = [ r for r in row ]
                if i < max_examples:
@@ -84,7 +94,7 @@ class RelationalCompiler(BagCompiler):
 #                   traceback.print_exc ()
 
 #               if i > 4: break
-                   
+
 
                try:
                    if len(columns) == len(values):
