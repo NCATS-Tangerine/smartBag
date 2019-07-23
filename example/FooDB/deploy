@@ -32,7 +32,7 @@ cd /projects/stars/var/FooDB/stage/smartBag/
 # alternativly, one could do a clone if master is up to date
 # git clone https://github.com/NCATS-Tangerine/smartBag.git
 git pull
-nano
+
 # export the current directory
 export PATH=$PWD/bin:$PATH
 echo $PATH
