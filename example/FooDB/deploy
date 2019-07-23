@@ -57,4 +57,4 @@ docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000
 
 # alternativly you can start the website on the command line
 # start/run the API website
-#./smartbag run smartapi --port 4000
+#./smartbag run smartapi --port 4001
