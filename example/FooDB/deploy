@@ -32,7 +32,7 @@ cd /projects/stars/var/FooDB/stage/smartBag/
 # alternativly, one could do a clone if master is up to date
 # git clone https://github.com/NCATS-Tangerine/smartBag.git
 git pull
-
+nano
 # export the current directory
 export PATH=$PWD/bin:$PATH
 echo $PATH
@@ -53,7 +53,7 @@ cd ../../bin
 # go to the directory with the docker file
 cd ../example/FooDB
 docker build --tag=smartbag_foodb .
-docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4000:5001 -d smartbag_foodb
+docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4001:5001 -d smartbag_foodb
 
 # alternativly you can start the website on the command line
 # start/run the API website
