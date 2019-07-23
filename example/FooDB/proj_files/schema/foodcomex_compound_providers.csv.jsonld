@@ -2,14 +2,24 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "foodcomex_compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "provider_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

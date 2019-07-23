@@ -2,24 +2,44 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chebi_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chebi_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chebi_definition" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

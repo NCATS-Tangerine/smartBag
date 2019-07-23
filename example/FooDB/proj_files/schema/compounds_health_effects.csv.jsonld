@@ -2,32 +2,60 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "health_effect_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_health_effect_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_compound_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_citation" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "citation" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "citation_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

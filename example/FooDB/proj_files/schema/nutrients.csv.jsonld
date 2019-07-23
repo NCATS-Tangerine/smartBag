@@ -2,50 +2,96 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "legacy_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "public_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "export" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "state" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "annotation_quality" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "wikipedia_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "comments" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "dfc_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "duke_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "eafus_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "dfc_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "compound_source" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "metabolism" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "synthesis_citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "general_citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

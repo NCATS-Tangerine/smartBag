@@ -2,18 +2,32 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "synonym" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "synonym_source" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

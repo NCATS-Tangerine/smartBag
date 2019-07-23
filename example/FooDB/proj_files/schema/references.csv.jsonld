@@ -2,28 +2,52 @@
   "@context": {
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "ref_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "text" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "pubmed_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "link" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "title" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }
