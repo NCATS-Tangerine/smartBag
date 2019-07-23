@@ -1,5 +1,6 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object": "schema:object",
     "id": {
         "@type" : "schema:name",
