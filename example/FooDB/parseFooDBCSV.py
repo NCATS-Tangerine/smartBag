@@ -38,4 +38,4 @@ def parseFooDBCSVFile(inputDir):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile(sys.argv[1])
+    parseFooDBCSVFile(sys.argv[2])
