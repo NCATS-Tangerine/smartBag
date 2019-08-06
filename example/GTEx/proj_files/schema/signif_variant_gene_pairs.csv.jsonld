@@ -5,8 +5,7 @@
     "ncbigene"  : "http://identifiers.org/ncbigene/",
     "uberon"    : "http://identifiers.org/uberon/",
     "schema"    : "http://schema.org/",
-    "schema"  : "http://schema.org/",
-  
+
 	"tissue_name" : {
 	    "@type" : "gtex:",
         "@id"   : "gtex:"
