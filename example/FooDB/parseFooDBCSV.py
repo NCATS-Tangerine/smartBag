@@ -1,6 +1,4 @@
-import sys, getopt
-#, csv
-import io
+import sys, getopt, csv
 
 ####
 # parses and corrects the foods.csv file.
@@ -14,21 +12,21 @@ def parseFooDBCSVFile(inputDir):
         print("Processing input file: {0}\n".format(inFileName))
 
         # get the input file handle, skip the header line and parse the rest
-        with open(inFileName, 'r') as inFH:
+        with open(inFileName, 'r', encoding='latin_1') as inFH:
             # read a list of lines into data
             data = inFH.readlines()
 
-            # remove the duplicate column name
-            data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id')
+        # remove the duplicate column name
+        data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id')
 
         # close the input file
         inFH.close()
 
-        for val in data:
-            val = val.encode('utf-8', 'ignore')
+#        for val in data:
+#            val = val.encode('utf-8', 'ignore')
 
         # open the file again for writing
-        with open(inFileName, 'w') as outFH:
+        with open(inFileName, 'w', encoding='utf-8') as outFH:
             outFH.writelines(data)
 
         # close the output file
@@ -42,4 +40,4 @@ def parseFooDBCSVFile(inputDir):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile(sys.argv[2])
+    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata') #sys.argv[2]
