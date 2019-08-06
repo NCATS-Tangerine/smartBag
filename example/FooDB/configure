@@ -97,6 +97,8 @@ get_archives ()
     # remove the original archive file
     rm ./*.gz
 
+    pwd
+
     # call the python script to do the parse
     python parseFooDBCSV.py -i ./FooDB_data
 
