@@ -97,6 +97,9 @@ get_archives ()
     # remove the original archive file
     rm ./*.gz
 
+    # call the python script to do the parse
+    python parseFooDBCSV.py -i ./FooDB_data
+
     # go back to the root directory
     cd $cur_dir
 
@@ -105,9 +108,6 @@ get_archives ()
 
     # make the bag directory
     mkdir bag
-
-    # call the python script to do the parse
-    python parseFooDBCSV.py -i ./FooDB_data
 
     # move the into the data directory
     cp ./$VAR/*.csv ./bag
