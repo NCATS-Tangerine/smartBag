@@ -100,8 +100,6 @@ get_archives ()
     # go back to the root directory
     cd $cur_dir
 
-    pwd
-
     # call the python script to do the parse
     python parseFooDBCSV.py -i ./FooDB_data
 
