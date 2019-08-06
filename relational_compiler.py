@@ -10,6 +10,7 @@ from compiler import DataSet
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
 from collections import OrderedDict
+import traceback
 
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)
@@ -100,7 +101,11 @@ class RelationalCompiler(BagCompiler):
                    if len(columns) == len(values):
                        cur.execute (insert_command, row)
                    else:
+                       print(values)
+                       for i, v in enumerate(values):
+                           print(f" {i} - {v}")
                        j+=1
+                       return None
                except:
                    print (values)
                    for i, v in enumerate(values):

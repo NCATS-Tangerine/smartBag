@@ -22,9 +22,6 @@ def parseFooDBCSVFile(inputDir):
         # close the input file
         inFH.close()
 
-#        for val in data:
-#            val = val.encode('utf-8', 'ignore')
-
         # open the file again for writing
         with open(inFileName, 'w', encoding='utf-8') as outFH:
             outFH.writelines(data)
@@ -40,4 +37,4 @@ def parseFooDBCSVFile(inputDir):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile(sys.argv[2]) #'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata'
+    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata') #sys.argv[2]
