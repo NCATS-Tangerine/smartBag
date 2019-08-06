@@ -97,13 +97,13 @@ get_archives ()
     # remove the original archive file
     rm ./*.gz
 
+    # go back to the root directory
+    cd $cur_dir
+
     pwd
 
     # call the python script to do the parse
-    python parseFooDBCSV.py -i ./
-
-    # go back to the root directory
-    cd $cur_dir
+    python parseFooDBCSV.py -i ./bag
 
     # remove the bag directory and start from scratch
     rm -rf bag
