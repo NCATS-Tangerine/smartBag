@@ -14,7 +14,7 @@ def parseFooDBCSVFile(inputDir):
         print("Processing input file: {0}\n".format(inFileName))
 
         # get the input file handle, skip the header line and parse the rest
-        with open(inFileName, 'r', encoding='latin_1') as inFH:
+        with open(inFileName, 'r') as inFH:
             # read a list of lines into data
             data = inFH.readlines()
 
