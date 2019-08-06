@@ -23,12 +23,15 @@ def parseFooDBCSVFile(inputDir):
         # close the input file
         inFH.close()
 
+        for val in data:
+            val = val.encode('utf-8')
+
         # open the file again for writing
-        #with open(inFileName, 'w') as outFH:
-        #    outFH.writelines(data)
+        with open(inFileName, 'w') as outFH:
+            outFH.writelines(data)
 
         # close the output file
-        #outFH.close()
+        outFH.close()
 
     except Exception as e:
         print("Error: {0}".format(e))
