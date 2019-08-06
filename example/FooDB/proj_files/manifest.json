@@ -8,10 +8,64 @@
   },
 
   "aggregates": [
-      { "uri": "",
+      { "uri": "../data/compound_alternate_parents.csv",
         "mediatype": "text/csv"
       },
-      { "uri": "",
+      { "uri": "../data/compound_external_descriptors.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compounds.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compounds_enzymes.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compounds_flavors.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compounds_health_effects.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compounds_pathways.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compound_substituents.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/compound_synonyms.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/contents.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/enzymes.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/flavors.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/foodcomex_compound_providers.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/foodcomex_compounds.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/foods.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/food_taxonomies.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/health_effects.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/nutrients.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/pathways.csv",
+        "mediatype": "text/csv"
+      },
+      { "uri": "../data/references.csv",
         "mediatype": "text/csv"
       }
   ],

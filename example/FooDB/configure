@@ -106,6 +106,9 @@ get_archives ()
     # make the bag directory
     mkdir bag
 
+    # call the python script to do the parse
+    python parseFooDBCSV.py -i ./FooDB_data
+
     # move the into the data directory
     cp ./$VAR/*.csv ./bag
 }
