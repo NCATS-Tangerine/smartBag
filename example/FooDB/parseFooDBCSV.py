@@ -24,7 +24,7 @@ def parseFooDBCSVFile(inputDir):
         inFH.close()
 
         # open the file again for writing
-        with open(inFileName, 'w',  encoding='ISO-8859-1') as outFH:
+        with open(inFileName, 'w',  encoding='UTF-8') as outFH:
             outFH.writelines(data)
 
         # close the output file
