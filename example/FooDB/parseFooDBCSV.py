@@ -31,7 +31,7 @@ def parseFooDBCSVFile(inputDir):
         outFH.close()
 
     except Exception as e:
-        print("Error: {0}".format(e.message))
+        print("Error: {0}".format(e))
 
 
 ####
