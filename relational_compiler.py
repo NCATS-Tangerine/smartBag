@@ -106,7 +106,7 @@ class RelationalCompiler(BagCompiler):
                            for i, v in enumerate(values):
                                print(f" {i} - {v}")
                                j+=1
-                       return None
+                           return None
                except:
                    print (values)
                    for i, v in enumerate(values):
