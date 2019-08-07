@@ -106,6 +106,7 @@ get_archives ()
     done
 
     # remove the bag directory and start from scratch
+
     rm -rf bag
 
     # make the bag directory

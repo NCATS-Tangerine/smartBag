@@ -101,12 +101,7 @@ class RelationalCompiler(BagCompiler):
                    if len(columns) == len(values):
                        cur.execute (insert_command, row)
                    else:
-                       if table_name == 'foods':
-                           print(values)
-                           for i, v in enumerate(values):
-                               print(f" {i} - {v}")
-                               j+=1
-                           return None
+                       j+=1
                except:
                    print (values)
                    for i, v in enumerate(values):
