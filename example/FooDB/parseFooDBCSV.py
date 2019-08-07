@@ -27,21 +27,6 @@ def parseFooDBCSVFile(inFileName):
 
         # close the output file
         outFH.close()
-
-
-        with open(inFileName, 'r', encoding='ISO-8859-1') as stream:
-            reader = csv.reader (stream)
-
-            headers = next (reader)
-
-            for row in reader:
-               values = [ r for r in row ]
-
-               if len(headers) != len(values):
-                    print(values)
-                    for i, v in enumerate(values):
-                        print(f" {i} - {v}")
-
     except Exception as e:
         traceback.print_exc(e)
 
