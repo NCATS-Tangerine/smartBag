@@ -1,5 +1,5 @@
-import sys, getopt, csv
 import traceback
+import csv
 
 ####
 # parses and corrects the foods.csv file.
@@ -18,11 +18,10 @@ def parseFooDBCSVFile(inFileName):
         inFH.close()
 
         # remove the duplicate column name
-        data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id')
+        data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',itis_id,wikipedia_id')
 
         with open(inFileName, "w", encoding="utf-8") as outFH:
             for el in data:
-                #print(el.encode('ascii', 'replace').decode('ascii', 'replace'))
                 outFH.write(el.encode('ascii', 'replace').decode('ascii', 'replace'))
 
         # close the output file
