@@ -101,7 +101,8 @@ get_archives ()
     cd $cur_dir
 
     # call the python script to do the parse
-    python parseFooDBCSV.py -i ./FooDB_data
+    for targetFile in "${targetFiles[@]}"; do
+      python parseFooDBCSV.py -i $VAR/$targetFile
 
     # remove the bag directory and start from scratch
     rm -rf bag

@@ -5,12 +5,8 @@ import traceback
 # parses and corrects the foods.csv file.
 # this file has a duplicate column entry in the header
 ####
-def parseFooDBCSVFile(inputDir):
+def parseFooDBCSVFile(inFileName):
     try:
-        # get the complete in and output file names
-        inFileName = "{0}/foods.csv".format(inputDir)
-        outFileName = "{0}/foods.conv.csv".format(inputDir)
-
         print("Processing input file: {0}\n".format(inFileName))
 
         # get the input file handle, skip the header line and parse the rest
@@ -24,7 +20,7 @@ def parseFooDBCSVFile(inputDir):
         # remove the duplicate column name
         data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id')
 
-        with open(outFileName, "w", encoding="utf-8") as outFH:
+        with open(inFileName, "w", encoding="utf-8") as outFH:
             for el in data:
                 #print(el.encode('ascii', 'replace').decode('ascii', 'replace'))
                 outFH.write(el.encode('ascii', 'replace').decode('ascii', 'replace'))
