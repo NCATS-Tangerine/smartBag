@@ -1,19 +1,34 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "ncbi_taxonomy_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "classification_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "classification_order" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

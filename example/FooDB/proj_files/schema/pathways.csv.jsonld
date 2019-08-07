@@ -1,17 +1,30 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object": "schema:object",
     "id": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "smpdb_id": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "kegg_map_id": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at": {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

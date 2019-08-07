@@ -1,77 +1,150 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "origin" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "storage_form" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "maximum_quantity" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "storage_condition" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "contact_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "contact_address" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "contact_email" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "export" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "purity" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "spectra_details" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "delivery_time" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "stability" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "admin_user_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "public_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "cas_number" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "taxonomy_class" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "taxonomy_family" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_logp" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_solubility" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "melting_point" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_of_origin" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "production_method_reference_text" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "production_method_reference_file_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "production_method_reference_content_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "production_method_reference_file_size" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "production_method_reference_updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "elemental_formula" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "minimum_quantity" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "quantity_units" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "available_spectra" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "storage_conditions" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

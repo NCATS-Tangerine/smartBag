@@ -10,6 +10,7 @@ from compiler import DataSet
 from jsonpath_rw import jsonpath, parse
 from pyld import jsonld
 from collections import OrderedDict
+import traceback
 
 logger = logging.getLogger("app")
 logger.setLevel(logging.DEBUG)

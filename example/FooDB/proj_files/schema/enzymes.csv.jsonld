@@ -1,69 +1,134 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "gene_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "go_classification" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "general_function" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "specific_function" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "pathway" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "reaction" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "cellular_location" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "signals" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "transmembrane_regions" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "molecular_weight" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "theoretical_pi" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "locus" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chromosome" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uniprot_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uniprot_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "pdb_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "genbank_protein_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "genbank_gene_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "genecard_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "genatlas_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "hgnc_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "hprd_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "organism" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "general_citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "comments" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

@@ -101,7 +101,7 @@ get_archives ()
 
     # now unpack them
     for f in $archive_files; do
-	# does the file exist
+	      # does the file exist
         if [ -f $f.tar.gz ]; then
 	        # extract the files. the data is actually in a subdir in the archive
 	        tar -zxvf $f.tar.gz $f -C ./

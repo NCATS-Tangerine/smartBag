@@ -1,53 +1,102 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "source_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_food_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_food_common_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_food_scientific_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_food_part" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_source_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_source_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_content" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_min" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_max" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_unit" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_citation" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "citation" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "citation_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_method" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "orig_unit_expression" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "standard_content" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

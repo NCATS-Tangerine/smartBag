@@ -1,217 +1,431 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
+
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "legacy_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "public_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "export" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "state" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "annotation_quality" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "cas_number" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "melting_point" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_formula" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_weight" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_solubility" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_logp" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "hydrophobicity" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "isoelectric_point" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "metabolism" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "kegg_compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "pubchem_compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "pubchem_substance_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chebi_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "het_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uniprot_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uniprot_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "genbank_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "wikipedia_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "synthesis_citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "general_citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "comments" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_structure_file_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_structure_content_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_structure_file_size" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "protein_structure_updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "msds_file_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "msds_content_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "msds_file_size" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "msds_updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "phenolexplorer_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "dfc_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "hmdb_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "duke_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "drugbank_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "bigg_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "eafus_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "knapsack_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "boiling_point" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "boiling_point_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "charge" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "charge_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "density" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "density_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "optical_rotation" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "optical_rotation_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "percent_composition" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "percent_composition_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "physical_description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "physical_description_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "refractive_index" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "refractive_index_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uv_index" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "uv_index_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_pka" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_pka_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_solubility_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "experimental_logp_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "hydrophobicity_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "isoelectric_point_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "melting_point_reference" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_alogps_logp" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_logp" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_alogps_logs" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_smiles" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_pka" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_formula" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_average_mass" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_inchi" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_mono_mass" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_inchikey" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_alogps_solubility" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "moldb_iupac" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "structure_source" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "duplicate_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "old_dfc_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "dfc_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "compound_source" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "flavornet_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "goodscent_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "superscent_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "phenolexplorer_metabolite_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "kingdom" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "superklass" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "klass" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "subklass" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "direct_parent" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "molecular_framework" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chembl_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "chemspider_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "meta_cyc_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "foodcomex" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "phytohub_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

@@ -1,47 +1,94 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "name_scientific" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "description" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "itis_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "wikipedia_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
+    "picture_file_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "picture_content_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "picture_file_size" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "picture_updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "legacy_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_group" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_subgroup" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "food_type" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "export_to_afcdb" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "category" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "ncbi_taxonomy_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "export_to_foodb" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }

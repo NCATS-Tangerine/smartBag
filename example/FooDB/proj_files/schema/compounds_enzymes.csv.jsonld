@@ -1,21 +1,38 @@
 {
   "@context": {
+    "schema"   : "http://schema.org/",
     "object"   : "schema:object",
     "id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "compound_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "enzyme_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "citations" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "created_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updated_at" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "creator_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     },
     "updater_id" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
     }
   }
 }
