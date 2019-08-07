@@ -25,7 +25,7 @@ def parseFooDBCSVFile(inputDir):
         # remove the duplicate column name
         data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id')
 
-        with codecs.open(outFileName, "w", "utf-8") as outFH:
+        with codecs.open(inFileName, "w", "utf-8") as outFH:
             outFH.writelines(data)
 
         # close the output file
@@ -39,4 +39,4 @@ def parseFooDBCSVFile(inputDir):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata') #sys.argv[2]
+    parseFooDBCSVFile(sys.argv[2]) #'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata'
