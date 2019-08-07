@@ -36,4 +36,4 @@ def parseFooDBCSVFile(inFileName):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile(sys.argv[2]) #'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata'
+    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv') # 'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata' sys.argv[2]

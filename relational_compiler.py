@@ -101,6 +101,12 @@ class RelationalCompiler(BagCompiler):
                    if len(columns) == len(values):
                        cur.execute (insert_command, row)
                    else:
+                       if csv_file =='foods.csv':
+                           print(values)
+
+                           for i, v in enumerate(values):
+                               print(f" {i} - {v}")
+
                        j+=1
                except:
                    print (values)
