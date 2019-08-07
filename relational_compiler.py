@@ -81,6 +81,11 @@ class RelationalCompiler(BagCompiler):
             max_examples = 5
 
             for row in reader:
+               # force the encoding to UTF 8
+               recoded = row.encode('utf-8', 'replace')
+               # restore the byte array back into a string
+               row = recoded.decode("utf-8")
+
                values = [ r for r in row ]
                if i < max_examples:
                    print (values)
