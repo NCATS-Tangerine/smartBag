@@ -1,5 +1,6 @@
 import traceback
 import sys
+import csv
 
 ####
 # parses and corrects the foods.csv file.
@@ -18,7 +19,7 @@ def parseFooDBCSVFile(inFileName):
         inFH.close()
 
         # remove the duplicate column name
-        data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',itis_id,wikipedia_id')
+        data[0] = data[0].replace(',wikipedia_id,wikipedia_id', ',wikipedia_id,picture_file_name')
 
         with open(inFileName, "w", encoding="utf-8") as outFH:
             for el in data:
@@ -26,6 +27,20 @@ def parseFooDBCSVFile(inFileName):
 
         # close the output file
         outFH.close()
+
+
+        with open(inFileName, 'r', encoding='ISO-8859-1') as stream:
+            reader = csv.reader (stream)
+
+            headers = next (reader)
+
+            for row in reader:
+               values = [ r for r in row ]
+
+               if len(headers) != len(values):
+                    print(values)
+                    for i, v in enumerate(values):
+                        print(f" {i} - {v}")
 
     except Exception as e:
         traceback.print_exc(e)
@@ -35,4 +50,4 @@ def parseFooDBCSVFile(inFileName):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile(sys.argv[2]) # 'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata' sys.argv[2]
+    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv') # 'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv' sys.argv[2]

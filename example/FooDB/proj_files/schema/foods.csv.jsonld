@@ -26,6 +26,10 @@
         "@type" : "schema:name",
         "@id"   : "schema:name"
     },
+    "picture_file_name" : {
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
+    },
     "picture_content_type" : {
         "@type" : "schema:name",
         "@id"   : "schema:name"
