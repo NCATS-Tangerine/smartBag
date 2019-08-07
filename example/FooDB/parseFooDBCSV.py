@@ -3,8 +3,8 @@ import sys
 import csv
 
 ####
-# parses and corrects the foods.csv file.
-# this file has a duplicate column entry in the header
+# parses and corrects the FooDB files by fixing the column header in foods.csv file and insuring only ascii characters
+
 ####
 def parseFooDBCSVFile(inFileName):
     try:
@@ -50,4 +50,4 @@ def parseFooDBCSVFile(inFileName):
 # main entry point to the process
 ####
 if __name__ == "__main__":
-    parseFooDBCSVFile('C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv') # 'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv' sys.argv[2]
+    parseFooDBCSVFile(sys.argv[2]) # 'C:/Phil/Work/Informatics/Robokop/FooDB/FooDB_rawdata/foods.csv' sys.argv[2]
