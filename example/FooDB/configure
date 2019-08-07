@@ -102,7 +102,7 @@ get_archives ()
 
     # call the python script to do the parse
     for targetFile in "${targetFiles[@]}"; do
-      python parseFooDBCSV.py -i $VAR/$targetFile
+      python parseFooDBCSV.py -i $VAR/$targetFile.csv
     done
 
     # remove the bag directory and start from scratch
