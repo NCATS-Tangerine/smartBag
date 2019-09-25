@@ -2,7 +2,7 @@ import sys, getopt, csv
 
 # debug use only
 test_tissues={
-"Adipose_Subcutaneous, 0002190"
+"Adipose_Subcutaneous,0002190"
 }
 
 # list of all the tissues in the GTEX data
@@ -27,8 +27,8 @@ tissues={
 "Brain_Spinal_cord_cervical_c-1,0002726",
 "Brain_Substantia_nigra,0002038",
 "Breast_Mammary_Tissue,0001911",
+"Cells_Cultured_fibroblasts,0015764",
 "Cells_EBV-transformed_lymphocytes,0001744",
-"Cells_Transformed_fibroblasts,0015764",
 "Colon_Sigmoid,0001159",
 "Colon_Transverse,0001157",
 "Esophagus_Gastroesophageal_Junction,0007650",
@@ -36,6 +36,7 @@ tissues={
 "Esophagus_Muscularis,0004648",
 "Heart_Atrial_Appendage,0006618",
 "Heart_Left_Ventricle,0002084",
+"Kidney_Cortex,0001225",
 "Liver,0002107",
 "Lung,0002048",
 "Minor_Salivary_Gland,0001830",
@@ -104,21 +105,20 @@ def processCSVFiles(argv):
     
     # call the funcs to process the CSV file and fill the output file
     for item in tissues:
-        parseCSVFile(item, inputDir, outputDir, 'egenes', 11, firstFile)
-        parseCSVFile(item, inputDir, outputDir, 'signif_variant_gene_pairs', 0, firstFile)
+        parseCSVFile(item, inputDir, outputDir, 'sqtl_signifpairs', 0, 1, firstFile)
         firstFile = False
 
 ####
 # parses the individual tissue file
 ####
-def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstFileFlag):
+def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, phenotype_id_index, firstFileFlag):
 
     try:
         # split the tissue declaration into its parts
         tissue_data = tissue.split(',')
         
         # get the complete in and output file names
-        infileName = "{0}/{1}.v7.{2}.csv".format(inputDir, tissue_data[0], fileType)
+        infileName = "{0}/{1}.v8.{2}.csv".format(inputDir, tissue_data[0], fileType)
         outfileName = "{0}/{1}.csv".format(outputDir, fileType)
         
         print("Processing input file: {0}, Sending to output file: {1}\n".format(infileName, outfileName))
@@ -127,16 +127,13 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstF
         tissueName = tissue_data[0].replace('_', ' ')
         
         # get the uberon code
-        tissueUberon = tissue_data[1]
+        tissueUberon = tissue_data[1][1:]
                 
         # get the output file handle
         outFH = open(outfileName, 'a+')
     
         # get the expected number of columns for error checking
-        if fileType == 'egenes':   
-            colCount = 36
-        else:
-            colCount = 15
+        colCount = 16
         
         # init a line counter for error checking
         lineCount = 1
@@ -148,7 +145,7 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstF
             
             # if this if the first time for the output write out the header
             if firstFileFlag == True:
-                outFH.write("tissue_name,tissue_uberon,HGVS,{0}".format(firstLine).replace('\t', ','))
+                outFH.write("tissue_name,tissue_uberon,HGVS,gene_id,{0}".format(firstLine).replace('\t', ','))
 
             # for the rest of the lines in the file 
             for line in inFH:
@@ -157,12 +154,17 @@ def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, firstF
 
                 # get the variant ID value
                 variant_id = newLine[variant_id_index]
+                phenotype_id = newLine[phenotype_id_index]
 
                 # get the HGVS value
-                HGVS = get_HGVS_value(variant_id)
+                HGVS = get_HGVS_value(variant_id[3:])
+
+                # the phenotype id contains the ensembl id for the gene.
+                # it has the format: chr1:497299:498399:clu_51878:ENSG00000237094.11
+                gene_id = phenotype_id.split(':')[4].split('.')[0]
 
                 # prepend the input line with the tissue name and uberon id
-                newLine = "{0},{1},{2},{3}".format(tissueName, tissueUberon, HGVS, line).replace('\t', ',')
+                newLine = "{0},{1},{2},{3},{4}".format(tissueName, tissueUberon, HGVS, gene_id, line).replace('\t', ',')
                 
                 # make check to insure we have the correct number of columns
                 numOfCols = newLine.split(',')

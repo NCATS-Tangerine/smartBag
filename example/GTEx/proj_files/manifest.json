@@ -8,10 +8,7 @@
   },
 
   "aggregates": [
-      { "uri": "../data/egenes.csv",
-        "mediatype": "text/csv"
-      },
-      { "uri": "../data/signif_variant_gene_pairs.csv",
+      { "uri": "../data/sqtl_signifpairs.csv",
         "mediatype": "text/csv"
       }
   ],
