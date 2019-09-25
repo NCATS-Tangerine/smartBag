@@ -282,6 +282,6 @@ def get_HGVS_value(gtex_variant_id):
 ####
 # main entry point to the process
 ####
-# if __name__ == "__main__":
-#     processCSVFiles(sys.argv[1:])
+if __name__ == "__main__":
+    processCSVFiles(sys.argv[1:])
 
