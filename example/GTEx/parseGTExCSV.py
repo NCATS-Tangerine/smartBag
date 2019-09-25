@@ -2,7 +2,7 @@ import sys, getopt, csv
 
 # debug use only
 test_tissues={
-"Adipose_Subcutaneous, 0002190"
+"Adipose_Subcutaneous,0002190"
 }
 
 # list of all the tissues in the GTEX data
