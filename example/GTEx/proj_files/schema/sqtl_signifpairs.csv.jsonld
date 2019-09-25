@@ -18,13 +18,17 @@
         "@type" : "schema:string",
         "@id"   : "schema:string"
 	},
+	"gene_id" : {
+        "@type" : "ensembl",
+        "@id"   : "ensembl"
+	},
 	"variant_id" : {
 	    "@type" : "schema:string",
 	    "@id"   : "schema:string"
 	},	
-	"gene_id" : {
-	    "@type" : "ensembl:",
-	    "@id"   : "ensembl:"
+	"phenotype_id" : {
+	    "@type" : "schema:string",
+	    "@id"   : "schema:string"
 	},	
 	"tss_distance" : {
 	    "@type" : "schema:name",

@@ -37,8 +37,8 @@ tissues=(
 "Brain_Spinal_cord_cervical_c-1, 0002726"
 "Brain_Substantia_nigra, 0002038"
 "Breast_Mammary_Tissue, 0001911"
+"Cells_Cultured_fibroblasts, 0015764"
 "Cells_EBV-transformed_lymphocytes, 0001744"
-"Cells_Transformed_fibroblasts, 0015764"
 "Colon_Sigmoid, 0001159"
 "Colon_Transverse, 0001157"
 "Esophagus_Gastroesophageal_Junction, 0007650"
@@ -46,6 +46,7 @@ tissues=(
 "Esophagus_Muscularis, 0004648"
 "Heart_Atrial_Appendage, 0006618"
 "Heart_Left_Ventricle, 0002084"
+"Kidney_Cortex, 0001225"
 "Liver, 0002107"
 "Lung, 0002048"
 "Minor_Salivary_Gland, 0001830"
@@ -82,38 +83,39 @@ get_archives ()
     cd $VAR
 
      # set the URL to the data. only going after the single tissue data for now
-    download_prefix="https://storage.googleapis.com/gtex_analysis_v7/single_tissue_eqtl_data"
+     # full path to GTEx data: https://storage.googleapis.com/gtex_analysis_v8/single_tissue_qtl_data/,data file name>
+    download_prefix="https://storage.googleapis.com/gtex_analysis_v8/single_tissue_qtl_data"
 
     # list of raw archive files
     # note although we are setting up for processing a list only one file is needed right now.
     # there are numerous other files that may also be desired on the site in the future.
-    archive_files="GTEx_Analysis_v7_eQTL"
+    archive_files="GTEx_Analysis_v8_sQTL"
 
     # for each raw data archive file
     for f in $archive_files; do
-	# checkpoint for the user
+	  # checkpoint for the user
         echo $f
 
-	# make the call to get the data
-#        wget --timestamping $download_prefix/$f.tar.gz
-        wget --quiet --timestamping $download_prefix/$f.tar.gz
+	      # make the call to get the data
+        # wget --timestamping $download_prefix/$f.tar.gz
+        wget --quiet --timestamping $download_prefix/$f.tar
     done
 
     # now unpack them
     for f in $archive_files; do
 	      # does the file exist
-        if [ -f $f.tar.gz ]; then
+        if [ -f $f.tar ]; then
 	        # extract the files. the data is actually in a subdir in the archive
-	        tar -zxvf $f.tar.gz $f -C ./
+	        tar -xvf $f.tar $f -C ./
 
 	        # move the tissue files back to this working directory
-            mv ./$f/*.gz ./
+          mv ./$f/*.gz ./
 
 	        # remove the temp directory
 	        rm -rf $f
         else
-            echo "no such file $f.tar.gz"
-            exit 1
+          echo "no such file $f.tar"
+          exit 1
         fi
     done
 
@@ -126,18 +128,10 @@ get_archives ()
         echo Including ${tissue_data[0]} in $VAR.
 
         # The tissues are a compressed archive. Uncompress it
-        if [ -f ${tissue_data[0]}.v7.egenes.txt.gz ]; then
-            gunzip -c ${tissue_data[0]}.v7.egenes.txt.gz > ${tissue_data[0]}.v7.egenes.csv
+        if [ -f ${tissue_data[0]}.v8.sgenes.txt.gz ]; then
+            gunzip -c ${tissue_data[0]}.v8.sqtl_signifpairs.txt.gz > ${tissue_data[0]}.v8.sqtl_signifpairs.csv
         else
-            echo "no such file ${tissue_data[0]}.v7.egenes.txt.gz"
-            exit 1
-        fi
-
-        # The tissues are a compressed archive. Uncompress it
-        if [ -f ${tissue_data[0]}.v7.signif_variant_gene_pairs.txt.gz ]; then
-            gunzip -c ${tissue_data[0]}.v7.signif_variant_gene_pairs.txt.gz > ${tissue_data[0]}.v7.signif_variant_gene_pairs.csv
-        else
-            echo "no such file $tissue.v7.signif_variant_gene_pairs.txt.gz"
+            echo "no such file $tissue.v8.sqtl_signifpairs.txt.gz"
             exit 1
         fi
     done
@@ -150,7 +144,7 @@ get_archives ()
 }
 
 # here we use a python script to parse all the CSV files
-stage_data_python  ()
+stage_data_python ()
 {
     # save the current directory
     cur_dir=$PWD
@@ -190,39 +184,21 @@ stage_data () {
     # make the bag directory
     mkdir bag
 
-    # here we start the process of merging all the csv files into the two types
-
-    # add the column headers to the target egenes file
-    echo 'tissue_name,tissue_uberon,hgvs,gene_id,gene_name,gene_chr,gene_start,gene_end,strand,num_var,beta_shape1,beta_shape2,true_df,pval_true_df,variant_id,tss_distance,chr,pos,ref,alt,num_alt_per_site,rs_id_dbSNP147_GRCh37p13,minor_allele_samples,minor_allele_count,maf,ref_factor,pval_nominal,slope,slope_se,pval_perm,pval_beta,qval,pval_nominal_threshold,log2_aFC,log2_aFC_lower,log2_aFC_upper' > bag/egenes.csv
+    # here we start the process of merging all the csv files into one
 
     # add the column headers to the target signif file
-    echo 'tissue_name,tissue_uberon,hgvs,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/signif_variant_gene_pairs.csv
+    echo 'tissue_name,tissue_uberon,hgvs,gene_id,variant_id,gene_id,tss_distance,ma_samples,ma_count,maf,pval_nominal,slope,slope_se,pval_nominal_threshold,min_pval_nominal,pval_beta' >  bag/sqtl_signifpairs.csv
 
     # for each tissue file
     for tissue in "${tissues[@]}"; do
         # split the tissue data into  the name removing the underscores
         IFS=', ' read -ra tissue_data <<< "$tissue"
 
-	# create the column data for the tissue name and uberon
-	tissueName="${tissue_data[0]//_/ },"
+	      # create the column data for the tissue name and uberon
+	      tissueName="${tissue_data[0]//_/ },"
 
         # create the column data for the uberon value
-	tissueUberon="${tissue_data[1]},"
-
-        # init a line counter for the egenes records
-        i=1
-
-        # for each line in the file except for the first one
-        while read line
-        do
-            # skip the first line
-            test $i -eq 1 && ((i=i+1)) && continue
-
-            # write out the line prepending with the tissue type and replacing tabs with commas
-            echo $tissueName$tissueUberon${line//	/,} >> bag/egenes.csv
-
-	# load up the next file to process
-        done < $VAR/${tissue_data[0]}.v7.egenes.csv
+	      tissueUberon="${tissue_data[1]},"
 
         # init a line counter for the signif records
         i=1
@@ -234,10 +210,10 @@ stage_data () {
             test $i -eq 1 && ((i=i+1)) && continue
 
             # write out the line prepending with the tissue type and replacing tabs with commas
-            echo $tissueName$tissueUberon${line//	/,} >> bag/signif_variant_gene_pairs.csv
+            echo $tissueName$tissueUberon${line//	/,} >> bag/sqtl_signifpairs.csv
 
-	# load up the next file to process
-        done < $VAR/${tissue_data[0]}.v7.signif_variant_gene_pairs.csv
+	      # load up the next file to process
+        done < $VAR/${tissue_data[0]}.v8.sqtl_signifpairs.csv
     done
 
     # move to the target directory
@@ -276,7 +252,7 @@ build_it () {
     get_archives
 
     # Stage data into a bag directory.
-    # old way, now obsolete    stage_data "$tissues"
+    # old way, now obsolete was: stage_data "$tissues"
     stage_data_python
     
     # Generate bag structure and metadata.
