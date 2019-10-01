@@ -37,7 +37,7 @@ smartbag make bag
 pwd
 cd ../../bin
 ./smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
-cd example/ctd
+cd ../example/ctd
 pwd
 docker build --tag=smartbag_ctd .
 docker run -it -v /projects/stars/var/ctd_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4002:5002 -d smartbag_ctd
