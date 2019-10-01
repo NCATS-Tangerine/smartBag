@@ -27,7 +27,6 @@ venv () {
 }
 venv
 
-cd smartBag
 export PATH=$PWD/bin:$PATH
 echo $PATH
 
