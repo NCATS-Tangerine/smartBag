@@ -40,6 +40,6 @@ bin/smartbag make smartapi --bag example/ctd/bag.tgz --opts example/ctd/options.
 cd example/ctd
 pwd
 docker build --tag=smartbag_ctd .
-docker run -it -v /projects/stars/var/ctd_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4000:5002 -d smartbag_ctd
+docker run -it -v /projects/stars/var/ctd_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4002:5000 -d smartbag_ctd
 
 #smartbag run smartapi --port 8997
