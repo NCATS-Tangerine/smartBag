@@ -9,7 +9,7 @@ cd /projects/stars/var/ctd_data/stage
 
 mkdir -p $HOSTNAME
 cd $HOSTNAME
-rm -rf smartBag
+#rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
 git checkout phil_smartBag
