@@ -108,7 +108,7 @@ stage_metadata () {
 
 build_it () {
     # Download data files. Uncomment the next line to recapture the data files.
-    #get_archives
+    get_archives
 
     # Stage data into a bag directory.
     stage_data "$archives"
