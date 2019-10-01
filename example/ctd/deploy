@@ -12,6 +12,7 @@ cd $HOSTNAME
 #rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
+cd smartBag
 git checkout phil_smartBag
 
 venv () {
