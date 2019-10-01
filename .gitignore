@@ -1,1 +1,7 @@
 __pycache__
+/example/out/
+/example/GTEx/GTEx_data/
+/example/FooDB/FooDB_data/
+/example/FooDB/bag/
+/example/GTEx/bag/
+/example/FooDB/bag.tgz

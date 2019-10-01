@@ -112,7 +112,6 @@ def processCSVFiles(argv):
 # parses the individual tissue file
 ####
 def parseCSVFile(tissue, inputDir, outputDir, fileType, variant_id_index, phenotype_id_index, firstFileFlag):
-
     try:
         # split the tissue declaration into its parts
         tissue_data = tissue.split(',')
