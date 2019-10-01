@@ -12,9 +12,10 @@ cd $HOSTNAME
 rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
+git checkout phil_smartBag
 
 venv () {
-    venv=/projects/stars/ctdVenv
+    venv=/projects/stars/ctd_data/ctdVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate
@@ -33,4 +34,9 @@ cd example/ctd
 ./configure $1
 smartbag make bag
 bin/smartbag make smartapi --bag example/ctd/bag.tgz --opts example/ctd/options.json
-smartbag run smartapi --port 8997
+cd example/ctd
+
+docker build --tag=smartbag_ctd .
+docker run -it -v /projects/stars/var/ctd_data/stage/smartBag/bin:/smartBag -p 4000:5002 -d smartbag_gtex
+
+#smartbag run smartapi --port 8997
