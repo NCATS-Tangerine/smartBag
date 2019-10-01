@@ -9,7 +9,7 @@ cd /projects/stars/var/ctd_data/stage
 
 mkdir -p $HOSTNAME
 cd $HOSTNAME
-#rm -rf smartBag
+rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
 cd smartBag
@@ -32,10 +32,12 @@ echo $PATH
 
 cd example/ctd
 ./configure $1
+pwd
 smartbag make bag
+pwd
 bin/smartbag make smartapi --bag example/ctd/bag.tgz --opts example/ctd/options.json
 cd example/ctd
-
+pwd
 docker build --tag=smartbag_ctd .
 docker run -it -v /projects/stars/var/ctd_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4000:5002 -d smartbag_ctd
 
