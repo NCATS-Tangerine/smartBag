@@ -42,7 +42,7 @@ cd ../../bin
 ./smartbag make smartapi --bag ../example/bicluster/bag.tgz --opts ../example/bicluster/options.json
 cd ../example/bicluster
 
-docker build --tag=smartbag_ctd .
+docker build --tag=smartbag_bicluster .
 docker run -it -v /projects/stars/var/bicluster_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4003:5003 -d smartbag_bicluster
 
 #smartbag run smartapi
