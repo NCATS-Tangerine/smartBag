@@ -16,7 +16,7 @@ cd smartBag
 git checkout phil_smartBag
 
 venv () {
-    venv=/projects/stars/ctd_data/ctdVenv
+    venv=/projects/stars/var/ctd_data/ctdVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate
@@ -40,6 +40,11 @@ cd ../../bin
 cd ../example/ctd
 pwd
 docker build --tag=smartbag_ctd .
+
+#docker login
+#docker tag smartbag_ctd phillipsowen/smartbag_1:smartbag_ctd
+#docker push phillipsowen/smartbag_1:smartbag_ctd
+
 docker run -it -v /projects/stars/var/ctd_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4002:5002 -d smartbag_ctd
 
 #smartbag run smartapi --port 8997

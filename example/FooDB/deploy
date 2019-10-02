@@ -53,6 +53,11 @@ cd ../../bin
 # go to the directory with the docker file
 cd ../example/FooDB
 docker build --tag=smartbag_foodb .
+
+#docker login
+#docker tag smartbag_foodb phillipsowen/smartbag_1:smartbag_foodb
+#docker push phillipsowen/smartbag_1:smartbag_foodb
+
 docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4001:5001 -d smartbag_foodb
 
 # alternativly you can start the website on the command line
