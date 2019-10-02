@@ -2,7 +2,7 @@
   "swagger" : {
     "swagger": "2.0",
     "info": {
-      "title": "BiCluster API",
+      "title": "BiCluster RNASeq DB API",
       "description": "A Programmatically Generated OpenAPI 2.0 for the bicluster RNA data.",
       "contact": {
         "responsibleOrganization": "renci.org",
