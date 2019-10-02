@@ -16,7 +16,7 @@ cd smartBag
 git checkout phil_smartBag
 
 venv () {
-    venv=/projects/stars/ctd_data/ctdVenv
+    venv=/projects/stars/var/ctd_data/ctdVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate

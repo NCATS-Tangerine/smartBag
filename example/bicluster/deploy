@@ -5,11 +5,17 @@ set -e
 set -x
 
 hostname; whoami
+
+# change to the temporary data directory
+cd /projects/stars/var/bicluster_data/stage
+
 mkdir -p $HOSTNAME
 cd $HOSTNAME
 rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
+cd smartBag
+git checkout phil_smartBag
 
 venv () {
     venv=/projects/stars/biclusterVenv
@@ -20,17 +26,23 @@ venv () {
         pip install -r requirements.txt
     fi
     source $venv/bin/activate
-
 }
 venv
-
-cd smartBag
 
 export PATH=$PWD/bin:$PATH
 echo $PATH
 
 cd example/bicluster
+
 ./configure $1
+
 smartbag make bag
-smartbag make smartapi --bag bag.tgz --title bicluster
-smartbag run smartapi
+cd ../../bin
+
+./smartbag make smartapi --bag ../example/bicluster/bag.tgz --title bicluster --opts ../example/bicluster/options.json
+cd ../example/bicluster
+
+docker build --tag=smartbag_ctd .
+docker run -it -v /projects/stars/var/bicluster_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4003:5003 -d smartbag_bicluster
+
+#smartbag run smartapi
