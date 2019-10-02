@@ -42,7 +42,7 @@ cd ../../bin
 ./smartbag make smartapi --bag ../example/bicluster_RNAseqDB/bag.tgz --opts ../example/bicluster_RNAseqDB/options.json
 cd ../example/bicluster_RNAseqDB
 
-docker build --tag=smartbag_bicluster_RNAseqDB .
-docker run -it -v /projects/stars/var/bicluster_RNAseqDB_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4004:5004 -d smartbag_bicluster_RNAseqDB
+docker build --tag=smartbag_bicluster_rnaseqdb .
+docker run -it -v /projects/stars/var/bicluster_RNAseqDB_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4004:5004 -d smartbag_bicluster_rnsseqdb
 
 #smartbag run smartapi
