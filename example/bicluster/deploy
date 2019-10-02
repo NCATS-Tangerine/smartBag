@@ -39,7 +39,7 @@ cd example/bicluster
 smartbag make bag
 cd ../../bin
 
-./smartbag make smartapi --bag ../example/bicluster/bag.tgz --title bicluster --opts ../example/bicluster/options.json
+./smartbag make smartapi --bag ../example/bicluster/bag.tgz --opts ../example/bicluster/options.json
 cd ../example/bicluster
 
 docker build --tag=smartbag_ctd .
