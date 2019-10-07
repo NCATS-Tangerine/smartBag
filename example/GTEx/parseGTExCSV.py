@@ -218,10 +218,12 @@ def get_HGVS_value(gtex_variant_id):
 
     # is there an alt allele
     if alt_allele == '.':
+        print(f'alt allele:{alt_allele},{position}del')
+
         # deletions
         if len_ref == 1:
-#            variation = f'{position}del'
-#        else:
+            variation = f'{position}del'
+        else:
             variation = f'{position}_{position + len_ref - 1}del'
 
     elif alt_allele.startswith('<'):
