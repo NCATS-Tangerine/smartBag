@@ -15,20 +15,20 @@
         "@id"   : "uberon:"
 	},
 	"HGVS" : {
-        "@type" : "schema:string",
-        "@id"   : "schema:string"
+        "@type" : "schema:name",
+        "@id"   : "schema:name"
 	},
 	"gene_id" : {
         "@type" : "ensembl",
         "@id"   : "ensembl"
 	},
 	"variant_id" : {
-	    "@type" : "schema:string",
-	    "@id"   : "schema:string"
+	    "@type" : "schema:name",
+	    "@id"   : "schema:name"
 	},	
 	"phenotype_id" : {
-	    "@type" : "schema:string",
-	    "@id"   : "schema:string"
+	    "@type" : "schema:name",
+	    "@id"   : "schema:name"
 	},	
 	"tss_distance" : {
 	    "@type" : "schema:name",
