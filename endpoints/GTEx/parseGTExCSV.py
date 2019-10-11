@@ -1,12 +1,12 @@
 import sys, getopt, csv
 
 # debug use only
-tissues={
+test_tissues={
 "Adipose_Subcutaneous,0002190"
 }
 
 # list of all the tissues in the GTEX data
-test_tissues={
+tissues={
 "Adipose_Subcutaneous,0002190",
 "Adipose_Visceral_Omentum,0003688",
 "Adrenal_Gland,0018303",
