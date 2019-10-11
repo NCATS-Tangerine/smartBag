@@ -9,7 +9,7 @@ hostname; whoami
 
 # method to prep the VM
 venv () {
-    venv=/projects/stars/var/GTEx/GTExVenv
+    venv=/projects/stars/var/FooDB/FooDBVenv
 
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
@@ -24,8 +24,8 @@ venv () {
 # call for virtual python environment prep
 venv
 
-# move to the GTEX staging area for the repo
-cd /projects/stars/var/GTEx/stage/smartBag/
+# move to the FooDB staging area for the repo
+cd /projects/stars/var/FooDB/stage/smartBag/
 
 # get the repo. sort of a chicken/egg thing here as the deploy file used here is in the repo
 # note using a pull here implies you are using the correct repo branch
@@ -38,7 +38,7 @@ export PATH=$PWD/bin:$PATH
 echo $PATH
 
 # go to the target project to process
-cd example/GTEx
+cd endpoints/FooDB
 
 # run the configuration script. this also creates the smartbag archive
 ./configure
@@ -47,20 +47,19 @@ cd example/GTEx
 cd ../../bin
 
 # decompress the smart bag and load the API
-./smartbag make smartapi --bag ../example/GTEx/bag.tgz --opts ../example/GTEx/options.json
-
-# go to the directory with the docker file
-cd ../example/GTEx
+./smartbag make smartapi --bag ../endpoints/FooDB/bag.tgz --opts ../endpoints/FooDB/options.json
 
 # create the docker image and launch the container
-docker build --tag=smartbag_gtex .
+# go to the directory with the docker file
+cd ../endpoints/FooDB
+docker build --tag=smartbag_foodb .
 
 #docker login
-#docker tag smartbag_gtex phillipsowen/smartbag_1:smartbag_gtex
-#docker push phillipsowen/smartbag_1:smartbag_gtex
+#docker tag smartbag_foodb phillipsowen/smartbag_1:smartbag_foodb
+#docker push phillipsowen/smartbag_1:smartbag_foodb
 
-docker run -it -v /projects/stars/var/GTEx/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_gtex
+docker run -it -v /projects/stars/var/FooDB/stage/smartBag/bin:/smartBag -p 4001:5001 -d smartbag_foodb
 
 # alternativly you can start the website on the command line
 # start/run the API website
-#./smartbag run smartapi --port 5000
+#./smartbag run smartapi --port 4001

@@ -40,8 +40,8 @@
     },
 
     "OmimIDs" : {
-      "@type" : "schema:string",
-      "@id"   : "schema:string"
+      "@type" : "schema:name",
+      "@id"   : "schema:name"
     },
 
     "PubMedIDs" : {

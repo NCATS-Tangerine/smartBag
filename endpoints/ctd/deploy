@@ -30,14 +30,14 @@ venv
 export PATH=$PWD/bin:$PATH
 echo $PATH
 
-cd example/ctd
+cd endpoints/ctd
 ./configure $1
 pwd
 smartbag make bag
 pwd
 cd ../../bin
-./smartbag make smartapi --bag ../example/ctd/bag.tgz --opts ../example/ctd/options.json
-cd ../example/ctd
+./smartbag make smartapi --bag ../endpoints/ctd/bag.tgz --opts ../endpoints/ctd/options.json
+cd ../endpoints/ctd
 pwd
 docker build --tag=smartbag_ctd .
 
