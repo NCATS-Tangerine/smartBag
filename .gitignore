@@ -1,7 +1,7 @@
 __pycache__
-/example/out/
-/example/GTEx/GTEx_data/
-/example/FooDB/FooDB_data/
-/example/FooDB/bag/
-/example/GTEx/bag/
-/example/FooDB/bag.tgz
+/endpoints/out/
+/endpoints/GTEx/GTEx_data/
+/endpoints/FooDB/FooDB_data/
+/endpoints/FooDB/bag/
+/endpoints/GTEx/bag/
+/endpoints/FooDB/bag.tgz

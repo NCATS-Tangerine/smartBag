@@ -7,7 +7,7 @@ set -x
 hostname; whoami
 
 # change to the temporary data directory
-cd /projects/stars/var/bicluster_data/stage
+cd /projects/stars/var/bicluster_RNAseqDB_data/stage
 
 mkdir -p $HOSTNAME
 cd $HOSTNAME
@@ -18,7 +18,7 @@ cd smartBag
 git checkout phil_smartBag
 
 venv () {
-    venv=/projects/stars/var/bicluster_data/biclusterVenv
+    venv=/projects/stars/var/bicluster_RNAseqDB_data/bicluster_RNAseqDBVenv
     if [ ! -d $venv ]; then
         python3.6 -m venv $venv
         source $venv/bin/activate
@@ -32,17 +32,17 @@ venv
 export PATH=$PWD/bin:$PATH
 echo $PATH
 
-cd example/bicluster
+cd endpoints/bicluster_RNAseqDB
 
 ./configure $1
 
 smartbag make bag
 cd ../../bin
 
-./smartbag make smartapi --bag ../example/bicluster/bag.tgz --opts ../example/bicluster/options.json
-cd ../example/bicluster
+./smartbag make smartapi --bag ../endpoints/bicluster_RNAseqDB/bag.tgz --opts ../endpoints/bicluster_RNAseqDB/options.json
+cd ../endpoints/bicluster_RNAseqDB
 
-docker build --tag=smartbag_bicluster .
-docker run -it -v /projects/stars/var/bicluster_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4003:5003 -d smartbag_bicluster
+docker build --tag=smartbag_bicluster_rnaseqdb .
+docker run -it -v /projects/stars/var/bicluster_RNAseqDB_data/stage/$HOSTNAME/smartBag/bin:/smartBag -p 4004:5004 -d smartbag_bicluster_rnaseqdb
 
 #smartbag run smartapi
