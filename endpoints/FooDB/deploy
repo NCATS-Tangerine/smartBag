@@ -30,8 +30,9 @@ cd /projects/stars/var/FooDB/stage/smartBag/
 # get the repo. sort of a chicken/egg thing here as the deploy file used here is in the repo
 # note using a pull here implies you are using the correct repo branch
 # alternativly, one could do a clone if master is up to date
-# git clone https://github.com/NCATS-Tangerine/smartBag.git
-git pull
+git clone https://github.com/NCATS-Tangerine/smartBag.git
+cd smartBag
+#git pull
 
 # export the current directory
 export PATH=$PWD/bin:$PATH

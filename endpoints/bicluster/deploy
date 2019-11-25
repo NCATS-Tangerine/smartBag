@@ -15,7 +15,7 @@ rm -rf smartBag
 
 git clone https://github.com/NCATS-Tangerine/smartBag.git
 cd smartBag
-git checkout phil_smartBag
+#git checkout phil_smartBag
 
 venv () {
     venv=/projects/stars/var/bicluster_data/biclusterVenv
