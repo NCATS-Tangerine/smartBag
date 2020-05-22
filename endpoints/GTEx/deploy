@@ -56,11 +56,11 @@ cd ../endpoints/GTEx
 # create the docker image and launch the container
 docker build --tag=smartbag_gtex .
 
-#docker login
-#docker tag smartbag_gtex phillipsowen/smartbag_1:smartbag_gtex
-#docker push phillipsowen/smartbag_1:smartbag_gtex
+docker login
+docker tag smartbag_gtex renciorg/smartbag_1:smartbag_gtex
+docker push renciorg/smartbag_1:smartbag_gtex
 
-docker run -it -v /projects/stars/var/GTEx/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_gtex
+#docker run -it -v /projects/stars/var/GTEx/stage/smartBag/bin:/smartBag -p 4000:5000 -d smartbag_gtex
 
 # alternativly you can start the website on the command line
 # start/run the API website
