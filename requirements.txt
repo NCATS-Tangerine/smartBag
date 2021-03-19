@@ -30,7 +30,7 @@ ipython-genutils==0.2.0
 isodate==0.5.4
 itsdangerous==0.24
 jedi==0.11.0
-Jinja2==2.8
+Jinja2==2.11.3
 jsobject==0.10.2
 jsonpath-rw==1.4.0
 jsonschema==2.6.0
