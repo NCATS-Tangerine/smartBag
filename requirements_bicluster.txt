@@ -12,7 +12,7 @@ Jinja2==2.10
 jsonpath-rw==1.4.0
 jsonschema==2.6.0
 MarkupSafe==1.0
-mistune==0.8.3
+mistune==2.0.3
 ply==3.11
 pyaml==17.12.1
 PyLD==1.0.3
